@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+	<texts>
+		<text name="CreateNew">Thêm mới</text>
+		<text name="Category">Danh Mục</text>
+
+		<text name="DanhSachDaiLy">Danh sách đại lý</text>
+		<text name="ThemDaiLy">Thêm mới đại lý</text>
+		<text name="ThemMoiDaiLy">Thêm mới đại lý</text>
+		<text name="NhapMaTenDaiLy">Nhập mã, tên đại lý</text>
+		<text name="Ma">Mã</text>
+		<text name="Ten">Tên</text>
+		<text name="NguoiLienHe">Người liên hệ</text>
+		<text name="SDT">Số điện thoại</text>
+		<text name="QuanLy">Quản lý</text>
+		<text name="DaiLy">Đại lý</text>
+		<text name="MST">Mã số thuế</text>
+
+		<text name="SelectFile">Chọn file</text>
+		<text name="ResetDefault">Đặt lại mặc định</text>
+		<text name="Cancel">Hủy bỏ</text>
+		<text name="IsActive">Hiệu lực</text>
+		<text name="Save">Lưu thông tin</text>
+		<text name="Edit">Chỉnh sửa</text>
+		<text name="SavedSuccessfully">Đã lưu thành công.</text>
+		<text name="AreYouSure">Bạn có chắc không ?</text>
+		<text name="DongBo_LichSu">Lịch sử đồng bộ</text>
+	</texts>
+</localizationDictionary>

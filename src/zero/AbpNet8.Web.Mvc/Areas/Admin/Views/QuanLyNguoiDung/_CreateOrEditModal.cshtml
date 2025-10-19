@@ -1,0 +1,148 @@
+﻿@using Abp.Extensions
+@using Admin.DomainTranferObjects.DTO
+
+@model NguoiDung_ThongTinDto
+
+<div class="modal-header" style="border-bottom: 1px solid #ebedf2; background-color: rgb(66,139,202);">
+    <h4 class="text-center" style="color:white;width:100%;padding-top:5px;">
+        @if (Model.Id != 0)
+        {
+            <spam>@L("ChinhSuaNguoiDung")</spam>
+        }
+        else
+        {
+            <span>@L("ThemMoiNguoiDung")</span>
+        }
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#UserInformationsTab" class="nav-link active" data-toggle="tab" role="tab">
+                Thông tin người dùng
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#RolesTab" data-toggle="tab" role="tab" class="nav-link">
+                Vai trò
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="UserInformationsTab" role="tabpanel">
+            <form name="UserInformationsForm" role="form" novalidate class="form-validation">
+                <input id="Id" type="hidden" name="Id" value="@Model.Id" />
+
+                @* <div class="row col-md-12 mt-3">
+                    <label for="DoanhNghiep_Mst" class="col-md-2 mt-2">Doanh nghiệp</label>
+                    <select class="form-control kt-select2 bs-select form-control-sm col-md-10 combobox" id="DoanhNghiep_Mst" name="DoanhNghiep_Mst" data-live-search="true" @(Model.Id == 0 ? "" : "disabled")>
+                        <option value=""> -- Chọn doanh nghiệp -- </option>
+                        @foreach (var dn in Model.ListDoanhNghiep)
+                        {
+                            @if (dn.DoanhNghiep_Mst == Model.DoanhNghiep_Mst)
+                            {
+                                <option value="@dn.DoanhNghiep_Mst" selected>@dn.DoanhNghiep_Mst - @dn.DoanhNghiep_Ten</option>
+                            }
+                            else
+                            {
+                                <option value="@dn.DoanhNghiep_Mst">@dn.DoanhNghiep_Mst - @dn.DoanhNghiep_Ten</option>
+                            }
+                        }
+                    </select>
+                </div> *@
+
+                <div class="row col-md-12 mt-3">
+                    <label for="NguoiDung_HoTen" class="col-md-2 mt-2">Họ tên<span style="color: red;"> *</span></label>
+                    <input id="NguoiDung_HoTen" type="text" name="NguoiDung_HoTen" class="form-control col-md-10" value="@Model.NguoiDung_HoTen" required maxlength="255" autocomplete="off">
+                </div>
+
+                <div class="row col-md-12 mt-3">
+                    <div class="form-group row col-md-12">
+                        <div class="row col-md-6">
+                            <label for="NguoiDung_Sdt" class="col-md-4 mt-2">Điện thoại</label>
+                            <input id="NguoiDung_Sdt" type="text" name="NguoiDung_Sdt" class="form-control col-md-8" value="@Model.NguoiDung_Sdt" maxlength="255" autocomplete="off">
+                        </div>
+                        <div class="row col-md-6">
+                            <label for="NguoiDung_Email" class="col-md-2 mt-2">Email<span style="color: red;"> *</span></label>
+                            <input id="NguoiDung_Email" type="text" name="NguoiDung_Email" class="form-control col-md-10" value="@Model.NguoiDung_Email" maxlength="255" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 mt-3">
+                    <label for="NguoiDung_TaiKhoan" class="col-md-2 mt-2">Tên đăng nhập<span style="color: red;"> *</span></label>
+                    <input id="NguoiDung_TaiKhoan" type="text" name="NguoiDung_TaiKhoan" class="form-control col-md-4" value="@Model.NguoiDung_TaiKhoan" maxlength="255" autocomplete="off" @(Model.Id == 0 ? "" : "disabled")>
+                </div>
+
+                <div class="row col-md-12 mt-3">
+                    <div class="form-group row col-md-12">
+                        <div class="row col-md-6">
+                            <label for="NguoiDung_MatKhau" class="col-md-4 mt-2">Mật khẩu<span style="color: red;"> *</span></label>
+                            <input id="NguoiDung_MatKhau" type="password" name="NguoiDung_MatKhau" class="form-control col-md-8" autocomplete="new-password"
+                                   maxlength="255" value="@Model.NguoiDung_MatKhau">
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="kt-checkbox-list ml-3">
+                                <label for="ShouldChangePasswordOnNextLogin" class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                    <input id="ShouldChangePasswordOnNextLogin" type="checkbox" name="ShouldChangePasswordOnNextLogin" value="true" @((Model.ShouldChangePasswordOnNextLogin == true) ? "checked=\"checked\"" : "")>
+                                    Đổi mật khẩu vào lần đăng nhập tiếp theo
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 mt-3">
+                    <div class="form-group row col-md-12">
+                        <div class="row col-md-6">
+                            <label for="PasswordRepeat" class="col-md-4 mt-2">Nhắc lại mật khẩu<span style="color: red;"> *</span></label>
+                            <input id="PasswordRepeat" type="password" name="PasswordRepeat" class="form-control col-md-8" autocomplete="new-password"
+                                   maxlength="255" value="@Model.NguoiDung_MatKhau">
+                        </div>
+                        <div class="row col-md-6" style="display: @(Model.Id == 0 ? "block" : "none")">
+                            <div class="kt-checkbox-list ml-3">
+                                <label for="NguoiDung_TrangThai" class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                    <input id="NguoiDung_TrangThai" type="checkbox" name="NguoiDung_TrangThai" value="true" @((Model.NguoiDung_TrangThai == true || Model.Id == 0) ? "checked=\"checked\"" : "")>
+                                    Kích hoạt
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 mt-3">
+                    @if (Model.Id != 0)
+                    {
+                        <div class="row col-md-6">
+                            <button id="changepass" class="btn btn-sm " type="button" required maxlength="255" title="Đổi mật khẩu" style="background:#384ad7; color: white;">Đổi mật khẩu</button>
+                        </div>
+                    }
+                    else
+                    {
+
+                    }
+                </div>
+
+            </form>
+        </div>
+
+        <div class="tab-pane" id="RolesTab" role="tabpanel">
+            <div class="user-role-checkbox-list">
+                @foreach (var role in Model.ListRole)
+                {
+                    <div class="kt-checkbox-list">
+                        <label for="EditUser_@(role.Name)" class="kt-checkbox">
+                            <input id="EditUser_@(role.Name)" type="checkbox" name="@(role.Name)" value="true"
+                            @Html.Raw(role.IsAssigned == true ? "checked=\"checked\"" : "")>@role.DisplayName
+                            <span></span>
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

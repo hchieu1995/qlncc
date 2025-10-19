@@ -1,0 +1,10 @@
+using System.Collections.Generic;
+using AbpNet8.Authorization.Users.Dto;
+
+namespace AbpNet8.Web.Areas.App.Models.Users
+{
+    public class UserLoginAttemptModalViewModel
+    {
+        public List<UserLoginAttemptDto> LoginAttempts { get; set; }
+    }
+}

@@ -1,0 +1,20 @@
+﻿@using AbpNet8.Roles.Dto
+
+
+@model List<RoleEditDto>
+<div class="user-role-checkbox-list">
+    @foreach (var role in Model)
+    {
+        <div class="kt-checkbox-list">
+            <label for="EditUser_@(role.Name)" class="kt-checkbox">
+                <input id="EditUser_@(role.Name)"
+                       type="checkbox"
+                       name="@(role.Name)"
+                       value="true"
+                       @Html.Raw(role.IsAssigned == true ? "checked=\"checked\"" : "")>
+                @role.DisplayName
+                <span></span>
+            </label>
+        </div>
+    }
+</div>

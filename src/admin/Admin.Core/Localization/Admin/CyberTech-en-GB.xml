@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en-GB">
+  <texts>
+    <text name="CreateNew">Create New</text>
+	  <text name="Category">Category</text>
+	  <text name="ProvincialDirectory">Provincial Directory</text>
+	  <text name="DistrictDirectory">District Directory</text>
+  </texts>
+</localizationDictionary>

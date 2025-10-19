@@ -1,0 +1,48 @@
+﻿(function ($) {
+    app.modals.ChangePasswordModal = function () {
+        var _nguoidungService = abp.services.qlncc.quanLyNguoiDung;
+        var _modalManager;
+        this.init = function (modalManager) {
+            _modalManager = modalManager;
+        };
+
+        this.save = function () {
+            var password = $("#password").val();
+            var changepassword = $("#changepassword").val();
+            if (password.trim() == null || password.trim() == "") {
+                document.getElementById("password").focus();
+                return abp.notify.error("Mời bạn nhập mật khẩu");
+            }
+            if (changepassword.trim() == null || changepassword.trim() == "") {
+                document.getElementById("changepassword").focus();
+                return abp.notify.error("Mời bạn nhập nhắc lại mật khẩu");
+            }
+            if (password.length < 6) {
+                document.getElementById("password").focus();
+                return abp.notify.warn("Độ dài mật khẩu phải lớn hơn 5!");
+            }
+            if (password.trim() == changepassword.trim()) {
+                var tenantId = $("#tenantId").val();
+                var userId = $("#userId").val();
+                _modalManager.setBusy(true);
+                _nguoidungService.changePassword(userId,tenantId,password).done(function (result) {
+                    if (result.success == true) {
+                        abp.notify.info(app.localize('SavedSuccessfully'));
+                        _modalManager.close();
+                    }
+                    else {
+                        abp.notify.error(result.message);
+                        _modalManager.close();
+                    }
+                    abp.event.trigger('app.changePasswordModalSaved');
+                }).always(function () {
+                    _modalManager.setBusy(false);
+                });
+            }
+            else {
+                abp.notify.error("Nhắc lại mật khẩu chưa chính xác");
+                return;
+            }
+        }
+    };
+})(jQuery);

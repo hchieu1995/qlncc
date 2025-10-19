@@ -1,0 +1,11 @@
+﻿@model AbpNet8.Web.Areas.App.Models.Layout.LogoViewModel
+@{
+    Layout = null;
+    var theme = await GetTheme();
+}
+
+<img alt="Logo" src="@Model.LogoUrl" style="max-width: 125px;height: 34px;"
+     class="@(string.IsNullOrEmpty(Model.LogoClassOverride)?"kt-header__brand-logo-default":Model.LogoClassOverride)" />
+
+@*<img alt="Logo" src="@Model.GetLogoUrl(ApplicationPath, theme.IsTopMenuUsed || theme.IsTabMenuUsed ? theme.BaseSettings.Header.HeaderSkin: theme.BaseSettings.Menu.AsideSkin)" height="34"
+     class="@(string.IsNullOrEmpty(Model.LogoClassOverride)?"kt-header__brand-logo-default":Model.LogoClassOverride)" />*@

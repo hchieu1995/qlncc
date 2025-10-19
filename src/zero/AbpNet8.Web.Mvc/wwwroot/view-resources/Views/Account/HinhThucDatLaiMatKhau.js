@@ -1,0 +1,24 @@
+﻿(function () {
+
+    $(function () {
+        var _thongtinnguoidungService = abp.services.qlncc.thongTinNguoiDung;
+
+        $('#next-btn').click(function () {
+            debugger;
+            var qmkdto = {};
+            qmkdto.userId = $("#UserId").val();
+            qmkdto.doanhNghiep_MST = $("#Mst").val();
+            qmkdto.loaiEmail = $(`input[name="EmailQMK"]:checked`).val();
+            _thongtinnguoidungService.guiEmail(qmkdto).done(function (result) {
+                
+                if (result.maKetQua == 1) {
+                    window.location = `/Account/NhapMaXacMinh?userid=${result.userId}&&key=${result.maXacThuc}`;
+                }
+                else {
+                    return abp.message.error('Gửi email thất bại');
+                }
+            });
+        });
+    });
+
+})();

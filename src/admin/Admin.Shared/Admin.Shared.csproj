@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Admin</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;CS0618;1951</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1951</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DomainTranferObjects\DanhMuc\**" />
+    <EmbeddedResource Remove="DomainTranferObjects\DanhMuc\**" />
+    <None Remove="DomainTranferObjects\DanhMuc\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.MailKit" Version="5.1.0" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.68.0.3427" />
+    <PackageReference Include="Minio" Version="3.1.13" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\zero\AbpNet8.Application\AbpNet8.Application.csproj" />
+    <ProjectReference Include="..\Admin.Core\Admin.Core.csproj" />
+    <ProjectReference Include="..\Admin.EntityFrameworkCore\Admin.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+</Project>

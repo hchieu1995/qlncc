@@ -1,0 +1,233 @@
+﻿@using Abp.Configuration
+@using Abp.MultiTenancy
+@using Abp.Timing
+@using AbpNet8.Configuration
+@using AbpNet8.Features
+@using AbpNet8.UiCustomization.Dto
+@using AbpNet8.Web.Areas.Admin.Views.Shared.Components.AppSubscriptionBar
+@using AbpNet8.Web.Areas.App.Models.Layout
+
+@model HeaderViewModel
+@{
+    Layout = null;
+    var isChatEnabled = (AbpSession.MultiTenancySide == MultiTenancySides.Host || IsFeatureEnabled(AppFeatures.ChatFeature));
+    UiCustomizationSettingsDto theme = await GetTheme();
+}
+
+
+<style>
+    .image-upload > input {
+        display: none;
+    }
+</style>
+<div class="kt-header__topbar">
+    @if (Model.VerSion != null)
+    {
+        <div style="color: #fff; align-self: center; padding: 0 0.55rem 0 0; font-size: 1rem; font-weight: 500;">@Model.VerSion</div>
+    }
+    <div class="kt-header__topbar-item dropdown d-none d-lg-block subscription-warning">
+        @await Component.InvokeAsync(typeof(AppSubscriptionBarViewComponent))
+    </div>
+    @if (SettingManager.GetSettingValue<bool>(AppSettings.UserManagement.IsQuickThemeSelectEnabled))
+    {
+        <div id="kt_theme_selection_panel_toggle" class="kt-header__topbar-item dropdown">
+            <div class="kt-header__topbar-wrapper">
+                <span class="kt-header__topbar-icon kt-header__topbar-icon--brand">
+                    <i class="flaticon-interface-7"></i>
+                </span>
+            </div>
+        </div>
+    }
+    @if (Model.Languages.Count > 1)
+    {
+    }
+    <div class="kt-header__topbar-item dropdown" id="header_notification_bar">
+    </div>
+    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px" aria-expanded="false">
+            <div class="kt-header__topbar-user">
+                <img class="header-profile-picture UserImage" alt="Pic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAANQElEQVR42u1dBXDjsNJWcvj/j5mZmZmZmWjoMTMzMzMfM6c5gjJz2gbKaCtou2Clx9nnzcz4GNLGkeTqm/mOwKBvLe1Kq1Vgfl4nPsQ91lwgjykEyWMCQB4DJPCIACF3LRByxyCBOxUKcKcgCd6pQAp3IiQIQUJs59csGAw4PwfsICnYQIJzgQKMwyoyHCyQ4XOrCsOEEIv4DAHLGieS4y7ryLoXAwm8DAh5jiPWY0iQ3IN4gULBgCAZDpBgO0Ch9nRhfRMhxCYKlQNMTq5nBn113tJ/YVu0wza0i3mLAg86975gW7Qtb+o/tQ39lYXCyDqiUH4AQGDRoi90RP+X0/BzDkFIGtRiBv3boqk/D5+ZKCwPp+emH5E36Q9sQx/HBpaJzKSjzNK/e3o29TCiUBrwC8ob9DA2pB9omzSUN2aeTRRu3s3bs/or8iatxUbzJ7WTi1byJVcNDwrMTL7Otmg7B1G4kFlas23QV6kxfjb1UNugVbyE4O8n6PsXTf1BZKUBwyVm0W/ZFl3kKwJ/2pbGmKl/FaB7DVkJwHHeEX/46oZQ1OLoH/jYyYutZab+eyX0raj90ne9AcbCtqV3KnFvd1igLb7xDfKz9G1LmL1TNKjJLP2NMsf1q1SXX64hAYLSLdjYpn5AiVceMovuwshJluXgu6wtrAsFgoHyerQK1YsX17693MvPZe1a1l5Ydb91hfUNSnxP8Mr/D56pW7/+wr0FXblLP9w2tAnVZXu/yrhoJR9CRALLTt1PiV9RIxix7ZQYPYFljd8lb9A+oRstNwksGQem9QKb7gJ7qgPYRCvY4834M/4e/xz/vvjv8sak+IZgat25XO5OAqRn6fVixc8zwPQBYGMNYMerwI7sgoXe7aWzbzfYsXDxOoxGgZkzIhrCKZxh5RbnCxPqmTowvQ/swWOOeDtQwPIzsgPsoePA9H68n0gh4k4u8wRCTPKYWrH7XujfiyJVing/vK84hmDoP+cxvQs8WfziB/ajINyI92daRBDHUHt9xRZ28gad5ffVT4M9UoMCCEN7uBp9D95rB0be0B7o+ZIu11W93AQsRA9howtHO7ofWGacby9gaE0AsJp4BWbR33F7ucyY2+ULy769kE8P83aIf+ZZJg+/7m3aEf+A29CiGwHL8u0JcBNN2XP4nAsP8XkhHezEMWxceRg9xHneQI+WNasIEzi5ZcdMdWKjSkd7tI5vL2DqXypb6ja37N3cpDuTJyPzyTjPvQe2E5k8gCwXuK2J29c/WocNKS9jIeyOuSaSLHfHzmv5hXxTOP0qtQEgmd7PN8F0Vnvpkvfq8dyuxabapRcfaSeOcA4LaZ1sYR8SV/L8YABI/mGhSV9ASgXXXbrGpF/ER+LCEee1Av1oyfvzOS/0+MsABo/zXyyapU8ntwvexRnsiWb/GACyf48QO5FvuywL54d1V/t8RIxq+LapoRUWLfrg2xn7f8DdAIZO+M8AsqMiZA9989ahH//sXgydfGcALDUkwjazwZuWp8FVJBGyWxZih/xnADQqRvrYXPKZ5EbAOnxCGED0oP8MQO8XpSzNn26Y4i3KNm47esB/BqD1CZJAquWum0qO5Vc9vLEyAF0MA0AuWskXX6/7/wWHh1FDAAdipEeuBhZeFsYAYiHlBHqbPNp4zf4+t+q2ALTj4bI1vEoOuZa2Qc8Bpf9/eff/JqGKJA0e85sBuNnCAhnBq65J9xaFuNHCbTy1JOz9djIsSybSw7Gxev/1AMa0YNvLae3lq3+GUAYw0eovA4jsFLEWISWI+Xn9HqI9HJvu8Vc+QHS/kEUmDMO4MyZ/PF84A0hG3cZTeYEerwuwWf2DwhlAdsxfBjBSI2pJ2g+4M4BC0dTdSh8+IPo0gtYZoj/CEHCvkNY5sN9HC0G9op5csoNgoSFvb6Qmg1h6UNRqY0cIHnwopAGMNfrFAESsMOauCaAPEBPy4WZ6fBICHhC5JH1kdfEg5WCACIc1dyDeQr0HEHInnAW0xPRQddwcqiIAL2lqGWIb2nlRH9COhX2QBzAg8tE0i8TDPABVH+DaDSGiLQmfwSjgtKAPiPGz3AYwcFD042gWgkFSOEdExbq7EJkRWC/48xfIWQwDU95Yl5oRZDO9IHTbGtq0Ow8gKu2RWonH/wnRj6brJczQG0R+SKZF5DSA6CEpjrMnzNL3iW2l01LOB7CxBvENwNC342rgbwV/UEyoUGngXtUVdn7x2TJfWFUM69uNjSvD4VMfJXg+rfAPmh1XGUCeRAH6K4sHQEjxsPGwmv4tN3PT9ycAEMS6suIPA52yFISSovvHrQButRDboq34hyoa4OL9868gykz9j+W5sNoyls+MSHMs/eWFId8tw0Oz9JDYBpA4Kon4SP3NrgFgXXlZHtxOHFY1AMrAhQV6z6tPBRmW4uFpXMzQLxaW5+s3aP/1TgL9w9IvqlLGWTImU/f/i+sYAH2NLC/AMmNCRQT20ElJhHeLRL3kBieDafPS9AJTHUKIP9e97Zrj5sWP/7vX3KhO8GaZLDnbvoWr+PMOtYYNUn39tqX/8yZnBGlvkOllxmv+DUb7Jm4GMF3zNxiv/o9UBoAnwZAbAbuGvKWlZXmZsep/Q6Lqd2B0bK64+FrdPyB26DdSGYBtUQ0AVpGbwN0uLgOnGrYWRUiEHSNo31gx8Wdq/473LXKsRqIewKQ/vI0DI2YeKcsLZSJhiFf9FopGEPotpJv+4+2Y37MNJk/+1RUfqbXtFr+t3AMjkg8htwPcNizDS+X6j8JU9d+vEGTq1F9hvntb2cVHX2P4yB+uuBf+PjtwTA4DMPUDJRwZp71cFgNINvwHJk785QphhsK/h1Tzf8siPBrTTO0/IB4qXtvloDPs0Pp/Q04SA8BaUCUdGpk3tR5ZDAA5dtw1ApcjR/8I6RbHEHqW1t3r9f9Eoa+5biL0O9Dq/oX3lcIAsA4kKRE4DLxFeAPoC6MIlxnBn12RruoR8CvGbvyWomdbN8Dkqb+5vsXVxKhDry2Kj3Se4bDwBoBHASzt6FhT7xLaCWzfgSJcwQl00tzu+voCoqFM1/wdaMO/8CsvxvOjx/4EidC1ol/Z7f8B9Pqi+C7T7bsFF19rQi3JUoCWI+qLzesxFOC6nK75ByTcL7gsRAPBMf+691ugCZHn/V9MSoP4EQEzZiDTsfuGBoBEsUaP/nnZwqMPMF3995veK9O5F5ipCSc+bvohy8V8Tn+MSEUkWHYSst0HsOFvi1rNP2HkyJ9KFR6HChxObvs+mZ6DwLJTQu39x4xvUg5g/pgIJWNmxzsg1bIVG7xkao7jNu5ECoPh399Q9Hjot8XIYfoU+gel3wOfbW68E0uviHQszPKBp0swg45xseTUMJhD9ZBu3YaNXBbqdf9GP6E4qzdx8m9Fr1+r/acr+nKZbt0O1mADPjuvhM8ELu+T0sF/cohlJ2BuoguMgeOQbtuODSo10207wBg4AbMTXfhulZnyNekLiAfwJG2M5aZhbqoXzPgpSLfvwkbzNdOO82rGq513juDOHG/SvTyBe7ikHl2W4OYMzM/0g5mog0znPqdR/stLDP5s/G8xgjAH65w2GVh+JGFq3e6hkF7BNlNPsC0tf/uC6zCvxXBMLHrvqcYbCa6YatoAmZ4DYA014jxHiVvMtPkzWf3RpBJYNPX33Mxbx4kRa7gJsj0hR/CNStwlG8RGyPaGYHakGRYoFpy+qUG8hVQSzg1/4zoeySGwRlogFwlDqnmzEs8jYtvi2oM12nplhGHSn5BKAwBWZ+M1cTcuV6w4se2NRHWkmObFA3Zfy70z7buYEoMPUx27FuZirXcnPGGMVD8+1brtrBKksky37zydjdc/ioiA3EDtM2jr1vNKmAqxeds5a6DxyUQkWLG6FyojqMS4v/3c/Ejdc4mIwJ5ADQfedvsCffk39gnSbbuVY+iBw+eO+aJjYajunqmu/SklXHmY7j6gzUbq7kpkAsRiazM9oQ4l4PKY7Qk3A9StJrLCHDj2u2TTBiVmiaQNGwrZ6PGfET8gN1j/pnTbztNK2NtNKNmRNxI1ryZ+gjFy9M7pSKhbCXxzZnvDbZlM3R2JX2HFaz+HExlK7CuI2U9nzHj1J8hKAM5fZyNVLUmVGwCpxg2QjoTrsYckKw1GovpV2RUcLqa7D2pWvObFZKUjFz/5lWTHTnvFfPWdu+eN2KnPEoUr8guC2YHj30+37WJ+ns0zBk59E9+VKNzYEKxY9af9NDSkO/fRXOzEx4lCacDxEWfCaNOWi9IJ37L5Ajp3ZrTh+URheYDJuvXYdTpO0zBt3FgQVXR8tkxvKIE+DcQ8Sc9WwEkSM3byy5lIuDPVuv0M//jdycyJhNtwfgNo1f8ThcrC7Kt7ohE99YtMpKor1b5nzsseAq+d6tg9m+2tas/FTv1kfrzx0URBPCcyFz31LBwyjP5jW4tTq10HpzJde810+45FHJuTTZsv0sYNhVTDf4sTMfhr/LOkk9GE/ybTtcdwnNBJ5/+2Gv3Ht+T6q7+WHal/mh+99/8BkL4jiQudtMUAAAAASUVORK5CYII=">
+            </div>
+        </div>
+        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(1253px, 64px, 0px);">
+            <!--begin: Head -->
+            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background: url(@(ApplicationPath)metronic/themes/@theme.BaseSettings.Theme/images/bg/bg-1.jpg); background-size: cover; min-height: 100px;position:relative;">
+                <div style="">
+                    <div class="kt-user-card__avatar" style="width:100%">
+
+                        <img class="UserImage" alt="Pic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAANQElEQVR42u1dBXDjsNJWcvj/j5mZmZmZmWjoMTMzMzMfM6c5gjJz2gbKaCtou2Clx9nnzcz4GNLGkeTqm/mOwKBvLe1Kq1Vgfl4nPsQ91lwgjykEyWMCQB4DJPCIACF3LRByxyCBOxUKcKcgCd6pQAp3IiQIQUJs59csGAw4PwfsICnYQIJzgQKMwyoyHCyQ4XOrCsOEEIv4DAHLGieS4y7ryLoXAwm8DAh5jiPWY0iQ3IN4gULBgCAZDpBgO0Ch9nRhfRMhxCYKlQNMTq5nBn113tJ/YVu0wza0i3mLAg86975gW7Qtb+o/tQ39lYXCyDqiUH4AQGDRoi90RP+X0/BzDkFIGtRiBv3boqk/D5+ZKCwPp+emH5E36Q9sQx/HBpaJzKSjzNK/e3o29TCiUBrwC8ob9DA2pB9omzSUN2aeTRRu3s3bs/or8iatxUbzJ7WTi1byJVcNDwrMTL7Otmg7B1G4kFlas23QV6kxfjb1UNugVbyE4O8n6PsXTf1BZKUBwyVm0W/ZFl3kKwJ/2pbGmKl/FaB7DVkJwHHeEX/46oZQ1OLoH/jYyYutZab+eyX0raj90ne9AcbCtqV3KnFvd1igLb7xDfKz9G1LmL1TNKjJLP2NMsf1q1SXX64hAYLSLdjYpn5AiVceMovuwshJluXgu6wtrAsFgoHyerQK1YsX17693MvPZe1a1l5Ydb91hfUNSnxP8Mr/D56pW7/+wr0FXblLP9w2tAnVZXu/yrhoJR9CRALLTt1PiV9RIxix7ZQYPYFljd8lb9A+oRstNwksGQem9QKb7gJ7qgPYRCvY4834M/4e/xz/vvjv8sak+IZgat25XO5OAqRn6fVixc8zwPQBYGMNYMerwI7sgoXe7aWzbzfYsXDxOoxGgZkzIhrCKZxh5RbnCxPqmTowvQ/swWOOeDtQwPIzsgPsoePA9H68n0gh4k4u8wRCTPKYWrH7XujfiyJVing/vK84hmDoP+cxvQs8WfziB/ajINyI92daRBDHUHt9xRZ28gad5ffVT4M9UoMCCEN7uBp9D95rB0be0B7o+ZIu11W93AQsRA9howtHO7ofWGacby9gaE0AsJp4BWbR33F7ucyY2+ULy769kE8P83aIf+ZZJg+/7m3aEf+A29CiGwHL8u0JcBNN2XP4nAsP8XkhHezEMWxceRg9xHneQI+WNasIEzi5ZcdMdWKjSkd7tI5vL2DqXypb6ja37N3cpDuTJyPzyTjPvQe2E5k8gCwXuK2J29c/WocNKS9jIeyOuSaSLHfHzmv5hXxTOP0qtQEgmd7PN8F0Vnvpkvfq8dyuxabapRcfaSeOcA4LaZ1sYR8SV/L8YABI/mGhSV9ASgXXXbrGpF/ER+LCEee1Av1oyfvzOS/0+MsABo/zXyyapU8ntwvexRnsiWb/GACyf48QO5FvuywL54d1V/t8RIxq+LapoRUWLfrg2xn7f8DdAIZO+M8AsqMiZA9989ahH//sXgydfGcALDUkwjazwZuWp8FVJBGyWxZih/xnADQqRvrYXPKZ5EbAOnxCGED0oP8MQO8XpSzNn26Y4i3KNm47esB/BqD1CZJAquWum0qO5Vc9vLEyAF0MA0AuWskXX6/7/wWHh1FDAAdipEeuBhZeFsYAYiHlBHqbPNp4zf4+t+q2ALTj4bI1vEoOuZa2Qc8Bpf9/eff/JqGKJA0e85sBuNnCAhnBq65J9xaFuNHCbTy1JOz9djIsSybSw7Gxev/1AMa0YNvLae3lq3+GUAYw0eovA4jsFLEWISWI+Xn9HqI9HJvu8Vc+QHS/kEUmDMO4MyZ/PF84A0hG3cZTeYEerwuwWf2DwhlAdsxfBjBSI2pJ2g+4M4BC0dTdSh8+IPo0gtYZoj/CEHCvkNY5sN9HC0G9op5csoNgoSFvb6Qmg1h6UNRqY0cIHnwopAGMNfrFAESsMOauCaAPEBPy4WZ6fBICHhC5JH1kdfEg5WCACIc1dyDeQr0HEHInnAW0xPRQddwcqiIAL2lqGWIb2nlRH9COhX2QBzAg8tE0i8TDPABVH+DaDSGiLQmfwSjgtKAPiPGz3AYwcFD042gWgkFSOEdExbq7EJkRWC/48xfIWQwDU95Yl5oRZDO9IHTbGtq0Ow8gKu2RWonH/wnRj6brJczQG0R+SKZF5DSA6CEpjrMnzNL3iW2l01LOB7CxBvENwNC342rgbwV/UEyoUGngXtUVdn7x2TJfWFUM69uNjSvD4VMfJXg+rfAPmh1XGUCeRAH6K4sHQEjxsPGwmv4tN3PT9ycAEMS6suIPA52yFISSovvHrQButRDboq34hyoa4OL9868gykz9j+W5sNoyls+MSHMs/eWFId8tw0Oz9JDYBpA4Kon4SP3NrgFgXXlZHtxOHFY1AMrAhQV6z6tPBRmW4uFpXMzQLxaW5+s3aP/1TgL9w9IvqlLGWTImU/f/i+sYAH2NLC/AMmNCRQT20ElJhHeLRL3kBieDafPS9AJTHUKIP9e97Zrj5sWP/7vX3KhO8GaZLDnbvoWr+PMOtYYNUn39tqX/8yZnBGlvkOllxmv+DUb7Jm4GMF3zNxiv/o9UBoAnwZAbAbuGvKWlZXmZsep/Q6Lqd2B0bK64+FrdPyB26DdSGYBtUQ0AVpGbwN0uLgOnGrYWRUiEHSNo31gx8Wdq/473LXKsRqIewKQ/vI0DI2YeKcsLZSJhiFf9FopGEPotpJv+4+2Y37MNJk/+1RUfqbXtFr+t3AMjkg8htwPcNizDS+X6j8JU9d+vEGTq1F9hvntb2cVHX2P4yB+uuBf+PjtwTA4DMPUDJRwZp71cFgNINvwHJk785QphhsK/h1Tzf8siPBrTTO0/IB4qXtvloDPs0Pp/Q04SA8BaUCUdGpk3tR5ZDAA5dtw1ApcjR/8I6RbHEHqW1t3r9f9Eoa+5biL0O9Dq/oX3lcIAsA4kKRE4DLxFeAPoC6MIlxnBn12RruoR8CvGbvyWomdbN8Dkqb+5vsXVxKhDry2Kj3Se4bDwBoBHASzt6FhT7xLaCWzfgSJcwQl00tzu+voCoqFM1/wdaMO/8CsvxvOjx/4EidC1ol/Z7f8B9Pqi+C7T7bsFF19rQi3JUoCWI+qLzesxFOC6nK75ByTcL7gsRAPBMf+691ugCZHn/V9MSoP4EQEzZiDTsfuGBoBEsUaP/nnZwqMPMF3995veK9O5F5ipCSc+bvohy8V8Tn+MSEUkWHYSst0HsOFvi1rNP2HkyJ9KFR6HChxObvs+mZ6DwLJTQu39x4xvUg5g/pgIJWNmxzsg1bIVG7xkao7jNu5ECoPh399Q9Hjot8XIYfoU+gel3wOfbW68E0uviHQszPKBp0swg45xseTUMJhD9ZBu3YaNXBbqdf9GP6E4qzdx8m9Fr1+r/acr+nKZbt0O1mADPjuvhM8ELu+T0sF/cohlJ2BuoguMgeOQbtuODSo10207wBg4AbMTXfhulZnyNekLiAfwJG2M5aZhbqoXzPgpSLfvwkbzNdOO82rGq513juDOHG/SvTyBe7ikHl2W4OYMzM/0g5mog0znPqdR/stLDP5s/G8xgjAH65w2GVh+JGFq3e6hkF7BNlNPsC0tf/uC6zCvxXBMLHrvqcYbCa6YatoAmZ4DYA014jxHiVvMtPkzWf3RpBJYNPX33Mxbx4kRa7gJsj0hR/CNStwlG8RGyPaGYHakGRYoFpy+qUG8hVQSzg1/4zoeySGwRlogFwlDqnmzEs8jYtvi2oM12nplhGHSn5BKAwBWZ+M1cTcuV6w4se2NRHWkmObFA3Zfy70z7buYEoMPUx27FuZirXcnPGGMVD8+1brtrBKksky37zydjdc/ioiA3EDtM2jr1vNKmAqxeds5a6DxyUQkWLG6FyojqMS4v/3c/Ejdc4mIwJ5ADQfedvsCffk39gnSbbuVY+iBw+eO+aJjYajunqmu/SklXHmY7j6gzUbq7kpkAsRiazM9oQ4l4PKY7Qk3A9StJrLCHDj2u2TTBiVmiaQNGwrZ6PGfET8gN1j/pnTbztNK2NtNKNmRNxI1ryZ+gjFy9M7pSKhbCXxzZnvDbZlM3R2JX2HFaz+HExlK7CuI2U9nzHj1J8hKAM5fZyNVLUmVGwCpxg2QjoTrsYckKw1GovpV2RUcLqa7D2pWvObFZKUjFz/5lWTHTnvFfPWdu+eN2KnPEoUr8guC2YHj30+37WJ+ns0zBk59E9+VKNzYEKxY9af9NDSkO/fRXOzEx4lCacDxEWfCaNOWi9IJ37L5Ajp3ZrTh+URheYDJuvXYdTpO0zBt3FgQVXR8tkxvKIE+DcQ8Sc9WwEkSM3byy5lIuDPVuv0M//jdycyJhNtwfgNo1f8ThcrC7Kt7ohE99YtMpKor1b5nzsseAq+d6tg9m+2tas/FTv1kfrzx0URBPCcyFz31LBwyjP5jW4tTq10HpzJde810+45FHJuTTZsv0sYNhVTDf4sTMfhr/LOkk9GE/ybTtcdwnNBJ5/+2Gv3Ht+T6q7+WHal/mh+99/8BkL4jiQudtMUAAAAASUVORK5CYII=">
+                        <div class="kt-user-card__name" style="text-alight:center">
+                            @Html.Raw(Model.GetShownLoginName())
+                        </div>
+                        <div class="testloadanh">
+                        </div>
+                    </div>
+
+
+                    <div>
+
+                        <p id="TenUserNa" style="color:white;text-align:center;margin-left:-15%"></p>
+                        <p id="TenTKUserNa" style="color:white;text-align:center;margin-left:-15%"></p>
+                    </div>
+                </div>
+
+            </div>
+            <!--end: Head -->
+            <!--begin: Navigation -->
+            <div class="kt-notification user-profile-menu">
+                @if (Model.IsImpersonatedLogin)
+                {
+                    <a href="#" class="kt-notification__item" id="UserProfileBackToMyAccountButton">
+                        <div class="kt-notification__item-icon">
+                            <i class="fa fa-reply kt-font-danger"></i>
+                        </div>
+                        <div class="kt-notification__item-details">
+                            <div class="kt-notification__item-title kt-font-bold">
+                                <span>
+                                    @L("BackToMyAccount")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+
+                <a href="#" class="kt-notification__item" id="UserProfileChangePassword">
+                    <div class="kt-notification__item-details">
+                        <div class="kt-notification__item-title kt-font-bold">
+                            <span>
+                                @L("ChangePassword")
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                @*<a href="#" class="kt-notification__item" id="UserProfileMySettingsLink">
+                <div class="kt-notification__item-icon">
+                <i class="flaticon-cogwheel"></i>
+                </div>
+                <div class="kt-notification__item-details">
+                <div class="kt-notification__item-title kt-font-bold">
+                <span>
+                @L("CapNhapThongTin")
+                </span>
+                </div>
+                </div>
+                </a>*@
+
+                <div class="kt-notification__custom">
+                    <a href="@Url.Action("Logout", "Account", new {area = string.Empty})" class="btn btn-label-brand btn-sm btn-bold">@L("Logout")</a>
+                </div>
+            </div>
+            <!--end: Navigation -->
+        </div>
+    </div>
+
+    @if (isChatEnabled)
+    {
+        <div id="chat_is_connecting_icon" class="kt-header__topbar-item dropdown">
+            <div class="kt-header__topbar-wrapper">
+                <span class="kt-header__topbar-icon kt-header__topbar-icon--brand">
+                    <img src="@(ApplicationPath)Common/Images/loading.gif" style="width: 23px;" tooltip="@L("ChatIsConnecting")" placement="left" />
+                </span>
+            </div>
+        </div>
+        <div id="kt_quick_sidebar_toggle" class="kt-header__topbar-item dropdown d-none">
+            <div class="kt-header__topbar-wrapper">
+                <span class="kt-header__topbar-icon kt-header__topbar-icon--brand">
+                    <div id="chatIconUnRead" class="d-none">
+                        <i class="flaticon-chat-2 unread-notification"></i>
+                        <span class="kt-badge kt-badge--primary unread-notification-count">
+                            {{unreadChatMessageCount}}
+                        </span>
+                    </div>
+                    <div id="chatIcon">
+                        <i class="flaticon-chat-2"></i>
+                    </div>
+                </span>
+            </div>
+        </div>
+    }
+</div>
+
+<script id="linkedAccountsSubMenuTemplate" type="x-tmpl-mustache">
+    {{#items}}
+    <li class="kt-nav__item py-2">
+        <a href="" data-user-id="{{id}}" data-tenant-id="{{tenantId}}" class="recently-linked-user">
+            <span class="kt-nav__link-bullet">
+                <span></span>
+            </span>
+            <span class="kt-nav__link-text">
+                {{shownUserName}}
+            </span>
+        </a>
+    </li>
+    {{/items}}
+</script>
+<script id="headerNotificationBarTemplate" type="x-tmpl-mustache">
+    <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="30px,0px" aria-expanded="true">
+        <span class="kt-header__topbar-icon kt-header__topbar-icon--brand">
+            {{#unreadCount}}
+            <i class="flaticon-alert-2 unread-notification"></i>
+            <span class="kt-badge kt-badge--primary unread-notification-count">
+                {{unreadCount}}
+            </span>
+            {{/unreadCount}}
+            {{^unreadCount}}
+            <i class="flaticon-alarm"></i>
+            {{/unreadCount}}
+        </span>
+    </div>
+    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-lg">
+        <div class="kt-head kt-head--skin-dark kt-head--fit-x kt-head--fit-b" style="background: url(@(ApplicationPath)metronic/themes/@theme.BaseSettings.Theme/images/bg/bg-1.jpg); background-size: cover; min-height: 100px;">
+            <h3 class="kt-head__title">
+                <span class="btn btn-success btn-sm btn-bold btn-font-md">{{unreadCount}} @L("NewNotifications")</span>
+            </h3>
+        </div>
+        <div class="kt-grid-nav kt-grid-nav--skin-light">
+            <div class="row m-4">
+                <div class="text-left col-md-8">
+                    {{#unreadCount}}
+                    <a href="" id="setAllNotificationsAsReadLink">@L("SetAllAsRead")</a>
+                    {{/unreadCount}}
+                </div>
+                <div class="text-right col-md-4">
+                    <a id="openNotificationSettingsModalLink" class="text-right" href="">@L("Settings")</a>
+                </div>
+            </div>
+            <hr />
+            <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200" style="height: 300px; overflow: hidden;">
+                {{#notifications}}
+                <a class="kt-notification__item {{#url}}user-notification-item-clickable{{/url}} {{#isUnread}}user-notification-item-unread{{/isUnread}}" data-url="{{url}}">
+                    <div class="kt-notification__item-icon">
+                        <i class="{{icon}} kt-font-success"></i>
+                    </div>
+                    <div class="kt-notification__item-details">
+                        <div class="kt-notification__item-title">
+                            {{text}}
+                        </div>
+                        <div class="kt-notification__item-time">
+                            {{timeAgo}}
+                            {{#isUnread}}
+                            <span data-notification-id="{{userNotificationId}}" class="set-notification-as-read">
+    @L("SetAsRead")
+                            </span>
+                            {{/isUnread}}
+                        </div>
+                    </div>
+                </a>
+                {{/notifications}}
+                {{^notifications.length}}
+                <span class="notification-empty-text p-3">
+    @L("ThereIsNoNotification")
+                </span>
+                {{/notifications.length}}
+            </div>
+            {{#notifications.length}}
+            <hr />
+            <div class="m-4">
+                <div class="text-center"><a href="@Url.Action("Index", "Notifications", new { area = "App" })">@L("SeeAllNotifications")</a></div>
+            </div>
+            {{/notifications.length}}
+        </div>
+    </div>
+</script>

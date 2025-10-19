@@ -1,0 +1,90 @@
+﻿@using AbpNet8.Web.Areas.App.Models.Common.Modals
+@using Admin.DomainTranferObjects.DTO
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("TaiKhoan")))
+@model NguoiDung_ThongTinDto
+
+<div class="modal-body">
+    <form name="UserProfileModalForm" class="kt-form">
+        <div class="row">
+            <div class="col-lg-4">
+                <div style="width:150px;height:150px;margin:auto;margin-top:10px">
+                        <div id="hoveranhdaidien">
+                            @* <img src="@Model.Base64"
+                                 id="anhdaidien"
+                                 style="width:150px;height:150px" class="img-thumbnail img-rounded user-edit-dialog-profile-image" /> *@
+
+                            <span class="btn btn-clean fileinput-button displaynone" id="spanfileupload" style="position:relative;top:-149px;left: 120px;padding: 2px 0px 2px 5px;">
+                                <i class="flaticon-edit"></i>
+                                <input id="fileupload" type="file" name="files" accept="image/*" title="@L("ChonFile")">
+                            </span>
+
+                            <span id="clearfile" class="btn btn-clean displaynone" style="position:relative;top:-26px;left:82px;padding: 2px 0px 2px 5px;">
+                                <i class="flaticon-refresh text-success"></i>
+                            </span>
+
+                            <input id="USDefaultFileUploadTextInput" type="hidden" value="">
+                            <input type="hidden" id="fileKey" />
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("Ho")<span style="color:red">*</span></label>
+                    </div>
+                    @* <div class="col-lg-9">
+                        <input id="NguoiDung_Ho" class="form-control form-control-sm" type="text" name="NguoiDung_Ho" value="@Model.NguoiDung_Ho" required maxlength="225">
+                    </div> *@
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("Ten")<span style="color:red">*</span></label>
+                    </div>
+                    @* <div class="col-lg-9">
+                        <input id="NguoiDung_Ten" class="form-control form-control-sm" type="text" name="NguoiDung_Ten" value="@Model.NguoiDung_Ten" required maxlength="225">
+                    </div> *@
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("NgaySinh")</label>
+                    </div>
+                    @* <div class="col-lg-4">
+                        <input id="NguoiDung_NgaySinh" class="form-control form-control-sm date-picker" type="text" name="NguoiDung_NgaySinh" value="@Model.NguoiDung_NgaySinh">
+                    </div> *@
+
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("GioiTinh")</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-control form-control-sm combobox" id="NguoiDung_GioiTinh" name="NguoiDung_GioiTinh">
+                            <option value="">&#8203;</option>
+                            <option value="1" selected="@(Model.NguoiDung_GioiTinh == 1)">@L("Nam")</option>
+                            <option value="2" selected="@(Model.NguoiDung_GioiTinh == 2)">@L("Nu")</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("Email")<span style="color:red">*</span></label>
+                    </div>
+                    <div class="col-lg-4">
+                        <input id="NguoiDung_Email" class="form-control form-control-sm" type="email" name="NguoiDung_Email" value="@Model.NguoiDung_Email" required maxlength="225">
+                    </div>
+
+                    <div class="col-lg-2 col-form-label">
+                        <label>@L("SDT")</label>
+                    </div>
+                    @* <div class="col-lg-3">
+                        <input id="NguoiDung_SDT" class="form-control form-control-sm" type="text" name="NguoiDung_SDT" value="@Model.NguoiDung_SDT" maxlength="225">
+                    </div> *@
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

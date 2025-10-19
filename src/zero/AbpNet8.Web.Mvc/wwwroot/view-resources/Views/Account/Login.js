@@ -1,0 +1,87 @@
+﻿var CurrentPage = (function () {
+
+
+    var handleLogin = function () {
+        var $loginForm = $('form.login-form');
+        var $submitButton = $('#kt_login_signin_submit');
+
+        $submitButton.click(function () {
+            trySubmitForm();
+        });
+
+        $loginForm.validate({
+            rules: {
+                username: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                },
+            },
+        });
+
+        $loginForm.find('input').keypress(function (e) {
+            if (e.which === 13) {
+                trySubmitForm();
+            }
+        });
+
+        $('a.social-login-icon').click(function () {
+            var $a = $(this);
+            var $form = $a.closest('form');
+            $form.find('input[name=provider]').val($a.attr('data-provider'));
+            $form.submit();
+        });
+        $("#togglePassword").click(function () {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+                this.classList.replace("fa-eye-slash", "fa-eye");
+            } else {
+                x.type = "password";
+                this.classList.replace("fa-eye", "fa-eye-slash");
+            }
+        });
+
+        $loginForm.find('input[name=returnUrlHash]').val(location.hash);
+
+        $('input[type=text]').first().focus();
+
+        function trySubmitForm() {
+            abp.multiTenancy.setTenantIdCookie(null);
+            var username = $('#usernameOrEmailAddress').val();
+            var password = $('#password').val();
+
+            if (!$('form.login-form').valid() || (username.trim() == "" && password.trim() == "")) {
+                abp.notify.error("Vui lòng nhập đủ thông tin");
+                return;
+            }
+            
+
+            abp.ui.setBusy(
+                null,
+                abp.ajax({
+                    contentType: app.consts.contentTypes.formUrlencoded,
+                    url: $loginForm.attr('action'),
+                    data: $loginForm.serialize()
+                }).done(function (e, response) {
+                    var jsonResult = response.result;
+                    if (jsonResult != null) {
+                        abp.notify.error(jsonResult);
+                    }
+                }).fail(function () {
+                    if (abp.setting.getBoolean('App.UserManagement.UseCaptchaOnLogin')) {
+                        grecaptcha.reset();
+                    }
+                })
+            );
+        }
+    };
+
+    return {
+        init: function () {
+            abp.multiTenancy.setTenantIdCookie(null);
+            handleLogin();
+        },
+    };
+})();

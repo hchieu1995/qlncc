@@ -1,0 +1,75 @@
+﻿(function () {
+
+    $(function () {
+        var _thongtinnguoidungService = abp.services.qlncc.thongTinNguoiDung;
+
+        $("#NewPassword").on('keyup', function () {
+            var newpassword = $("#NewPassword").val();
+            if (newpassword.length < 5) {
+                $("#TextNewPassword").attr("hidden", false);
+                $(".save-button").prop("disabled", true);
+            } else {
+                $("#TextNewPassword").attr("hidden", true);
+                $(".save-button").prop("disabled", false);
+            }
+        });
+
+        $("#NewPasswordRepeat").on('keyup', function () {
+            var newpassword = $("#NewPassword").val();
+            var newpasswordrepeat = $("#NewPasswordRepeat").val();
+            if (newpasswordrepeat.length < 5) {
+                $("#Text1NewPasswordRepeat").attr("hidden", false);
+                $(".save-button").prop("disabled", true);
+            } else {
+                $("#Text1NewPasswordRepeat").attr("hidden", true);
+                $(".save-button").prop("disabled", false);
+            }
+            if (newpassword != newpasswordrepeat) {
+                $("#Text2NewPasswordRepeat").attr("hidden", false);
+                $(".save-button").prop("disabled", true);
+            } else {
+                $("#Text2NewPasswordRepeat").attr("hidden", true);
+                $(".save-button").prop("disabled", false);
+            }
+        });
+
+        $('.save-button').click(function () {
+            var userid = $("#UserId").val();
+            var key = $("#Key").val();
+            var code = $("#Code").val();
+            var newpassword = $("#NewPassword").val();
+            var newpasswordrepeat = $("#NewPasswordRepeat").val();
+            if (newpassword.trim() == null || newpassword.trim() == "") {
+                document.getElementById("NewPassword").focus();
+                return abp.notify.error("Mời bạn nhập mật khẩu");
+            }
+            if (newpasswordrepeat.trim() == null || newpasswordrepeat.trim() == "") {
+                document.getElementById("NewPasswordRepeat").focus();
+                return abp.notify.error("Mời bạn nhập nhắc lại mật khẩu");
+            }
+            if (newpassword.trim() == newpasswordrepeat.trim()) {
+                _thongtinnguoidungService.checkMaXacMinh(key, code).done(function (result) {
+                    if (result == true) {
+                        _thongtinnguoidungService.changePasswordById(userid, newpassword).done(function (result) {
+                            if (result.success == true) {
+                                window.location = `/Account/Login`;
+                                abp.notify.info(app.localize('SavedSuccessfully'));
+                            }
+                            else {
+                                return abp.message.error('Thay đổi mật khẩu thất bại thất bại');
+                            }
+                        })
+                    }
+                    else {
+                        return abp.message.error('Mã xác minh đã hết hạn');
+                    }
+                });
+            }
+            else {
+                return abp.message.error("Nhắc lại mật khẩu chưa chính xác");
+            }
+        });
+
+    });
+
+})();

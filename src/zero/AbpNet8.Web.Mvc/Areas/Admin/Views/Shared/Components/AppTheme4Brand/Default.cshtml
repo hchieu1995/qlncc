@@ -1,0 +1,15 @@
+﻿@using AbpNet8.Web.Areas.Admin.Views.Shared.Components.AppLogo
+@using AbpNet8.Web.Areas.App.Models.Layout
+
+@model HeaderViewModel
+@{
+    Layout = null;
+}
+<div class="kt-header__brand kt-grid__item" id="kt_header_brand">
+    <div class="kt-header__brand-logo" style="padding: 0px 35px;">
+        <a href="@Url.Action("Index", "Home", new {area = string.Empty})" class="dark">
+            @await Component.InvokeAsync(typeof(AppLogoViewComponent), new { LogoSkin = "dark" })
+        </a>
+        
+    </div>
+</div>

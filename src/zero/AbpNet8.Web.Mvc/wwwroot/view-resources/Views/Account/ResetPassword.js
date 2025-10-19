@@ -1,0 +1,68 @@
+﻿var CurrentPage = (function () {
+    var _passwordComplexityHelper = new app.PasswordComplexityHelper();
+
+    var handleResetPassword = function () {
+        $('.pass-reset-form').validate({
+            rules: {
+                PasswordRepeat: {
+                    equalTo: '#Password',
+                },
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            },
+        });
+
+        $('.pass-reset-form input').keypress(function (e) {
+            if (e.which === 13) {
+                if ($('.pass-reset-form').valid()) {
+                    $('.pass-reset-form').submit();
+                }
+
+                return false;
+            }
+        });
+
+        $("#Password").on('keyup', function () {
+            var newpassword = $("#Password").val();
+            if (newpassword.length < 5) {
+                $("#TextNewPassword").attr("hidden", false);
+                $("#SavePassword").prop("disabled", true);
+            } else {
+                $("#TextNewPassword").attr("hidden", true);
+                $("#SavePassword").prop("disabled", false);
+            }
+        });
+
+        $("#PasswordRepeat").on('keyup', function () {
+            var newpassword = $("#Password").val();
+            var newpasswordrepeat = $("#PasswordRepeat").val();
+            if (newpasswordrepeat.length < 5) {
+                $("#Text1NewPasswordRepeat").attr("hidden", false);
+                $("#SavePassword").prop("disabled", true);
+            } else {
+                $("#Text1NewPasswordRepeat").attr("hidden", true);
+                $("#SavePassword").prop("disabled", false);
+            }
+            if (newpassword != newpasswordrepeat) {
+                $("#Text2NewPasswordRepeat").attr("hidden", false);
+                $("#SavePassword").prop("disabled", true);
+            } else {
+                $("#Text2NewPasswordRepeat").attr("hidden", true);
+                $("#SavePassword").prop("disabled", false);
+            }
+        });
+
+        _passwordComplexityHelper.setPasswordComplexityRules(
+            $('input[name=Password],input[name=PasswordRepeat]'),
+            window.passwordComplexitySetting
+        );
+    };
+
+    return {
+        init: function () {
+            handleResetPassword();
+        },
+    };
+})();

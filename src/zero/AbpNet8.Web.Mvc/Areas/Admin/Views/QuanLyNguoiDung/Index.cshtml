@@ -1,0 +1,75 @@
+﻿@using Abp.Application.Services.Dto
+@using Admin.Authorization
+@using Admin.DomainTranferObjects
+@using AbpNet8.Web.Areas.Admin.Startup
+
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.QuanLyNguoiDung;
+}
+
+@section Scripts
+    {
+    <script type="text/javascript" src="/view-resources/Areas/Admin/QuanLyNguoiDung/Index.js" asp-append-version="true"></script>
+    <script src="~/Common/Scripts/dx.all.js"></script>
+    <script src="~/Common/Scripts/dx.messages.vi.js"></script>
+
+}
+<link href="~/view-resources/Areas/Admin/AppTopBarView/AppTopBarView.css" rel="stylesheet" />
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor bgrallct">
+    <input type="hidden" id="tenantSelectedId" value="0" />
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass()) hdct">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>Quản lý người dùng</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    @* @if (IsGranted(AppPermissions.Admin_HeThong_NguoiDung_CreateNew)) *@
+                    @* { *@
+                        <button id="CreateButton" class="btn btn-sm btn-outline-primary"><i class="fa fa-plus"></i> @L("CreateNew")</button>
+                    @* } *@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bgct kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet--mobile searchct">
+            <div class="kt-portlet__body">
+                <div class="kt-form" style="">
+                    <div class="row col-12">
+                        <div class="col-md-3">
+                            <div class="form-group no-hint">
+                                <select class="form-control kt-select2 bs-select form-control-sm combobox" id="filterTrangThai" name="filterTrangThai" data-live-search="true">
+                                    <option value=""> -- Chọn trạng thái -- </option>
+                                    <option value="0">Chưa hoạt động</option>
+                                    <option value="1">Hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group align-items-center">
+                                <div class="input-group">
+                                    <input type="text" id="filterText" class="form-control" placeholder="Tên đăng nhập, họ tên" autocomplete="off" style="z-index: 1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group align-items-center">
+                                <button id="filterButton" class="btn btn-outline-primary" type="submit" style="padding-right:2px"><i class="flaticon-search-1" aria-label="@L("Search")"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="align-items-center" style="padding:10px">
+                    <div id="gridContainer" style="height: calc(100vh - 170px)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

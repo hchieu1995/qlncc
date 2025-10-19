@@ -1,0 +1,72 @@
+﻿@using Abp.Application.Services.Dto
+@using Admin.Authorization;
+@using Admin.DomainTranferObjects
+@using AbpNet8.Web.Areas.Admin.Startup
+
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.DonViHanhChinh;
+}
+
+@model TableFilterList
+@section Scripts
+    {
+    <script type="text/javascript" src="/view-resources/Areas/Admin/DonViHanhChinh/Index.js" asp-append-version="true"></script>
+    <script src="~/Common/Scripts/dx.all.js"></script>
+    <script src="~/Common/Scripts/dx.messages.vi.js"></script>
+}
+<link href="~/view-resources/Areas/Admin/AppTopBarView/AppTopBarView.css" rel="stylesheet" />
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor bgrallct">
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass()) hdct">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>Đơn vị hành chính</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            </div>
+            <div class="kt-subheader__toolbar col-md-8" style="padding:0px">
+                @* <div class="kt-subheader__wrapper">
+                    @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_NhapExcel))
+                    {
+                        <button id="ImportExcelButton" class="btn btn-outline-warning btn-sm" style="height: 34px"><i class="far fa-file-excel"></i>Nhập excel</button>
+                    }
+                    @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_XuatExcel))
+                    {
+                        <button id="ExportExcelButton" class="btn btn-success btn-sm" style="height: 34px"><i class="far fa-file-excel"></i>Xuất excel</button>
+                    }
+                    @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_Them))
+                    {
+                        <button id="CreateButton" class="btn btn-sm btn-outline-primary" style="height: 34px"><i class="fa fa-plus" aria-hidden="true"></i>@L("CreateNew")</button>
+                    }
+                </div> *@
+            </div>
+        </div>
+    </div>
+
+    <div class="bgct kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet--mobile searchct">
+            <div class="kt-portlet__body">
+                <div class="kt-form" style="">
+                    <div class="row col-12">
+                        <div class="col-3">
+                            <div class="form-group align-items-center">
+                                <div class="input-group">
+                                    <input type="text" id="filterText" class="form-control" placeholder="Mã đơn vị, tên đơn vị" autocomplete="off" style="z-index: 1" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group align-items-center">
+                                <button id="filterButton" class="btn btn-outline-primary" type="submit" style="padding-right:2px"><i class="flaticon-search-1" aria-label="@L("Search")"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-center" style="padding:10px">
+                        <div id="gridContainer" style="height: calc(100vh - 170px)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

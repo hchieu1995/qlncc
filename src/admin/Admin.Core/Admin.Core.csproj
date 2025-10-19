@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Admin</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1951;0114</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1951;0114</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Localization\Admin\CyberTech-en-GB.xml" />
+    <None Remove="Localization\Admin\WebApp-en.xml" />
+    <None Remove="Localization\Admin\WebApp-vi.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Admin\WebApp-en.xml" />
+    <EmbeddedResource Include="Localization\Admin\WebApp-vi.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\zero\AbpNet8.Core\AbpNet8.Core.csproj" />
+  </ItemGroup>
+</Project>

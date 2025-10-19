@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+	<texts>
+		<text name="POS">POS</text>
+		<text name="Support">Hỗ trợ</text>
+		<text name="CreateNew">Thêm mới</text>
+		<text name="Update">Sửa</text>
+		<text name="Delete">Xóa</text>
+		<text name="Category">Danh Mục</text>
+		<text name="DanhMuc">Danh mục</text>
+		<text name="DanhMucKhac">Danh mục khác</text>
+		<text name="DanhMucTienTe">Danh mục tiền tệ</text>
+		<text name="DanhMucTinhThanh">Danh mục tỉnh thành</text>
+		<text name="DanhMucQuanHuyen">Danh mục quận huyện</text>
+		<text name="DanhMucCQT">Danh mục cơ quan thuế</text>
+		<text name="ChiCucThue">Chi cục thuế</text>
+		<text name="GoiDichVu">Gói dịch vụ</text>
+		<text name="DanhMucGoiDichVu">Danh mục gói dịch vụ</text>
+		<text name="DanhMucDoanhNghiepRuiRo">Danh mục Doanh nghiệp rủi ro</text>
+		<text name="DoanhNghiepRuiRo">Doanh nghiệp rủi ro</text>
+		<text name="DanhMucCanhBao">Danh mục cảnh báo</text>
+		<text name="DongBoLichSu">Lịch sử đồng bộ</text>
+		<text name="QuanLyThe">Quản lý thẻ</text>
+		<text name="DoiMatKhau">Đổi mật khẩu </text>
+		<text name="MoKhoa">Mở khóa </text>
+		<text name="DanhMucLoaiFile">Danh mục loại hồ sơ</text>
+		
+		<text name="NhapExcel">Nhập Excel</text>
+		<text name="XuatExcel">Xuất Excel</text>
+		<text name="Email">Email</text>
+		<text name="Gmail">Gmail</text>
+		<text name="XemGmail">Xem Gmail</text>
+		<text name="DanhSachDoanhNghiep">Danh sách doanh nghiệp</text>
+
+		<text name="SuaDoanhNghiep">Sửa doanh nghiệp</text>
+		<text name="ThemDoanhNghiep">Thêm doanh nghiệp</text>
+		<text name="XoaDoanhNghiep">Xóa doanh nghiệp</text>
+		<text name="QuanLyRuiRo">Quản lý rủi ro</text>
+
+		<text name="ThongTinDoanhNghiep">Thông tin doanh nghiệp</text>
+		<text name="ThongTinDoanhNghiepAdmin">Thông tin doanh nghiệp Admin</text>
+		<text name="ThongTinDoanhNghiepTest">Thông tin doanh nghiệp Test</text>
+		<text name="TaiKhoanKetNoi">Tài khoản kết nối</text>
+		<text name="ThongTinKetNoiTCT">Thông tin kết nối TCT</text>
+		<text name="TaiKhoan">Tài khoản</text>
+		<text name="NgayCapNhat">Ngày cập nhật</text>
+		<text name="DangNhap">Đăng nhập</text>
+		<text name="DangXuat">Đăng xuất</text>
+		<text name="LuuThongTin">Lưu thông tin</text>
+
+		<text name="HoaDon">Hóa đơn</text>
+		<text name="HoaDonDauVao">Hóa đơn đầu vào</text>
+		<text name="HoaDonDauRa">Hóa đơn đầu ra</text>
+		<text name="CauHinhHienThi">Cấu hình hiển thị</text>
+		<text name="ChonKyKeKhai">Chọn kỳ kê khai</text>
+		<text name="DongBoTuCQT">Đồng bộ từ CQT</text>
+		<text name="TaiPdf">Tải PDF</text>
+		<text name="TaiXml">Tải XML</text>
+		<text name="XemChiTiet">Xem chi tiết</text>
+		<text name="XuatDLVaoPMKT">Xuất DL vào PMKT</text>
+		<text name="XuatExcelNangCao">Xuất Excel nâng cao</text>
+		<text name="DanhDauHopLe">Đánh dấu hợp lệ</text>
+		<text name="DanhSachHoaDonDauRa">Danh sách hóa đơn đầu ra</text>
+
+		<text name="DoanhNghiep">Doanh nghiệp</text>
+		<text name="QuanLyDoanhNghiep">Quản lý doanh nghiệp</text>
+
+		<text name="TienTe">Tiền tệ</text>
+		<text name="TienTeCreateNew">Thêm mới tiền tệ</text>
+		<text name="TienTeUpdate">Sửa tiền tệ</text>
+		<text name="TienTeDelete">Xóa tiền tệ</text>
+
+		<text name="NganHang">Ngân hàng</text>
+		<text name="NganHangCreateNew">Thêm mới ngân hàng</text>
+		<text name="NganHangUpdate">Sửa ngân hàng</text>
+		<text name="NganHangDelete">Xóa ngân hàng</text>
+
+		<text name="QuocTich">Quốc tịch</text>
+		<text name="QuocTichCreateNew">Thêm mới quốc tịch</text>
+		<text name="QuocTichUpdate">Sửa quốc tịch</text>
+		<text name="QuocTichDelete">Xóa quốc tịch</text>
+
+		<text name="TinhThanh">Tỉnh thành</text>
+		<text name="TinhThanhCreateNew">Thêm mới tỉnh thành</text>
+		<text name="TinhThanhUpdate">Sửa tỉnh thành</text>
+		<text name="TinhThanhDelete">Xóa tỉnh thành</text>
+
+		<text name="QuanHuyen">Quận huyện</text>
+		<text name="QuanHuyenCreateNew">Thêm mới quận huyện</text>
+		<text name="QuanHuyenUpdate">Sửa quận huyện</text>
+		<text name="QuanHuyenDelete">Xóa quận huyện</text>
+
+		<text name="XaPhuong">Xã phường</text>
+		<text name="XaPhuongCreateNew">Thêm mới xã phường</text>
+		<text name="XaPhuongUpdate">Sửa xã phường</text>
+		<text name="XaPhuongDelete">Xóa xã phường</text>
+
+		<text name="QuanLy">Quản lý</text>
+
+		<text name="MauEmail">Mẫu email</text>
+		<text name="MauEmailCreateNew">Thêm mới mẫu email</text>
+		<text name="MauEmailUpdate">Sửa mẫu email</text>
+		<text name="MauEmailDelete">Xóa mẫu email</text>
+
+		<text name="CauHinh">Cấu hình</text>
+		<text name="QuanLyCauHinh">Quản lý cấu hình</text>
+		<text name="CauHinhCreateNew">Thêm mới cấu hình</text>
+		<text name="CauHinhUpdate">Sửa cấu hình</text>
+		<text name="CauHinhDelete">Xóa cấu hình</text>
+
+		<text name="CapNhapThongTin">Cập nhật thông tin</text>
+		<text name="HeThong">Hệ thống</text>
+
+		<text name="CoSoDuLieu">Cơ sở dữ liệu</text>
+		<text name="CoSoDuLieuCreateNew">Thêm mới cơ sở dữ liệu</text>
+		<text name="CoSoDuLieuUpdate">Sửa cơ sở dữ liệu</text>
+		<text name="CoSoDuLieuDelete">Xóa cơ sở dữ liệu</text>
+
+		<text name="QuanLyDonVi">Quản lý đơn vị</text>
+
+		<text name="VaiTro">Vai trò</text>
+		<text name="QuanLyVaiTro">Quản lý vai trò</text>
+		<text name="VaiTroCreateNew">Thêm mới vai trò</text>
+		<text name="VaiTroUpdate">Sửa vai trò</text>
+		<text name="VaiTroDelete">Xóa vai trò</text>
+
+		<text name="Admin">Admin</text>
+
+		<text name="DonVi">Đơn vị</text>
+
+		<text name="DonViThongTin">Thông tin đơn vị</text>
+		<text name="DonViThongTinCreateNew">Thêm mới thông tin đơn vị</text>
+		<text name="DonViThongTinUpdate">Sửa thông tin đơn vị</text>
+		<text name="DonViThongTinDelete">Xóa thông tin đơn vị</text>
+
+		<text name="DonViNguoiDung">Đơn vị người dùng</text>
+		<text name="DonViNguoiDungCreateNew">Thêm mới đơn vị người dùng</text>
+		<text name="DonViNguoiDungUpdate">Sửa đơn vị người dùng</text>
+		<text name="DonViNguoiDungDelete">Xóa đơn vị người dùng</text>
+
+		<text name="Tenant">Tenant</text>
+		<text name="TenantCreateNew">Thêm mới tenant</text>
+		<text name="TenantUpdate">Sửa tenant</text>
+		<text name="TenantDelete">Xóa tenant</text>
+
+		<text name="NguoiDung">Người dùng</text>
+
+		<text name="NguoiDungThongTin">Thông tin người dùng</text>
+		<text name="NguoiDungThongTinCreateNew">Thêm mới thông tin người dùng</text>
+		<text name="NguoiDungThongTinUpdate">Sửa thông tin người dùng</text>
+		<text name="NguoiDungThongTinDelete">Xóa thông tin người dùng</text>
+
+		<text name="DownloadTemplatesFile">Tải file mẫu</text>
+		<text name="ImportFileExcel">Nhập file excel</text>
+		<text name="SelectFile">Chọn file</text>
+		<text name="Cancel">Hủy bỏ</text>
+		<text name="IsActive">Hiệu lực</text>
+		<text name="Save">Lưu thông tin</text>
+		<text name="Edit">Chỉnh sửa</text>
+		<text name="SavedSuccessfully">Đã lưu thành công.</text>
+
+		<text name="SuccessfullyDeleted">Xóa thành công</text>
+		<text name="DeletedError">Xóa lỗi</text>
+    <text name="AreYouSureDeleteUser">Bạn có chắc chắn muốn xóa người dùng?</text>
+    
+		<text name="SanPham">Sản phẩm</text>
+		<text name="SanPhamCreateNew">Thêm mới sản phẩm</text>
+		<text name="SanPhamUpdate">Sửa sản phẩm</text>
+		<text name="SanPhamDelete">Xóa sản phẩm</text>
+		<text name="KhachHang">Khách hàng</text>
+
+		<text name="KhachHangThongTin">Thông tin khách hàng</text>
+		<text name="KhachHangThongTinCreateNew">Thêm mới thông tin khách hàng</text>
+		<text name="KhachHangThongTinUpdate">Sửa thông tin khách hàng</text>
+		<text name="KhachHangThongTinDelete">Xóa thông tin khách hàng</text>
+
+		<text name="System">Hệ thống</text>
+		<text name="Database">Cơ sở dữ liệu</text>
+
+		<text name="HeThongGoiDichVu">Gói dịch vụ hệ thống</text>
+		<text name="HeThongGoiDichVuCreateNew">Thêm mới gói dịch vụ hệ thống</text>
+		<text name="HeThongGoiDichVuUpdate">Sửa gói dịch vụ hệ thống</text>
+		<text name="HeThongGoiDichVuDelete">Xóa gói dịch vụ hệ thống</text>
+
+
+		<text name="AreYouSure">Bạn có chắc chắn muốn xóa ?</text>
+
+
+		<text name="DonViGoiDichVu">Gói dịch vụ đơn vị</text>
+		<text name="DonViGoiDichVuCreateNew">Thêm mới gói dịch vụ đơn vị</text>
+		<text name="DonViGoiDichVuUpdate">Sửa gói dịch vụ đơn vị</text>
+		<text name="DonViGoiDichVuDelete">Xóa gói dịch vụ đơn vị</text>
+
+		<text name="QuanLyKhachHang">Quản lý khách hàng</text>
+
+		<text name="XoaPhongBan">Xóa phòng ban</text>
+		<text name="QuanLyPhongBan">Quản lý phòng ban</text>
+
+		<text name="ThemPhongBanCon">Thêm phòng ban con</text>
+
+		<text name="ThemPhongBan">Thêm phòng ban</text>
+		<text name="ThemTaiKhoan">Thêm tài khoản</text>
+		<text name="STT">STT</text>
+		<text name="TenDangNhap">Tên đăng nhập</text>
+		<text name="HoTen">Họ tên</text>
+		<text name="ChucVu">Chức vụ</text>
+		<text name="Them">Thêm</text>
+		<text name="Sua">Sửa</text>
+		<text name="Xoa">Xóa</text>
+
+		<text name="BanChacChanMuonThucHienThaoTacNay">Bạn chắc chắn muốn thực hiện thao tác này?</text>
+		<text name="XacNhan">Xác nhận</text>
+		<text name="NhanVien">Nhân viên</text>
+		<text name="QuanLyNhanVien">Quản lý nhân viên</text>
+
+		<text name="BienNhan">Biên nhận</text>
+		<text name="XiNghiep">Xí nghiệp</text>
+		<text name="QuanLyXiNghiep">Quản lý xí nghiệp</text>
+
+		<text name="QuanLyNguoiDung">Quản lý người dùng</text>
+
+		<text name="Mail_LichSu">Lịch sử đọc mail</text>
+
+		<text name="NhanVienThu">Nhân viên thu</text>
+		<text name="NhanVienKinhDoanh">Nhân viên kinh doanh</text>
+		<text name="Khoa">Khóa</text>
+
+		<text name="QuanTriVien">Quản trị viên</text>
+		<text name="QuanLyBaiViet">Quản lý bài viết</text>
+		<text name="Chuyen">Chuyển</text>
+		<text name="XuatBan">Xuất bản</text>
+
+		<text name="QuanLyChuyenMucTin" > Quản lý chuyên mục tin</text>
+
+		<text name="BaiVietDangBienTap">Bài viết đang biên tập</text>
+		<text name="BaiVietChoXuatBan">Bài viết chờ xuất bản</text>
+		<text name="BaiVietDaXuatBan">Bài viết đã xuất bản</text>
+		<text name="BaiVietBiGoXuong">Bài viết bị gỡ xuống</text>
+
+		<text name="AreYouSureGoBaiViet">Bạn có chắc chắn muốn gỡ bài viết ?</text>
+		<text name="AreYouSureXuatBan">Bạn có chắc chắn muốn xuất bản bài viết ?</text>
+		<text name="HopThu">Hộp thư</text>
+
+		<text name="ThongTinNguoiDung">Thông tin người dùng</text>
+		<text name="ChinhSuaNguoiDung">Chỉnh sửa người dùng</text>
+		<text name="ThemMoiNguoiDung">Thêm mới người dùng</text>
+		<text name="QuenMatKhau?">Quên mật khẩu?</text>
+		<text name="MatKhau">Mật khẩu</text>
+
+		<text name="DanhDauHopLeSuccess">Đánh dấu hợp lệ thành công.</text>
+		<text name="TaiXmlSuccess">Tải XML thành công.</text>
+		<text name="TaiPdfSuccess">Tải PDF thành công.</text>
+		<text name="InsertedFileSuccessfully">Thêm file thành công.</text>
+		<text name="DeletedFileSuccessfully">Xóa file thành công.</text>
+		<text name="FileExisted">File đã tồn tại.</text>
+		<text name="MaxInsertedFile">Tổng dung lượng file lớn hơn 10Mb.</text>
+		<text name="ExportSuccessfully">Export file thành công.</text>
+		<text name="InValidInput">Dữ liệu chưa được nhập đúng.</text>
+		<text name="TthhdvRequire">Hóa đơn phải có ít nhất một thông tin hàng hóa hợp lệ!</text>
+
+		<text name="Yes">Có</text>
+		<text name="BaoCao">Báo cáo</text>
+		<text name="TrangThaiHoaDon">Trạng thái hóa đơn</text>
+		<text name="ToKhaiThueGTGT">Tờ khai thuế GTGT</text>
+		<text name="ToKhaiGiamThue">Tờ khai giảm thuế</text>
+
+		<text name="LichSuDongBo">Lịch sử đồng bộ</text>
+		<text name="DangNhapDangXuat">Đăng nhập, đăng xuất</text>
+
+		<text name="DanhSachMail">Danh sách mail</text>
+		<text name="DocMail">Đọc mail</text>
+		<text name="Xem">Xem</text>
+		<text name="LichSuDocMail">Lịch sử đọc mail</text>
+		<text name="ResetDefault">Đặt lại mặc định</text>
+
+    <text name="QuanLyTaiLieu">Quản lý tài liệu</text>
+    <text name="TaiTaiLieu">Tải tài liệu</text>
+
+    <text name="TaiDanhSachPdf">Tải danh sách pdf</text>
+    <text name="TaiDanhSachXml">Tải danh sách xml</text>
+    <text name="InDanhSachHoaDon">In danh sách hóa đơn</text>
+    <text name="BangKeHoaDon">Bảng kê hóa đơn</text>
+
+    <text name="Search">Search</text>
+    <text name="TopMenu">TopMenu</text>
+    <text name="ChangePassword">Đổi mật khẩu</text>
+    <text name="Logout">Đăng xuất</text>
+    <text name="NewNotifications">NewNotifications</text>
+    <text name="SetAllAsRead">SetAllAsRead</text>
+    <text name="Settings">Settings</text>
+    <text name="SetAsRead">SetAsRead</text>
+    <text name="ThereIsNoNotification">ThereIsNoNotification</text>
+    <text name="SeeAllNotifications">SeeAllNotifications</text>
+    <text name="Dashboard">Dashboard</text>
+    <text name="Remove">Remove</text>
+    <text name="DonViHanhChinh">Đơn vị hành chính</text>
+    
+	</texts>
+</localizationDictionary>
