@@ -16,8 +16,7 @@ namespace AbpNet8.Web.Areas.Admin.Startup
             menu
                 .AddItem(new MenuItemDefinition("HeThong", L("HeThong"), icon: "flaticon-medical", permissionDependency: null)
                             .AddItem(new MenuItemDefinition("HeThong.QuanLyNguoiDung", L("QuanLyNguoiDung"), url: "Admin/QuanLyNguoiDung", permissionDependency: null))
-                            .AddItem(new MenuItemDefinition("HeThong.VaiTro", L("VaiTro"), url: "Admin/QuanLyVaiTro", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_VaiTro)))
-                            .AddItem(new MenuItemDefinition("HeThong.ThongTinDoanhNghiep", L("ThongTinDoanhNghiep"), url: "Admin/QuanLyDoanhNghiep/CauHinhTongHop", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_ThongTinDoanhNghiep)))
+                            .AddItem(new MenuItemDefinition("HeThong.QuanLyCoCauToChuc", L("QuanLyCoCauToChuc"), url: "Admin/QuanLyCoCauToChuc", permissionDependency: null))
                          )
                 .AddItem(new MenuItemDefinition("DanhMuc", L("DanhMuc"), icon: "flaticon-medical", permissionDependency: null)
                         //.AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac", L("DanhMucKhac"), permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac))

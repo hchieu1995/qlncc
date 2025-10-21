@@ -1,7 +1,7 @@
 {
 	"sProcessing": "Đang xử lý...",
 	"sLengthMenu": " _MENU_ ",
-	"sZeroRecords": "<p style='margin:0'>Không tìm thấy dòng nào phù hợp</p>",
+	"sZeroRecords": "Không tìm thấy dòng nào phù hợp",
 	"sInfo": "Tổng cộng: _TOTAL_",
 	"sInfoEmpty": "Tổng cộng: 0",
 	"sInfoFiltered": "(được lọc từ _MAX_ mục)",

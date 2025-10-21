@@ -13,7 +13,9 @@ namespace Admin.EntityFrameworkCore
         //No Tenant
         public virtual DbSet<PersistedGrantEntity> PersistedGrants { get; set; }
         public virtual DbSet<NguoiDung_ThongTin> NguoiDung_ThongTins { get; set; }
+        public virtual DbSet<Ql_CoCauToChuc> Ql_CoCauToChucs { get; set; }
         public virtual DbSet<C_DonViHC> C_DonViHCs { get; set; }
+        public virtual DbSet<Ql_ToChuc_ThanhVien> Ql_ToChuc_ThanhViens { get; set; }
 
         public BnnDbContext(DbContextOptions<BnnDbContext> options)
             : base(options)

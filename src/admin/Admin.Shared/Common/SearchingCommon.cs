@@ -1,19 +1,9 @@
 ﻿using Abp.Dependency;
 using AbpNet8.Configuration;
-using Admin.DomainTranferObjects;
-using Castle.Core.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Minio;
-using Minio.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Admin.Shared.Common
 {

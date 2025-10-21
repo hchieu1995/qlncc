@@ -294,6 +294,6 @@
     <text name="Dashboard">Dashboard</text>
     <text name="Remove">Remove</text>
     <text name="DonViHanhChinh">Đơn vị hành chính</text>
-    
+    <text name="QuanLyCoCauToChuc">Cơ cấu tổ chức</text>
 	</texts>
 </localizationDictionary>

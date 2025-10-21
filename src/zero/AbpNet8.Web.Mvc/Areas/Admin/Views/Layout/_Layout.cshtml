@@ -44,7 +44,7 @@
 
     <meta property="og:title" content="AbpZeroTemplate" />
     <meta property="og:image" content="@headerViewModel.GetLogoUrl(ApplicationPath, theme.BaseSettings.Menu.AsideSkin)" />
-    <meta property="og:description" content="Hóa đơn, Bán hàng, Sell, Pos" />
+    <meta property="og:description" content="người có công" />
     <meta property="og:url" content="@($" {Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")">
 
     <link rel="shortcut icon" href="/Common/Images/favicon.ico" />
@@ -155,7 +155,10 @@
     {
         <script src="~/view-resources/Areas/App/Views/Layout/_MenuSearchBar.min.js"></script>
     }
-
+    <script src="~/Common/Scripts/dx-quill.js"></script>
+    <script src="~/Common/Scripts/dx.all.js"></script>
+    <script src="~/Common/Scripts/dx.messages.vi.js"></script>
+    <link href="~/view-resources/Areas/Admin/AppTopBarView/AppTopBarView.css" rel="stylesheet" />
     <!--end::Base Scripts -->
     <!--begin::Page Snippets -->
     @await RenderSectionAsync("Scripts", false)

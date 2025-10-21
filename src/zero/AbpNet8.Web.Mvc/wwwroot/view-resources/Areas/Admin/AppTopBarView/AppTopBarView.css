@@ -11,15 +11,6 @@ a {
         color: #f58233;
     }
 
-.dataTables_empty {
-    background-image: url(/Common/Images/loaddulieu.gif);
-    background-repeat: no-repeat;
-    height: 190px;
-    background-size: 250px 200px;
-    background-position: top;
-    background-color: #e2e5ec !important;
-}
-
     .dataTables_empty p {
         margin-top: 170px !important;
         font-weight: 600;
@@ -183,7 +174,7 @@ table thead th {
     border-color: #dee2e6;
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
-    font-size: 14px !important;
+    font-size: 13px !important;
 }
 /*table tbody td {
     background-color: white !important;

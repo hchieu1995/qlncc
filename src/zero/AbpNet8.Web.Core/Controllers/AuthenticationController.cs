@@ -44,13 +44,8 @@ namespace AbpNet8.Controllers
         private readonly TokenAuthConfiguration _configuration;
         private readonly UserManager _userManager;
         private readonly ICacheManager _cacheManager;
-        private readonly IOptions<JwtBearerOptions> _jwtOptions;
-        private readonly IExternalAuthConfiguration _externalAuthConfiguration;
-        private readonly IExternalAuthManager _externalAuthManager;
-        private readonly UserRegistrationManager _userRegistrationManager;
         private readonly IdentityOptions _identityOptions;
-        private readonly ISettingManager _settingManager;
-        private readonly IRepository<NguoiDung_ThongTin> _thongTinNguoiDungRepository;
+        private readonly IRepository<NguoiDung_ThongTin, long> _thongTinNguoiDungRepository;
 
         public AuthenticationController(
             LogInManager logInManager,
@@ -59,13 +54,8 @@ namespace AbpNet8.Controllers
             TokenAuthConfiguration configuration,
             UserManager userManager,
             ICacheManager cacheManager,
-            IOptions<JwtBearerOptions> jwtOptions,
-            IExternalAuthConfiguration externalAuthConfiguration,
-            IExternalAuthManager externalAuthManager,
-            UserRegistrationManager userRegistrationManager,
             IOptions<IdentityOptions> identityOptions,
-            ISettingManager settingManager,
-            IRepository<NguoiDung_ThongTin> thongTinNguoiDungRepository
+            IRepository<NguoiDung_ThongTin, long> thongTinNguoiDungRepository
             )
         {
             _logInManager = logInManager;
@@ -74,11 +64,6 @@ namespace AbpNet8.Controllers
             _configuration = configuration;
             _userManager = userManager;
             _cacheManager = cacheManager;
-            _jwtOptions = jwtOptions;
-            _externalAuthConfiguration = externalAuthConfiguration;
-            _externalAuthManager = externalAuthManager;
-            _userRegistrationManager = userRegistrationManager;
-            _settingManager = settingManager;
             _identityOptions = identityOptions.Value;
             _thongTinNguoiDungRepository = thongTinNguoiDungRepository;
         }

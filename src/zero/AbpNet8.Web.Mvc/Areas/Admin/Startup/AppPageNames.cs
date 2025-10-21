@@ -26,6 +26,7 @@ namespace AbpNet8.Web.Areas.Admin.Startup
 
             public const string HeThong = "HeThong";
             public const string QuanLyNguoiDung = "HeThong.QuanLyNguoiDung";
+            public const string QuanLyCoCauToChuc = "HeThong.QuanLyCoCauToChuc";
             public const string VaiTro = "HeThong.VaiTro";
             public const string ThongTinDoanhNghiep = "HeThong.ThongTinDoanhNghiep";
 

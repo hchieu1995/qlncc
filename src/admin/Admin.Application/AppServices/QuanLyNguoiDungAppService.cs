@@ -7,6 +7,7 @@ using AbpNet8.Authorization.Roles;
 using AbpNet8.Authorization.Users;
 using AbpNet8.Roles.Dto;
 using Admin.Application.AppServices;
+using Admin.Constants;
 using Admin.Domains;
 using Admin.DomainTranferObjects;
 using Admin.DomainTranferObjects.DTO;
@@ -20,21 +21,23 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Admin.AppServices
 {
     //[AbpAuthorize]
     public class QuanLyNguoiDungAppService : BnnAdminServiceBase
     {
-        private readonly IRepository<NguoiDung_ThongTin> _thongTinNguoiDungRepository;
+        private readonly IRepository<NguoiDung_ThongTin, long> _thongTinNguoiDungRepository;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IRepository<UserRole, long> _userRoleRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IRepository<Setting, long> _settingRepository;
+        const string htmlspace = "&nbsp;&nbsp;&nbsp;&nbsp;";
         public QuanLyNguoiDungAppService(
-            IRepository<NguoiDung_ThongTin> thongTinNguoiDungRepository,
+            IRepository<NguoiDung_ThongTin, long> thongTinNguoiDungRepository,
             UserManager userManager,
             RoleManager roleManager,
             IUnitOfWorkManager unitOfWorkManager,
@@ -397,6 +400,60 @@ namespace Admin.AppServices
                 result.Message = "Có lỗi xảy ra, vui lòng liên hệ hỗ trợ viên";
             }
             return result;
+        }
+        public GenericResultDto CayToChuc()
+        {
+            GenericResultDto rs = new GenericResultDto();
+            try
+            {
+                var tc = GetUserInfo_ToChuc();
+                if (tc.ToChuc_ToChucCons?.Count > 0)
+                {
+                    var dstochucdto = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(tc.ToChuc_ToChucCons);
+                    var tcdto = ObjectMapper.Map<Ql_CoCauToChucDto>(tc.ToChuc);
+                    tcdto.Level = 1;
+                    tcdto.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == tcdto.Id).ToList();
+                    List<Ql_CoCauToChucDto> dsql_CoCauToChucDto = new List<Ql_CoCauToChucDto>() { tcdto };
+
+                    foreach (var item1 in dsql_CoCauToChucDto)
+                        foreach (var item2 in item1.DSToChucCon)
+                        {
+                            item2.Level = 2;
+                            item2.SpaceLevel = htmlspace;
+                            item2.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item2.Id).ToList();
+                            foreach (var item3 in item2.DSToChucCon)
+                            {
+                                item3.Level = 3;
+                                item3.SpaceLevel = item2.SpaceLevel + htmlspace;
+                                item3.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item3.Id).ToList();
+                                foreach (var item4 in item3.DSToChucCon)
+                                {
+                                    item4.Level = 4;
+                                    item4.SpaceLevel = item3.SpaceLevel + htmlspace;
+                                    item4.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item4.Id).ToList();
+                                    foreach (var item5 in item4.DSToChucCon)
+                                    {
+                                        item5.Level = 5;
+                                        item5.SpaceLevel = item4.SpaceLevel + htmlspace;
+                                        item5.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item5.Id).ToList();
+                                    }
+                                }
+                            }
+                        }
+                    rs.Success = true;
+                    rs.Data = dsql_CoCauToChucDto;
+                }
+                else
+                {
+                    rs.Success = true;
+                    rs.Data = new List<Ql_CoCauToChucDto>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("DSToChuc", ex);
+            }
+            return rs;
         }
     }
 }

@@ -1,0 +1,71 @@
+﻿@using Abp.Application.Services.Dto
+@using AbpNet8.Web.Areas.Admin.Startup
+
+@* @{
+    ViewBag.CurrentPageName = AppPageNames.Common.CoCauToChuc;
+} *@
+
+@section Scripts
+{
+    <script src="~/view-resources/Areas/Admin/QuanLyCoCauToChuc/Index.js"></script>
+    <script src="~/assets/ckeditor/ckeditor.js"></script>
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="kt-container kt-container--fluid">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>Quản lý cơ cấu tổ chức</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="kt-portlet">
+                    <div class="row pt-3 pr-3 pl-3 ml-0 mr-0">
+                        <button type="button" id="ThemToChuc" class="btn btn-sm btn-outline-primary float-right mb-3">
+                            <i class="fa fa-plus"></i>@L("ThemToChuc")
+                        </button>
+                    </div>
+                    <div class="kt-portlet__body" style="height: calc(100vh - 165px)">
+                        <div id="treeviewid"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="kt-portlet">
+                    <div class="kt-subheader__toolbar">
+                        <div class="kt-subheader__wrapper pt-3 pr-3 pl-3">
+                            <button id="CreateNewUserButton" class="btn btn-sm btn-outline-primary "><i class="fa fa-plus"></i> @L("CreateNew")</button>
+
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <table id="UsersTable" class="organization-members-table display table table-striped table-bordered table-hover dt-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="max-width: 10%; text-align: center;">@L("STT")</th>
+                                    <th style="max-width: 25%; text-align: center;">@L("TenDangNhap")</th>
+                                    <th style="max-width: 25%; text-align: center;">@L("HoTen")</th>
+                                    <th style="max-width: 25%; text-align: center;">@L("Email")</th>
+                                    <th style="max-width: 15%; text-align: center;">Hành động</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
