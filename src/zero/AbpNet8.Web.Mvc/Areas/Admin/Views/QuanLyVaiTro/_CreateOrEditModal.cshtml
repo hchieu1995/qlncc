@@ -1,0 +1,62 @@
+﻿@using Abp.Json
+@using AbpNet8.Web.Areas.App.Models.Roles
+
+@model CreateOrEditRoleModalViewModel
+
+<div class="modal-header" style="border-bottom:1px solid #ebedf2;background-color: rgb(66,139,202);">
+    <h4 class="text-center" style="color:white;width:100%;padding-top:5px;">
+        @if (Model.Role.Id > 0)
+        {
+            <spam>@L("Edit")</spam>
+        }
+        else
+        {
+            <span>@L("CreateNew")</span>
+        }
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#RoleInformationsTab" class="nav-link active" data-toggle="tab" role="tab">
+                @L("RoleProperties")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#PermissionsTab" class="nav-link" data-toggle="tab" role="tab">
+                @L("Permissions")
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="RoleInformationsTab" role="tabpanel">
+            <form name="RoleInformationsForm" role="form" novalidate class="form-validation">
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="Id" value="@Model.Role.Id" />
+                }
+                <div class="row col-md-12">
+                    <div class="form-group row col-md-6">
+                        <label for="NameId" class="col-md-4">Mã vai trò<span style="color: red;"> *</span></label>
+                        <input id="NameId" class="form-control @(Model.Role.Name) col-md-8" type="text" name="Name" value="@Model.Role.Name" maxlength="32">
+                    </div>
+                    <div class="form-group row col-md-6">
+                        <label for="DisplayNameId" class="col-md-4">Tên vai trò<span style="color: red;"> *</span></label>
+                        <input id="DisplayNameId" class="form-control @(Model.Role.DisplayName) col-md-8" type="text" name="DisplayName" value="@Model.Role.DisplayName" maxlength="64">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane" id="PermissionsTab" role="tabpanel">
+            @await Html.PartialAsync("~/Areas/App/Views/Common/_PermissionTree.cshtml", Model)
+        </div>
+    </div>
+
+    @* <div class="alert alert-warning" style="margin-top: 30px;">
+        <em>@L("Note_RefreshPageForPermissionChanges")</em>
+    </div> *@
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -153,7 +153,7 @@ namespace AbpNet8.Roles
                 /*input.Role.Name = input.Role.Name.Replace(" ", "").Trim();*/
                 input.Role.DisplayName = input.Role.DisplayName.Trim();
 
-                var role = await _roleManager.GetRoleByIdAsync(input.Role.Id);
+                var role = await _roleManager.GetRoleByIdAsync(input.Role.Id ?? 0);
 
                 /*role.Name = input.Role.Name.Replace(" ", "").Trim();*/
                 role.DisplayName = input.Role.DisplayName;

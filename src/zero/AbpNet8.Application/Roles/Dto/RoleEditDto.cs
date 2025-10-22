@@ -1,10 +1,10 @@
-﻿using Abp.Application.Services.Dto;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AbpNet8.Roles.Dto
 {
-    public class RoleEditDto: EntityDto<int>
+    public class RoleEditDto
     {
+        public int? Id { get; set; }
         [Required]
         public string DisplayName { get; set; }
         [Required]

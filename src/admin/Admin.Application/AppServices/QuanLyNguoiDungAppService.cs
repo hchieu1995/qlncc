@@ -136,7 +136,7 @@ namespace Admin.AppServices
             model.NguoiDung_MatKhau = "***************";
             foreach (var role in model.ListRole)
             {
-                if (listRoleOfUser.Contains(role.Id))
+                if (listRoleOfUser.Contains(role.Id ?? 0))
                     role.IsAssigned = true;
                 else role.IsAssigned = false;
             }
