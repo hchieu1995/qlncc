@@ -1,0 +1,6 @@
+.kt-login__body {
+  display: flex !important;
+}
+.kt-login__form .blockOverlay {
+  background: none !important;
+}
