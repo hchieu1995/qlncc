@@ -1,4 +1,5 @@
-﻿using Abp.Authorization.Users;
+﻿using Abp.Authorization;
+using Abp.Authorization.Users;
 using Abp.Configuration;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
@@ -7,7 +8,7 @@ using AbpNet8.Authorization.Roles;
 using AbpNet8.Authorization.Users;
 using AbpNet8.Roles.Dto;
 using Admin.Application.AppServices;
-using Admin.Constants;
+using Admin.Authorization;
 using Admin.Domains;
 using Admin.DomainTranferObjects;
 using Admin.DomainTranferObjects.DTO;
@@ -21,11 +22,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace Admin.AppServices
 {
-    //[AbpAuthorize]
+    [AbpAuthorize]
     public class QuanLyNguoiDungAppService : BnnAdminServiceBase
     {
         private readonly IRepository<NguoiDung_ThongTin, long> _thongTinNguoiDungRepository;
@@ -54,7 +54,7 @@ namespace Admin.AppServices
             _passwordHasher = passwordHasher;
             _settingRepository = settingRepository;
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung)]
         public async Task<TableShowItem> GetAllItem(TableFilterItem input)
         {
             if (!string.IsNullOrWhiteSpace(input.sort))
@@ -68,7 +68,7 @@ namespace Admin.AppServices
             {
                 using (_unitOfWorkManager.Current.SetTenantId(null))
                 {
-                    var usermanager = _userManager.Users
+                    var usermanager = _userManager.Users.Where(o => o.UserName != "admin")
                         .WhereIf(!string.IsNullOrWhiteSpace(input.filterext), o => o.Name.Trim().ToUpper().Contains(input.filterext.Trim().ToUpper()) || 
                         o.UserName.Trim().ToUpper().Contains(input.filterext.Trim().ToUpper())).Select(o => o.Id).ToList() ;
                     
@@ -154,7 +154,7 @@ namespace Admin.AppServices
                 return await Update(input);
             }
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_CreateNew)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_Them)]
         public async Task<GenericResultDto> Create(CreateEditNguoiDungThongTin input)
         {
             var result = new GenericResultDto();
@@ -233,7 +233,7 @@ namespace Admin.AppServices
 
             return result;
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_Update)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_Sua)]
         public async Task<GenericResultDto> Update(CreateEditNguoiDungThongTin input)
         {
             var result = new GenericResultDto();
@@ -292,7 +292,7 @@ namespace Admin.AppServices
             return result;
         }
 
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_Delete)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_NguoiDung_Xoa)]
         public async Task<GenericResultDto> Delete(int? id, int? tenantid)
         {
             var result = new GenericResultDto();
@@ -402,13 +402,11 @@ namespace Admin.AppServices
                 if (pbs.Count > 0)
                 {
                     var listToChuc = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(pbs);
-                    foreach (var item in listToChuc)
-                    {
-                        int capDo = item.ToChuc_CapDo ?? 0;
-                        item.SpaceLevel = string.Concat(Enumerable.Repeat(htmlspace, capDo));
-                    }
+
+                    // 👉 Sắp xếp đúng thứ tự cây cha → con
+                    var orderedList = OrderAsTree(listToChuc);
                     rs.Success = true;
-                    rs.Data = listToChuc;
+                    rs.Data = orderedList;
                 }
                 else
                 {
@@ -421,6 +419,51 @@ namespace Admin.AppServices
                 Logger.Error("DSToChuc", ex);
             }
             return rs;
+        }
+        private List<Ql_CoCauToChucDto> OrderAsTree(List<Ql_CoCauToChucDto> list)
+        {
+            if (list == null || list.Count == 0)
+                return new List<Ql_CoCauToChucDto>();
+
+            const string htmlspace = "&nbsp;&nbsp;&nbsp;";
+
+            // Tạo map cha -> danh sách con
+            var childrenMap = list
+                .Where(x => x.ToChuc_Cha_Id != null)
+                .GroupBy(x => x.ToChuc_Cha_Id)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.OrderBy(x => x.ToChuc_Ma).ThenBy(x => x.ToChuc_Ten).ToList()
+                );
+
+            // Tập hợp ID
+            var allIds = list.Select(x => x.Id).ToHashSet();
+
+            // Xác định các gốc (root)
+            var roots = list
+                .Where(x => x.ToChuc_Cha_Id == null || !allIds.Contains(x.ToChuc_Cha_Id.Value))
+                .OrderBy(x => x.ToChuc_Ma)
+                .ThenBy(x => x.ToChuc_Ten)
+                .ToList();
+
+            var ordered = new List<Ql_CoCauToChucDto>();
+            void Traverse(Ql_CoCauToChucDto node, int level, string space)
+            {
+                node.Level = level;
+                node.SpaceLevel = space;
+                ordered.Add(node);
+
+                if (childrenMap.TryGetValue(node.Id, out var children))
+                {
+                    foreach (var child in children)
+                        Traverse(child, level + 1, space + htmlspace);
+                }
+            }
+
+            foreach (var r in roots)
+                Traverse(r, 1, "");
+
+            return ordered;
         }
 
 

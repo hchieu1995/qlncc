@@ -6,6 +6,7 @@ using Abp.Linq.Extensions;
 using AbpNet8.Authorization.Roles;
 using AbpNet8.Roles.Dto;
 using Admin.Application.AppServices;
+using Admin.Authorization;
 using Admin.DomainTranferObjects;
 using Admin.Shared.DomainTranferObjects;
 using Microsoft.AspNetCore.Mvc;
@@ -132,7 +133,7 @@ namespace Admin.AppServices
                 return await CreateRoleAsync(input);
             }
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_CreateNew)]
+        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Them)]
         public async Task<GenericResultDto> CreateRoleAsync(CreateOrUpdateRoleInput input)
         {
             var result = new GenericResultDto
@@ -178,7 +179,7 @@ namespace Admin.AppServices
             }
             return result;
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Update)]
+        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Sua)]
         public async Task<GenericResultDto> UpdateRoleAsync(CreateOrUpdateRoleInput input)
         {
             var result = new GenericResultDto
@@ -224,7 +225,7 @@ namespace Admin.AppServices
             }
             return result;
         }
-        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Delete)]
+        //[AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Xoa)]
         public async Task<GenericResultDto> DeleteRole(DeleteRoleInput input)
         {
             var result = new GenericResultDto

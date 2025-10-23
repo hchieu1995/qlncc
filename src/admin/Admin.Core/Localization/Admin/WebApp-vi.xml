@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="vi">
 	<texts>
-		<text name="POS">POS</text>
 		<text name="Support">Hỗ trợ</text>
 		<text name="CreateNew">Thêm mới</text>
 		<text name="Update">Sửa</text>
@@ -21,7 +20,6 @@
 		<text name="DanhMucCanhBao">Danh mục cảnh báo</text>
 		<text name="DongBoLichSu">Lịch sử đồng bộ</text>
 		<text name="QuanLyThe">Quản lý thẻ</text>
-		<text name="DoiMatKhau">Đổi mật khẩu </text>
 		<text name="MoKhoa">Mở khóa </text>
 		<text name="DanhMucLoaiFile">Danh mục loại hồ sơ</text>
 		
@@ -204,9 +202,7 @@
 		<text name="TenDangNhap">Tên đăng nhập</text>
 		<text name="HoTen">Họ tên</text>
 		<text name="ChucVu">Chức vụ</text>
-		<text name="Them">Thêm</text>
-		<text name="Sua">Sửa</text>
-		<text name="Xoa">Xóa</text>
+		
 
 		<text name="BanChacChanMuonThucHienThaoTacNay">Bạn chắc chắn muốn thực hiện thao tác này?</text>
 		<text name="XacNhan">Xác nhận</text>
@@ -217,7 +213,6 @@
 		<text name="XiNghiep">Xí nghiệp</text>
 		<text name="QuanLyXiNghiep">Quản lý xí nghiệp</text>
 
-		<text name="QuanLyNguoiDung">Quản lý người dùng</text>
 
 		<text name="Mail_LichSu">Lịch sử đọc mail</text>
 
@@ -294,6 +289,20 @@
     <text name="Dashboard">Dashboard</text>
     <text name="Remove">Remove</text>
     <text name="DonViHanhChinh">Đơn vị hành chính</text>
+    <text name="SearchWithThreeDot">Tìm kiếm...</text>
+
+    <text name="Them">Thêm</text>
+    <text name="Sua">Sửa</text>
+    <text name="Xoa">Xóa</text>
+    <text name="QuanLyNguoiDung">Quản lý người dùng</text>
+    <text name="KhoaMoKhoa">Khóa/Mở khóa</text>
+    <text name="DoiMatKhau">Đổi mật khẩu</text>
+
     <text name="QuanLyCoCauToChuc">Cơ cấu tổ chức</text>
+    <text name="ThemToChuc">Thêm tổ chức</text>
+    <text name="SuaToChuc">Sửa tổ chức</text>
+    <text name="XoaToChuc">Xóa tổ chức</text>
+    <text name="ThemNguoiDungToChuc">Thêm người dùng trong tổ chức</text>
+    <text name="XoaNguoiDungToChuc">Xóa người dùng trong tổ chức</text>
 	</texts>
 </localizationDictionary>

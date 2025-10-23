@@ -5,9 +5,9 @@
         var _$usersTable = $('#UsersTable');
 
         var _permissions = {
-            themtochuc: abp.auth.hasPermission('Admin.HeThong.CoCauToChuc.ThemToChuc'),
-            suatochuc: abp.auth.hasPermission('Admin.HeThong.CoCauToChuc.SuaToChuc'),
-            xoatochuc: abp.auth.hasPermission('Admin.HeThong.CoCauToChuc.XoaToChuc'),
+            themtochuc: abp.auth.hasPermission('Admin.HeThong.QuanLyCoCauToChuc.ThemToChuc'),
+            suatochuc: abp.auth.hasPermission('Admin.HeThong.QuanLyCoCauToChuc.SuaToChuc'),
+            xoatochuc: abp.auth.hasPermission('Admin.HeThong.QuanLyCoCauToChuc.XoaToChuc'),
         };
 
         var _createToChucModal = new app.ModalManager({
@@ -33,7 +33,7 @@
                     edit: {
                         label: app.localize('Sua'),
                         icon: 'la la-pencil',
-                        //_disabled: !_permissions.suatochuc,
+                        _disabled: !_permissions.suatochuc,
                         action: function () {
                             _createToChucModal.open({
                                 id: node.id, chaid: undefined
@@ -44,7 +44,7 @@
                     add: {
                         label: app.localize('Them'),
                         icon: 'la la-plus',
-                        //_disabled: !_permissions.themtochuc,
+                        _disabled: !_permissions.themtochuc,
                         action: function () {
                             _createToChucModal.open({ id: undefined, chaid: node.id });
                         }
@@ -53,7 +53,7 @@
                     delete: {
                         label: app.localize("Xoa"),
                         icon: 'la la-remove',
-                        //_disabled: !_permissions.xoatochuc || (node.children && node.children.length > 0),
+                        _disabled: !_permissions.xoatochuc || (node.children && node.children.length > 0),
                         action: function (data) {
                             abp.message.confirm(
                                 app.localize('BanChacChanMuonThucHienThaoTacNay'),
@@ -232,8 +232,9 @@
                     defaultContent: '',
                     render: function (data, type, full, meta) {
                         var text = "";
+                        if (abp.auth.isGranted('Admin.HeThong.QuanLyCoCauToChuc.XoaNguoiDungToChuc')) {
                             text += '<a style="height:18px" class="btn btn-sm text-danger btn-icon btn-icon-md delete" data-toggle="tooltip" title="Xóa"' + app.localize('Xoa') + '" href="#"><i class="la la-trash"></i></a>';
-
+                        }
                             
                         return text;
                     }

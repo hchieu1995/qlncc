@@ -111,7 +111,7 @@ namespace AbpNet8.Roles
                 return await CreateRoleAsync(input);
             }
         }
-        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Delete)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Xoa)]
         public async Task DeleteRole(int id)
         {
             var role = await _roleManager.GetRoleByIdAsync(id);
@@ -125,7 +125,7 @@ namespace AbpNet8.Roles
             CheckErrors(await _roleManager.DeleteAsync(role));
 
         }
-        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Update)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Sua)]
         protected virtual async Task<Result> UpdateRoleAsync(CreateOrUpdateRoleInput input)
         {
             var result = new Result()
@@ -170,7 +170,7 @@ namespace AbpNet8.Roles
             }
             return result;
         }
-        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_CreateNew)]
+        [AbpAuthorize(AppPermissions.Admin_HeThong_VaiTro_Them)]
         protected virtual async Task<Result> CreateRoleAsync(CreateOrUpdateRoleInput input)
         {
             var result = new Result()

@@ -15,7 +15,7 @@
             modalClass: 'ChangePasswordModal',
             modalSize: "modal-s"
         });
-
+        DevExpress.localization.locale("vi");
         $('.combobox')
             .selectpicker({
                 iconBase: "fa",
@@ -85,8 +85,6 @@
             );
         }
         var parmaforall = {};
-
-        DevExpress.localization.locale("vi");
         function isNotEmpty(value) {
             return value !== undefined && value !== null && value !== "";
         }
@@ -267,26 +265,26 @@
                     allowFiltering: false,
                     cellTemplate: function (container, options) {
                         var txt = "";
-                        //if (abp.auth.isGranted('Admin.HeThong.NguoiDung.DoiMatKhau')) {
-                        txt += `<a class="btn btn-sm btn-icon btn-icon-md changepass" title="Đổi mật khẩu" style="margin-top: -10px;margin-left: 10px;color:#E1B74B;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="flaticon-refresh icon-color" style="font-size: 1.4rem;"></i></a>`;
-                        //}
-                        //if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Update')) {
-                        txt += `<a class="btn btn-sm btn-icon btn-icon-md edit" title="Chỉnh sửa" style="margin-top: -10px;color:#169BD5;margin-left: 15px;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-edit icon-color"></i></a>`;
-                        //}
-                        if (options.data.nguoiDung_TrangThai == true) {
-                            
-                            //if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Khoa')) {
-                                txt += `<a class="btn btn-sm btn-icon btn-icon-md lock" title="Khóa" style="margin-top: -10px;margin-left: 10px;color:red;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-lock icon-color"></i></a>`;
-                            //}
-                            
-                        } else {
-                            //if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Khoa')) {
-                                txt += `<a class="btn btn-sm btn-icon btn-icon-md unlock" title="Mở khóa" style="margin-top: -10px;margin-left: 10px;color:#169BD5;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-lock-open icon-color"></i></a>`;
-                            //}
+                        if (abp.auth.isGranted('Admin.HeThong.NguoiDung.DoiMatKhau')) {
+                            txt += `<a class="btn btn-sm btn-icon btn-icon-md changepass" title="Đổi mật khẩu" style="margin-top: -10px;margin-left: 10px;color:#E1B74B;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="flaticon-refresh icon-color" style="font-size: 1.4rem;"></i></a>`;
                         }
-                        //if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Delete')) {
-                        txt += `<a class="btn btn-sm btn-icon btn-icon-md delete" title="Xóa" style="margin-top:-10px;margin-left: 10px;color:red;" data-id="${options.data.id}" data-tenant="${options.data.tenantId}"><i class="fa fa-trash icon-color"></i></a>`;
-                        //}
+                        if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Sua')) {
+                            txt += `<a class="btn btn-sm btn-icon btn-icon-md edit" title="Chỉnh sửa" style="margin-top: -10px;color:#169BD5;margin-left: 15px;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-edit icon-color"></i></a>`;
+                        }
+                        if (options.data.nguoiDung_TrangThai == true) {
+
+                            if (abp.auth.isGranted('Admin.HeThong.NguoiDung.KhoaMoKhoa')) {
+                                txt += `<a class="btn btn-sm btn-icon btn-icon-md lock" title="Khóa" style="margin-top: -10px;margin-left: 10px;color:red;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-lock icon-color"></i></a>`;
+                            }
+
+                        } else {
+                            if (abp.auth.isGranted('Admin.HeThong.NguoiDung.KhoaMoKhoa')) {
+                                txt += `<a class="btn btn-sm btn-icon btn-icon-md unlock" title="Mở khóa" style="margin-top: -10px;margin-left: 10px;color:#169BD5;" data-id="${options.data.userId}" data-tenant="${options.data.tenantId}"><i class="fa fa-lock-open icon-color"></i></a>`;
+                            }
+                        }
+                        if (abp.auth.isGranted('Admin.HeThong.NguoiDung.Xoa')) {
+                            txt += `<a class="btn btn-sm btn-icon btn-icon-md delete" title="Xóa" style="margin-top:-10px;margin-left: 10px;color:red;" data-id="${options.data.id}" data-tenant="${options.data.tenantId}"><i class="fa fa-trash icon-color"></i></a>`;
+                        }
                         
                         $(container).append(txt);
                     }

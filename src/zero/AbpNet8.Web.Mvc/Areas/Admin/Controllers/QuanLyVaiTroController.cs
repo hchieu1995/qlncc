@@ -1,4 +1,5 @@
-﻿using AbpNet8.Authorization.Permissions;
+﻿using Abp.AspNetCore.Mvc.Authorization;
+using AbpNet8.Authorization.Permissions;
 using AbpNet8.Controllers;
 using AbpNet8.Roles.Dto;
 using AbpNet8.Web.Areas.App.Models.Roles;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AbpNet8.Web.Areas.Admin.Controllers
 {
-    //[AbpMvcAuthorize]
+    [AbpMvcAuthorize]
     [Area("Admin")]
     public class QuanLyVaiTroController : AbpNet8ControllerBase
     {

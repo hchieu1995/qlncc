@@ -40,22 +40,25 @@ namespace Admin.Authorization
             var hethong = admin.CreateChildPermission(AppPermissions.Admin_HeThong, L("HeThong"));
 
             var nguoidung = hethong.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung, L("QuanLyNguoiDung"));
-            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_CreateNew, L("CreateNew"));
-            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Update, L("Update"));
-            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Khoa, L("Khoa"));
-            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_MoKhoa, L("MoKhoa"));
-            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Delete, L("Delete"));
+            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Them, L("Them"));
+            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Sua, L("Sua"));
+            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_Xoa, L("Xoa"));
+            nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_KhoaMoKhoa, L("KhoaMoKhoa"));
             nguoidung.CreateChildPermission(AppPermissions.Admin_HeThong_NguoiDung_DoiMatKhau, L("DoiMatKhau"));
 
-            var vaitro = hethong.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro, L("VaiTro"));
-            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_CreateNew, L("CreateNew"));
-            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Update, L("Update"));
-            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Delete, L("Delete"));
+            var qlcctc = hethong.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc, L("QuanLyCoCauToChuc"));
+            qlcctc.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_ThemToChuc, L("ThemToChuc"));
+            qlcctc.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_SuaToChuc, L("SuaToChuc"));
+            qlcctc.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_XoaToChuc, L("XoaToChuc"));
+            qlcctc.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_ThemNguoiDungToChuc, L("ThemNguoiDungToChuc"));
+            qlcctc.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_XoaNguoiDungToChuc, L("XoaNguoiDungToChuc"));
 
-            var qldn = hethong.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyDoanhNghiep, L("QuanLyDoanhNghiep"));
-            qldn.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyDoanhNghiep_DanhSachDoanhNghiep, L("DanhSachDoanhNghiep"));
-            qldn.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyDoanhNghiep_ThemDoanhNghiep, L("ThemDoanhNghiep"));
-            qldn.CreateChildPermission(AppPermissions.Admin_HeThong_QuanLyDoanhNghiep_XoaDoanhNghiep, L("XoaDoanhNghiep"));
+            var vaitro = hethong.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro, L("VaiTro"));
+            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Them, L("Them"));
+            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Sua, L("Sua"));
+            vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Xoa, L("Xoa"));
+
+            
 
             #endregion
 

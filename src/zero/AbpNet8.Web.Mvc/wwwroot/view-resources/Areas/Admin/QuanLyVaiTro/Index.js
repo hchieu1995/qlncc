@@ -8,7 +8,7 @@
             scriptUrl: abp.appPath + 'view-resources/Areas/Admin/QuanLyVaiTro/_CreateOrEditModal.js',
             modalClass: 'CreateOrEditModal'
         });
-
+        DevExpress.localization.locale("vi");
         $('.combobox')
             .selectpicker({
                 iconBase: "fa",
@@ -42,8 +42,6 @@
             );
         }
         var parmaforall = {};
-
-        DevExpress.localization.locale("vi");
         function isNotEmpty(value) {
             return value !== undefined && value !== null && value !== "";
         }
@@ -188,12 +186,12 @@
                     alignment: 'center',
                     cellTemplate: function (container, options) {
                         var txt = "";
-                        //if (abp.auth.isGranted('Admin.HeThong.VaiTro.Update')) {
+                        if (abp.auth.isGranted('Admin.HeThong.VaiTro.Sua')) {
                             txt += `<a class="btn btn-sm btn-clean btn-icon btn-icon-md edit" title="Sửa" style="margin-top:-10px;" href="#" data-id="${options.data.id}" data-tenant="${options.data.tenantId}"><i class="fa fa-edit" style="color: #10519f;"></i></a>`;
-                        //}
-                        //if (abp.auth.isGranted('Admin.HeThong.VaiTro.Delete')) {
+                        }
+                        if (abp.auth.isGranted('Admin.HeThong.VaiTro.Xoa')) {
                             txt += `<a class="btn btn-sm text-danger btn-icon btn-icon-md delete" title="Xóa" style="margin-top:-10px" data-id="${options.data.id}" data-tenant="${options.data.tenantId}" href="#"><i class="fa fa-trash"></i></a>`;
-                        //}
+                        }
                        
                         $(container).append(txt);
                     }

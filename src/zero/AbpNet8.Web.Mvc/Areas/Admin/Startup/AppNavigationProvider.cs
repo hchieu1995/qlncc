@@ -14,20 +14,17 @@ namespace AbpNet8.Web.Areas.Admin.Startup
         {
             var menu = context.Manager.Menus[MenuName] = new MenuDefinition(MenuName, new FixedLocalizableString("Main Menu"));
             menu
-                .AddItem(new MenuItemDefinition("HeThong", L("HeThong"), icon: "flaticon-medical", permissionDependency: null)
-                            .AddItem(new MenuItemDefinition("HeThong.QuanLyNguoiDung", L("QuanLyNguoiDung"), url: "Admin/QuanLyNguoiDung", permissionDependency: null))
-                            .AddItem(new MenuItemDefinition("HeThong.QuanLyCoCauToChuc", L("QuanLyCoCauToChuc"), url: "Admin/QuanLyCoCauToChuc", permissionDependency: null))
-                            .AddItem(new MenuItemDefinition("HeThong.VaiTro", L("VaiTro"), url: "Admin/QuanLyVaiTro", permissionDependency: null))
+                .AddItem(new MenuItemDefinition("HeThong", L("HeThong"), icon: "flaticon-medical", permissionDependency: null)//new SimplePermissionDependency(AppPermissions.Admin_HeThong))
+                            .AddItem(new MenuItemDefinition("HeThong.QuanLyNguoiDung", L("QuanLyNguoiDung"), url: "Admin/QuanLyNguoiDung", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_NguoiDung)))
+                            .AddItem(new MenuItemDefinition("HeThong.QuanLyCoCauToChuc", L("QuanLyCoCauToChuc"), url: "Admin/QuanLyCoCauToChuc", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc)))
+                            .AddItem(new MenuItemDefinition("HeThong.VaiTro", L("VaiTro"), url: "Admin/QuanLyVaiTro", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_VaiTro)))
                          )
                 .AddItem(new MenuItemDefinition("DanhMuc", L("DanhMuc"), icon: "flaticon-medical", permissionDependency: null)
                         //.AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac", L("DanhMucKhac"), permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac))
                         //        .AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac.TinhThanh", L("DanhMucTinhThanh"), url: "Admin/DanhMucTinhThanh", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac_TinhThanh)))
                         //        .AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac.QuanHuyen", L("DanhMucQuanHuyen"), url: "Admin/DanhMucQuanHuyen", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen)))
                         //        )
-                        .AddItem(new MenuItemDefinition("DanhMuc.DonViHanhChinh", L("DonViHanhChinh"), url: "Admin/DonViHanhChinh", permissionDependency: null))
-                         )
-                .AddItem(new MenuItemDefinition("DoanhNghiep", L("DoanhNghiep"), icon: "flaticon-medical", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong))
-                            .AddItem(new MenuItemDefinition("DoanhNghiep.QuanLyDoanhNghiep", L("QuanLyDoanhNghiep"), url: "Admin/QuanLyDoanhNghiep", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_QuanLyDoanhNghiep_DanhSachDoanhNghiep)))
+                        //.AddItem(new MenuItemDefinition("DanhMuc.DonViHanhChinh", L("DonViHanhChinh"), url: "Admin/DonViHanhChinh", permissionDependency: null))
                          )
                 ;
         }

@@ -27,10 +27,10 @@
             </div>
             <div class="kt-subheader__toolbar col-md-8" style="padding:0px">
                 <div class="kt-subheader__wrapper">
-                    @* @if (IsGranted(AppPermissions.Admin_HeThong_VaiTro_CreateNew)) *@
-                    @* { *@
+                    @if (IsGranted(AppPermissions.Admin_HeThong_VaiTro_Them))
+                    {
                         <button id="CreateButton" class="btn btn-sm btn-outline-primary" style="height: 34px"><i class="fa fa-plus" aria-hidden="true"></i>@L("CreateNew")</button>
-                    @* } *@
+                    }
 
                 </div>
             </div>

@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace Admin.AppServices
 {
-    //[AbpAuthorize]
+    [AbpAuthorize]
     public class QuanLyCoCauToChucAppService : BnnAdminServiceBase
     {
         private readonly RoleManager _roleManager;
@@ -53,18 +53,14 @@ namespace Admin.AppServices
                 item.ToChuc_Cha_Id_Temp = item.ToChuc_Cha_Id;
             }
 
-            // Tìm tất cả node mà cha của nó không nằm trong danh sách
             var rootLikeNodes = list
                 .Where(x => !list.Any(y => y.Id == x.ToChuc_Cha_Id))
                 .ToList();
 
             bool hasRealRoot = list.Any(x => x.ToChuc_Cha_Id == null);
 
-            // Nếu có ít nhất 1 gốc thật, thì gán null cho các node mồ côi (cha không nằm trong danh sách)
-            // Nếu không có gốc thật, cũng gán null cho các node mồ côi (xử lý trường hợp nhiều nhánh độc lập)
             foreach (var root in rootLikeNodes)
             {
-                // Nếu node này không phải là gốc thật => gán null
                 if (root.ToChuc_Cha_Id != null)
                 {
                     root.ToChuc_Cha_Id_Temp = null;

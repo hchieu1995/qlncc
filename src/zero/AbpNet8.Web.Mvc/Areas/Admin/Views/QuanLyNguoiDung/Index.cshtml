@@ -10,16 +10,13 @@
 @section Scripts
     {
     <script type="text/javascript" src="/view-resources/Areas/Admin/QuanLyNguoiDung/Index.js" asp-append-version="true"></script>
-    @* <script src="~/Common/Scripts/dx.all.js"></script>
-    <script src="~/Common/Scripts/dx.messages.vi.js"></script> *@
 
 }
-@* <link href="~/view-resources/Areas/Admin/AppTopBarView/AppTopBarView.css" rel="stylesheet" /> *@
 
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor bgrallct">
     <input type="hidden" id="tenantSelectedId" value="0" />
     <div class="kt-subheader kt-grid__item">
-        <div class="@(await GetContainerClass()) hdct">
+        <div class="kt-container kt-container--fluid hdct">
             <div class="kt-subheader__main">
                 <h3 class="kt-subheader__title">
                     <span>Quản lý người dùng</span>
@@ -28,10 +25,10 @@
             </div>
             <div class="kt-subheader__toolbar">
                 <div class="kt-subheader__wrapper">
-                    @* @if (IsGranted(AppPermissions.Admin_HeThong_NguoiDung_CreateNew)) *@
-                    @* { *@
+                    @if (IsGranted(AppPermissions.Admin_HeThong_NguoiDung_Them))
+                    {
                         <button id="CreateButton" class="btn btn-sm btn-outline-primary"><i class="fa fa-plus"></i> @L("CreateNew")</button>
-                    @* } *@
+                    }
 
                 </div>
             </div>

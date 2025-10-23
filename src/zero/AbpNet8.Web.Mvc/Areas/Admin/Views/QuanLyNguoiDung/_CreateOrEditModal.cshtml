@@ -51,8 +51,9 @@
                         }
                     </select>
                 </div> *@
-                <div class="col-2 pt-3">
-                    <select class="form-control kt-select2 bs-select form-control-sm combobox" id="ToChucThongBao" data-live-search="true"></select>
+                <div class="row col-md-12 mt-3">
+                    <label for="DoanhNghiep_Mst" class="col-md-2 mt-2">Tổ chức</label>
+                    <select class="form-control kt-select2 bs-select form-control-sm col-md-10 combobox" id="ToChucThongBao" data-live-search="true"></select>
                 </div>
                 <div class="row col-md-12 mt-3">
                     <label for="NguoiDung_HoTen" class="col-md-2 mt-2">Họ tên<span style="color: red;"> *</span></label>
@@ -113,19 +114,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row col-md-12 mt-3">
-                    @if (Model.Id != 0)
-                    {
-                        <div class="row col-md-6">
-                            <button id="changepass" class="btn btn-sm " type="button" required maxlength="255" title="Đổi mật khẩu" style="background:#384ad7; color: white;">Đổi mật khẩu</button>
-                        </div>
-                    }
-                    else
-                    {
-
-                    }
                 </div>
 
             </form>
