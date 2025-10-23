@@ -121,7 +121,7 @@ src/zero/AbpNet8.Web.Mvc/node_modules
 src/zero/AbpNet8.Web.Mvc/wwwroot/lib
 src/zero/AbpNet8.Web.Mvc/wwwroot/dist
 src/zero/AbpNet8.Web.Mvc/wwwroot/view-resources/Views/_Bundles
-src/zero/AbpNet8.Web.Mvc/wwwroot/view-resources/Areas/App/Views/_Bundles
+#src/zero/AbpNet8.Web.Mvc/wwwroot/view-resources/Areas/App/Views/_Bundles
 #src/zero/AbpNet8.Web.Mvc/wwwroot/view-resources/**/*.min.*
 #src/zero/AbpNet8.Web.Mvc/wwwroot/Common/**/*.min.*
 #src/zero/AbpNet8.Web.Mvc/wwwroot/metronic/**/*.min.*
