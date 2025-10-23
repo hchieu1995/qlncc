@@ -1,0 +1,27 @@
+.unread-notification-count {
+  position: absolute;
+  top: 25px !important;
+  left: initial !important;
+  right: 0px;
+  font-size: 1rem !important;
+  padding: 9px;
+  background-color: #ff0000 !important;
+}
+.searchMenuContainerSelect2 {
+  width: 150px !important;
+}
+.searchMenuContainerSelect2 .select2-container * {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+@media (max-width: 1024px) {
+  .searchMenuContainerSelect2 {
+    width: calc(100% - 50px) !important;
+  }
+  .searchMenuContainerSelect2 .select2-container {
+    width: 214px;
+  }
+  .searchMenuContainerSelect2 .select2-container * {
+    color: #5e6383 !important;
+  }
+}
