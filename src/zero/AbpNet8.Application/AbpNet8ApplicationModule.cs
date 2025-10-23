@@ -2,6 +2,7 @@
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AbpNet8.Authorization;
+using WebApp;
 
 namespace AbpNet8
 {
@@ -13,6 +14,7 @@ namespace AbpNet8
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<AbpNet8AuthorizationProvider>();
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(CustomDtoMapper.CreateMappings);
         }
 
         public override void Initialize()

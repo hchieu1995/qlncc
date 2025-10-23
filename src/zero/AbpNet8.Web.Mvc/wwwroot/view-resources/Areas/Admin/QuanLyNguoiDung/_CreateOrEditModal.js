@@ -149,19 +149,7 @@
             _toChucThongBao.append('<option value=""> -- Chọn tổ chức -- </option>');
             if (dstochuc && dstochuc.length > 0) {
                 $.each(dstochuc, function (i, item) {
-                    _toChucThongBao.append('<option value="' + item.id + '" ' + ' class="font-weight-bold" ' + '>' + item.tc_Ma + " - " + item.tc_Ten + '</option>');
-                    $.each(item.dsToChucCon, function (i, item2) {
-                        _toChucThongBao.append('<option value="' + item2.id + '" ' + ' class="font-weight-bold" ' + '>' + item2.spaceLevel + item2.tc_Ma + " - " + item2.tc_Ten + '</option>');
-                        $.each(item2.dsToChucCon, function (i, item3) {
-                            _toChucThongBao.append('<option value="' + item3.id + '" ' + '>' + item3.spaceLevel + item3.tc_Ma + " - " + item3.tc_Ten + '</option>');
-                            $.each(item3.dsToChucCon, function (i, item4) {
-                                _toChucThongBao.append('<option value="' + item4.id + '" ' + '>' + item4.spaceLevel + item4.tc_Ma + " - " + item4.tc_Ten + '</option>');
-                                $.each(item4.dsToChucCon, function (i, item5) {
-                                    _toChucThongBao.append('<option value="' + item5.id + '" ' + '>' + item5.spaceLevel + item5.tc_Ma + " - " + item5.tc_Ten + '</option>');
-                                });
-                            });
-                        });
-                    });
+                    _toChucThongBao.append('<option value="' + item.id + '" ' + ' class="font-weight-bold" ' + '>' + item.spaceLevel + item.toChuc_Ma + " - " + item.toChuc_Ten + '</option>');
                 });
             }
         }

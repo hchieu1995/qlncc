@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Admin.DomainTranferObjects.DTO
 {
-    public class NguoiDung_ThongTinDto : FullAuditedEntity
+    public class NguoiDung_ThongTinDto : FullAuditedEntity<long>
     {
         public long UserId { get; set; }
         public string DoanhNghiep_Mst { get; set; }

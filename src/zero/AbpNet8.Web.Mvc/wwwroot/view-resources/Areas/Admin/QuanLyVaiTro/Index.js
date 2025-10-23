@@ -75,7 +75,7 @@
                 });
                 params.filterext = $("#filterText").val();
                 parmaforall = params;
-                $.getJSON(abp.appPath + "api/services/qltd/QuanLyVaiTro/GetAllItem", params)
+                $.getJSON(abp.appPath + "api/services/qlncc/QuanLyVaiTro/GetAllItem", params)
                     .done(function (response) {
                         console.log(response);
                         $.each(response.result.data, function (i, val) {
@@ -188,12 +188,12 @@
                     alignment: 'center',
                     cellTemplate: function (container, options) {
                         var txt = "";
-                        if (abp.auth.isGranted('Admin.HeThong.VaiTro.Update')) {
+                        //if (abp.auth.isGranted('Admin.HeThong.VaiTro.Update')) {
                             txt += `<a class="btn btn-sm btn-clean btn-icon btn-icon-md edit" title="Sửa" style="margin-top:-10px;" href="#" data-id="${options.data.id}" data-tenant="${options.data.tenantId}"><i class="fa fa-edit" style="color: #10519f;"></i></a>`;
-                        }
-                        if (abp.auth.isGranted('Admin.HeThong.VaiTro.Delete')) {
+                        //}
+                        //if (abp.auth.isGranted('Admin.HeThong.VaiTro.Delete')) {
                             txt += `<a class="btn btn-sm text-danger btn-icon btn-icon-md delete" title="Xóa" style="margin-top:-10px" data-id="${options.data.id}" data-tenant="${options.data.tenantId}" href="#"><i class="fa fa-trash"></i></a>`;
-                        }
+                        //}
                        
                         $(container).append(txt);
                     }

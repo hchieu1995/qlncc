@@ -45,28 +45,32 @@ namespace Admin.AppServices
 
         public List<Ql_CoCauToChucDto> DanhSachToChuc()
         {
-            List<Ql_CoCauToChucDto> rs = [];
-            var nguoidung = GetUserInfo_ToChuc();
-            if(nguoidung.ToChuc != null)
+            var pbs = GetListPhongBanQuanLy();
+
+            var list = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(pbs);
+            foreach (var item in list)
             {
-                var lstuserroleID = _userRoleRepository.GetAll().Where(o => o.UserId == AbpSession.UserId).Select(o => o.RoleId).ToList();
-                var lstRole = _roleManager.Roles.Where(o => lstuserroleID.Contains(o.Id)).Select(o => o.Name).ToList();
-                if (lstRole.Contains("Admin"))
+                item.ToChuc_Cha_Id_Temp = item.ToChuc_Cha_Id;
+            }
+
+            // Tìm tất cả node mà cha của nó không nằm trong danh sách
+            var rootLikeNodes = list
+                .Where(x => !list.Any(y => y.Id == x.ToChuc_Cha_Id))
+                .ToList();
+
+            bool hasRealRoot = list.Any(x => x.ToChuc_Cha_Id == null);
+
+            // Nếu có ít nhất 1 gốc thật, thì gán null cho các node mồ côi (cha không nằm trong danh sách)
+            // Nếu không có gốc thật, cũng gán null cho các node mồ côi (xử lý trường hợp nhiều nhánh độc lập)
+            foreach (var root in rootLikeNodes)
+            {
+                // Nếu node này không phải là gốc thật => gán null
+                if (root.ToChuc_Cha_Id != null)
                 {
-                    rs = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(_ql_CoCauToChucRepository.GetAll()); 
-                }
-                else
-                {
-                    rs = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(nguoidung.ToChuc_ToChucCons);
-                    if (nguoidung.ToChuc.Tc_Cha_Id != null)
-                    {
-                        var temp = rs.Where(o => o.Tc_Ma == nguoidung.ToChuc.Tc_Ma).FirstOrDefault();
-                        temp.Tc_Cha_Id = null;
-                    }
+                    root.ToChuc_Cha_Id_Temp = null;
                 }
             }
-           
-            return rs;
+            return list;
         }
         public Ql_CoCauToChucDto ToChucF()
         {
@@ -91,8 +95,8 @@ namespace Admin.AppServices
 
         public async Task<GenericResultDto> CreateOrUpdate(Ql_CoCauToChucDto input)
         {
-            input.Tc_Ma = !string.IsNullOrEmpty(input.Tc_Ma) ? input.Tc_Ma.Trim() : input.Tc_Ma;
-            input.Tc_Ten = !string.IsNullOrEmpty(input.Tc_Ten) ? input.Tc_Ten.Trim() : input.Tc_Ten;
+            input.ToChuc_Ma = !string.IsNullOrEmpty(input.ToChuc_Ma) ? input.ToChuc_Ma.Trim() : input.ToChuc_Ma;
+            input.ToChuc_Ten = !string.IsNullOrEmpty(input.ToChuc_Ten) ? input.ToChuc_Ten.Trim() : input.ToChuc_Ten;
             if (input.Id != 0)
             {
                 return await Update(input);
@@ -107,7 +111,7 @@ namespace Admin.AppServices
             var result = new GenericResultDto();
             try
             {
-                var isExisted = _ql_CoCauToChucRepository.GetAll().Any(o => o.Tc_Ma == input.Tc_Ma);
+                var isExisted = _ql_CoCauToChucRepository.GetAll().Any(o => o.ToChuc_Ma == input.ToChuc_Ma);
                 if (isExisted)
                 {
                     result.Message = "Mã tổ chức đã tồn tại. Vui lòng nhập lại";
@@ -115,14 +119,14 @@ namespace Admin.AppServices
                     result.Status = 1;
                     return result;
                 }
-                if (input.Tc_Cha_Id != null && input.Tc_Cha_Id != 0)
+                if (input.ToChuc_Cha_Id != null && input.ToChuc_Cha_Id != 0)
                 {
-                    var capdocha = _ql_CoCauToChucRepository.Get(input.Tc_Cha_Id.Value).Tc_CapDo;
-                    input.Tc_CapDo = capdocha + 1;
+                    var capdocha = _ql_CoCauToChucRepository.Get(input.ToChuc_Cha_Id.Value).ToChuc_CapDo;
+                    input.ToChuc_CapDo = capdocha + 1;
                 }
                 else
                 {
-                    input.Tc_CapDo = 1;
+                    input.ToChuc_CapDo = 1;
                     
                 }
                 var obj = ObjectMapper.Map<Ql_CoCauToChuc>(input);
@@ -142,7 +146,7 @@ namespace Admin.AppServices
             var result = new GenericResultDto();
             try
             {
-                var isExisted = _ql_CoCauToChucRepository.GetAll().Any(o => o.Tc_Ma == input.Tc_Ma && o.Id != input.Id);
+                var isExisted = _ql_CoCauToChucRepository.GetAll().Any(o => o.ToChuc_Ma == input.ToChuc_Ma && o.Id != input.Id);
                 if (isExisted)
                 {
                     result.Message = "Mã phòng ban đã tồn tại. Vui lòng nhập lại";
@@ -151,7 +155,7 @@ namespace Admin.AppServices
                     return result;
                 }
                 var csdl = await _ql_CoCauToChucRepository.GetAsync(input.Id);
-                input.Tc_CapDo = csdl.Tc_CapDo;
+                input.ToChuc_CapDo = csdl.ToChuc_CapDo;
                 ObjectMapper.Map(input, csdl);
 
                 await _ql_CoCauToChucRepository.UpdateAsync(csdl);
@@ -190,8 +194,8 @@ namespace Admin.AppServices
                     .Where(m => m.ToChuc_Id == input.ToChucId).OrderByDescending(o => o.Id).ToList();
                 if (ds.Count > 0)
                 {
-                    var dsid = ds.Select(m => m.UserId).ToList();
-                    var query = _nguoiDung_ThongTinRepository.GetAll().Where(m => dsid.Contains(m.UserId));
+                    var dsid = ds.Select(m => m.NguoiDung_ThongTin_Id).ToList();
+                    var query = _nguoiDung_ThongTinRepository.GetAll().Where(m => dsid.Contains(m.Id));
 
                     var Count = await query.CountAsync();
                     List<NguoiDung_ThongTin> lst;
@@ -219,7 +223,7 @@ namespace Admin.AppServices
             {
                 try
                 {
-                    var query = _nguoiDung_ThongTinRepository.GetAll().Where(m => string.IsNullOrEmpty(m.NguoiDung_ToChuc_Ma))
+                    var query = _nguoiDung_ThongTinRepository.GetAll()
                         .WhereIf(!string.IsNullOrEmpty(input.Filter),
                         p => p.NguoiDung_TaiKhoan.ToLower().Contains(input.Filter.ToLower().Trim()) ||
                         p.NguoiDung_HoTen.ToLower().Contains(input.Filter.ToLower().Trim()));
@@ -246,7 +250,7 @@ namespace Admin.AppServices
         {
             GenericResultDto rs = new();
             var tc = _ql_CoCauToChucRepository.Get(input.ToChucId);
-            var dsnd = _nguoiDung_ThongTinRepository.GetAll().ToList();//.Where(m => dsuserid.Contains(m.Id)).ToList();
+            var dsnd = _nguoiDung_ThongTinRepository.GetAll().ToList();
 
             foreach (var item in input.DsTaiKhoan)
             {
@@ -254,13 +258,9 @@ namespace Admin.AppServices
                 Ql_ToChuc_ThanhVien tcnd = new()
                 {
                     NguoiDung_ThongTin_Id = nd.Id,
-                    UserId = nd.UserId,
                     ToChuc_Id = tc.Id
                 };
                 _ql_ToChuc_ThanhVienRepository.Insert(tcnd);
-
-                nd.NguoiDung_ToChuc_Ma = tc.Tc_Ma;
-                _nguoiDung_ThongTinRepository.Update(nd);
             }
             rs.Success = true;
             return rs;
@@ -273,9 +273,8 @@ namespace Admin.AppServices
             {
                 if (userid > 0 && tochucid > 0)
                 {
-                    await _ql_ToChuc_ThanhVienRepository.DeleteAsync(m => m.ToChuc_Id == tochucid && m.UserId == userid);
+                    await _ql_ToChuc_ThanhVienRepository.DeleteAsync(m => m.ToChuc_Id == tochucid && m.NguoiDung_ThongTin_Id == userid);
                     var nd = await _nguoiDung_ThongTinRepository.FirstOrDefaultAsync(o => o.UserId == userid);
-                    nd.NguoiDung_ToChuc_Ma = "";
                     _nguoiDung_ThongTinRepository.Update(nd);
 
                     result.Success = true;
@@ -326,8 +325,8 @@ namespace Admin.AppServices
             List<Ql_CoCauToChuc> result = new();
             if (!string.IsNullOrEmpty(macha))
             {
-                var tc = _ql_CoCauToChucRepository.GetAll().Where(o => o.Tc_Ma == macha).FirstOrDefault();
-                result = _ql_CoCauToChucRepository.GetAll().Where(o => o.Tc_Cha_Id == tc.Id).ToList();
+                var tc = _ql_CoCauToChucRepository.GetAll().Where(o => o.ToChuc_Ma == macha).FirstOrDefault();
+                result = _ql_CoCauToChucRepository.GetAll().Where(o => o.ToChuc_Cha_Id == tc.Id).ToList();
             }
 
             return result;

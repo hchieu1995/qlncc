@@ -28,7 +28,6 @@ namespace AbpNet8.Web.Areas.Admin.Views.Shared.Components.AppMenu
 
         public async Task<IViewComponentResult> InvokeAsync(bool isLeftMenuUsed, string currentPageName = null)
         {
-            var x = _abpSession.ToUserIdentifier();
             var model = new MenuViewModel
             {
                 Menu = await _userNavigationManager.GetMenuAsync(AppNavigationProvider.MenuName, _abpSession.ToUserIdentifier()),

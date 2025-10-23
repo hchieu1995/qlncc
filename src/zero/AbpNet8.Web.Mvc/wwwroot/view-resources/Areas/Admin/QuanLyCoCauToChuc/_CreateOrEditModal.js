@@ -24,14 +24,14 @@
         $('.save-button').click(function () {
             $(this).prop('disabled', true);
             var tc = _$tcInformationForm.serializeFormToObject();
-            if (tc.Tc_Ma.trim() == "") {
+            if (tc.ToChuc_Ma.trim() == "") {
                 $(this).prop('disabled', false);
-                document.getElementById("Tc_Ma").focus();
+                document.getElementById("ToChuc_Ma").focus();
                 return abp.notify.warn("Mời bạn nhập mã!");
             }
-            if (tc.Tc_Ten.trim() == "") {
+            if (tc.ToChuc_Ten.trim() == "") {
                 $(this).prop('disabled', false);
-                document.getElementById("Tc_Ten").focus();
+                document.getElementById("ToChuc_Ten").focus();
                 return abp.notify.warn("Mời bạn nhập tên!");
             }
             _quanLyCoCauToChucService.createOrUpdate(tc).done(function (res) {

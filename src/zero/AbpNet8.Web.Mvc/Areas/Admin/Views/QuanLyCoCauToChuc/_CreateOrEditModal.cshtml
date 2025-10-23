@@ -18,17 +18,17 @@
     <div class="tab-content">
         <form name="TcInformationsForm" role="form" novalidate class="form-validation">
             <input type="hidden" name="Id" value="@Model.ToChuc.Id" />
-            <input type="hidden" name="Tc_Cha_Id" value="@Model.ToChuc.Tc_Cha_Id" />
+            <input type="hidden" name="ToChuc_Cha_Id" value="@Model.ToChuc.ToChuc_Cha_Id" />
 
             <div class="col-md-12 mt-2" style=" display: flex; flex-wrap: wrap;">
                 <h4 class="col-md-12" style="padding-top: 10px; margin-bottom: 0px;">Thông tin tổ chức</h4>
                 <div class="col-md-4 mt-2">
-                    <label for="Tc_Ma" class="col-md-12 mt-2">Mã<span style="color: red;"> *</span></label>
-                    <input id="Tc_Ma" class="form-control form-control-sm col-md-12 mt-2" type="text" name="Tc_Ma" value="@Model.ToChuc.Tc_Ma" maxlength="100">
+                    <label for="ToChuc_Ma" class="col-md-12 mt-2">Mã<span style="color: red;"> *</span></label>
+                    <input id="ToChuc_Ma" class="form-control form-control-sm col-md-12 mt-2" type="text" name="ToChuc_Ma" value="@Model.ToChuc.ToChuc_Ma" maxlength="100">
                 </div>
                 <div class="col-md-4 mt-2">
-                    <label for="Tc_Ten" class="col-md-12 mt-2">Tên<span style="color: red;"> *</span></label>
-                    <input id="Tc_Ten" class="form-control form-control-sm col-md-12 mt-2" type="text" name="Tc_Ten" value="@Model.ToChuc.Tc_Ten" maxlength="250">
+                    <label for="ToChuc_Ten" class="col-md-12 mt-2">Tên<span style="color: red;"> *</span></label>
+                    <input id="ToChuc_Ten" class="form-control form-control-sm col-md-12 mt-2" type="text" name="ToChuc_Ten" value="@Model.ToChuc.ToChuc_Ten" maxlength="250">
                 </div>
             </div>
         </form>

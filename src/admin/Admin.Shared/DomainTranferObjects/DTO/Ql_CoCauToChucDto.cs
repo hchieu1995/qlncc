@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace Admin.DomainTranferObjects.DTO
 {
-    public class Ql_CoCauToChucDto : FullAuditedEntity
+    public class Ql_CoCauToChucDto : FullAuditedEntity<long>
     {
-        public int? Tc_CapDo { get; set; }
-        public string Tc_Ma { get; set; }
-        public string Tc_Ten { get; set; }
-        public string Tc_TenVietTat { get; set; }
-        public long? Tc_Cha_Id { get; set; }
+        public int? ToChuc_CapDo { get; set; }
+        public string ToChuc_Ma { get; set; }
+        public string ToChuc_Mst { get; set; }
+        public string ToChuc_Ten { get; set; }
+        public string ToChuc_TenVietTat { get; set; }
+        public long? ToChuc_Cha_Id { get; set; }
+        public long? ToChuc_Cha_Id_Temp { get; set; }
         public string SpaceLevel { get; set; }
         public int Level { get; set; }
 

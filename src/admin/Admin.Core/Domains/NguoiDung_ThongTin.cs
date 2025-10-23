@@ -8,8 +8,6 @@ namespace Admin.Domains
     [Table("nguoidung_thongtin")]
     public class NguoiDung_ThongTin : FullAuditedEntity<long>
     {
-        public long Id { get; set; }
-        public string NguoiDung_ToChuc_Ma { get; set; }
         public long UserId { get; set; }
         public string NguoiDung_TaiKhoan { get; set; }
         public string NguoiDung_MatKhau { get; set; }

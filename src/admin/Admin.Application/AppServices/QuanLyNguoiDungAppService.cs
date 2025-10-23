@@ -249,17 +249,9 @@ namespace Admin.AppServices
                     return result;
                 }
 
-                string taikhoan = "";
-                if (string.IsNullOrEmpty(input.NguoiDungThongTinDto.DoanhNghiep_Mst))
-                {
-                    taikhoan = input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
-                }
-                else
-                {
-                    taikhoan = input.NguoiDungThongTinDto.DoanhNghiep_Mst.Replace("-", "") + "@" + input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
-                }
+                string taikhoan = input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
 
-                var nd = _thongTinNguoiDungRepository.FirstOrDefault(input.NguoiDungThongTinDto.Id);
+                var nd = _thongTinNguoiDungRepository.Get(input.NguoiDungThongTinDto.Id);
                 var user = await UserManager.FindByIdAsync(nd.UserId.ToString());
                 input.NguoiDungThongTinDto.NguoiDung_TaiKhoan = input.NguoiDungThongTinDto.NguoiDung_TaiKhoan.Replace(" ", "");
 
@@ -269,7 +261,7 @@ namespace Admin.AppServices
                 nd.NguoiDung_Sdt = input.NguoiDungThongTinDto.NguoiDung_Sdt;
 
                 nd.NguoiDung_TrangThai = input.NguoiDungThongTinDto.NguoiDung_TrangThai;
-                nd.UserId = (int)user.Id;
+                nd.UserId = user.Id;
                 nd.LastModifierUserId = AbpSession.UserId;
                 await _thongTinNguoiDungRepository.UpdateAsync(nd);
 
@@ -406,42 +398,17 @@ namespace Admin.AppServices
             GenericResultDto rs = new GenericResultDto();
             try
             {
-                var tc = GetUserInfo_ToChuc();
-                if (tc.ToChuc_ToChucCons?.Count > 0)
+                var pbs = GetListPhongBanQuanLy();
+                if (pbs.Count > 0)
                 {
-                    var dstochucdto = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(tc.ToChuc_ToChucCons);
-                    var tcdto = ObjectMapper.Map<Ql_CoCauToChucDto>(tc.ToChuc);
-                    tcdto.Level = 1;
-                    tcdto.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == tcdto.Id).ToList();
-                    List<Ql_CoCauToChucDto> dsql_CoCauToChucDto = new List<Ql_CoCauToChucDto>() { tcdto };
-
-                    foreach (var item1 in dsql_CoCauToChucDto)
-                        foreach (var item2 in item1.DSToChucCon)
-                        {
-                            item2.Level = 2;
-                            item2.SpaceLevel = htmlspace;
-                            item2.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item2.Id).ToList();
-                            foreach (var item3 in item2.DSToChucCon)
-                            {
-                                item3.Level = 3;
-                                item3.SpaceLevel = item2.SpaceLevel + htmlspace;
-                                item3.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item3.Id).ToList();
-                                foreach (var item4 in item3.DSToChucCon)
-                                {
-                                    item4.Level = 4;
-                                    item4.SpaceLevel = item3.SpaceLevel + htmlspace;
-                                    item4.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item4.Id).ToList();
-                                    foreach (var item5 in item4.DSToChucCon)
-                                    {
-                                        item5.Level = 5;
-                                        item5.SpaceLevel = item4.SpaceLevel + htmlspace;
-                                        item5.DSToChucCon = dstochucdto.Where(m => m.Tc_Cha_Id == item5.Id).ToList();
-                                    }
-                                }
-                            }
-                        }
+                    var listToChuc = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(pbs);
+                    foreach (var item in listToChuc)
+                    {
+                        int capDo = item.ToChuc_CapDo ?? 0;
+                        item.SpaceLevel = string.Concat(Enumerable.Repeat(htmlspace, capDo));
+                    }
                     rs.Success = true;
-                    rs.Data = dsql_CoCauToChucDto;
+                    rs.Data = listToChuc;
                 }
                 else
                 {
@@ -455,5 +422,7 @@ namespace Admin.AppServices
             }
             return rs;
         }
+
+
     }
 }

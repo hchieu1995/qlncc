@@ -80,7 +80,7 @@
 
             generateTextOnTree: function (item) {
                 var $name = $("<span/>").addClass("label text-info");
-                $name.text(item.tc_Ma + ' - ' + item.tc_Ten);
+                $name.text(item.toChuc_Ma + ' - ' + item.toChuc_Ten);
                 var $label = $("<span/>").addClass("label");
                 return $name[0].outerHTML;
             },
@@ -92,9 +92,9 @@
                         var treeData = _.map(result, function (item) {
                             return {
                                 id: item.id,
-                                parent: item.tc_Cha_Id ? item.tc_Cha_Id : '#',
-                                code: item.tc_Ma,
-                                displayName: item.tc_Ten,
+                                parent: item.toChuc_Cha_Id_Temp ? item.toChuc_Cha_Id_Temp : '#',
+                                code: item.toChuc_Ma,
+                                displayName: item.toChuc_Ten,
                                 text: treeview.generateTextOnTree(item),
                                 state: {
                                     opened: true
@@ -250,7 +250,7 @@
 
         $('#UsersTable tbody').on('click', 'a.delete', function () {
             var data = dataTable.row($(this).parents('tr')).data();
-            deleteUser(data.userId);
+            deleteUser(data.id);
         });
 
         function reloaddataTable() {

@@ -32,7 +32,7 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
             else if (chaid > 0)
             {
                 viewModel.ToChuc = new();
-                viewModel.ToChuc.Tc_Cha_Id = chaid;
+                viewModel.ToChuc.ToChuc_Cha_Id = chaid;
             }
             else
             {

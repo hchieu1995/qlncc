@@ -1,7 +1,5 @@
-﻿using Abp.Domain.Entities;
-using Abp.Domain.Entities.Auditing;
+﻿using Abp.Domain.Entities.Auditing;
 using Abp.MultiTenancy;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Admin.Domains
@@ -12,6 +10,5 @@ namespace Admin.Domains
     {
         public long ToChuc_Id { get; set; }
         public long NguoiDung_ThongTin_Id { get; set; }
-        public long UserId { get; set; }
     }
 }
