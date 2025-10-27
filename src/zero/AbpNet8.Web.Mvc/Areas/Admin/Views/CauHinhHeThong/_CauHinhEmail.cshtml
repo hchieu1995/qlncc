@@ -1,0 +1,42 @@
+﻿<form id="ThongTinEmailForm" class="form-horizontal bgct" role="form">
+    <div class="form-body pt-5">
+        <input class="hidden" value="">
+        <input type="password" class="hidden" value="">
+        <div class="form-group row justify-content-center">
+            <label class="col-1 text-right label-dashed pr-4"> Host <span class="text-danger"> *</span></label>
+            <input id="MAIL_SMTP" name="MAIL_SMTP" class="input-dashed col-3 pl-0" value="" required maxlength="255">
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Email gửi <span class="text-danger"> *</span></label>
+            <input id="MAIL_FROM" name="MAIL_FROM" class="input-dashed col-3 pl-0" value="" required maxlength="255">
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Tài khoản <span class="text-danger"> *</span></label>
+            <input id="MAIL_ACCOUNT" name="MAIL_ACCOUNT" class="input-dashed col-3 pl-0" value="" required maxlength="255">
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Mật khẩu <span class="text-danger"> *</span></label>
+            <input id="MAIL_PASSWORD" name="MAIL_PASSWORD" type="password" class="input-dashed col-3 pl-0" value="" required maxlength="255">
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Cổng <span class="text-danger"> *</span></label>
+            <input id="MAIL_PORT" name="MAIL_PORT" type="number" min="0" max="100000" class="input-dashed col-3 pl-0 pr-0" value="" required>
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Tên đại diện </label>
+            <input id="MAIL_NAME" name="MAIL_NAME" class="input-dashed col-3 pl-0" value="" maxlength="500">
+        </div>
+        <div class="form-group row justify-content-center pt-4">
+            <label class="col-1 text-right label-dashed pr-4"> Sử dụng SSL </label>
+            <div class="col-3 pl-0">
+                <input id="MAIL_SSL" type="checkbox" name="MAIL_SSL" value="1">
+            </div>
+        </div>
+        <div class="row justify-content-center pt-2">
+            <div class="col-6 text-center">
+                <button type="button" id="LuuCauHinhEmail" class="btn btn-sm btn-outline-primary mt-3 mb-3"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                <button type="button" id="GuiCauHinhEmail" class="btn btn-sm btn-outline-warning mt-3 mb-3"><i class="fa fa-send"></i> <span>Gửi email</span></button>
+            </div>
+        </div>
+    </div>
+</form>

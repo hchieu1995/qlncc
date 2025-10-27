@@ -1,0 +1,32 @@
+﻿@using AbpNet8.Web.Areas.App.Models.Common.Modals
+
+<div class="modal fade" id="ThongTinCauHinhModal" tabindex="-1" role="modal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Thông tin cấu hình"))
+
+            <div class="modal-body">
+                <form id="ThongTinCauHinhForm">
+                    <div class="form-group row pt-4">
+                        <label for="ToChucCauHinh" class="col-3 text-right pr-4">Tổ chức </label>
+                        <select id="ToChucCauHinh" class="form-control combobox col-6" name="ToChucCauHinh" required data-live-search="true"></select>
+                    </div>
+                    <div class="form-group row pt-4">
+                        <label for="MaCauHinh" class="col-3 text-right pr-4">Mã cấu hình<span class="text-danger"> *</span></label>
+                        <input id="MaCauHinh" class="form-control col-6" value="" required maxlength="255">
+                    </div>
+                    <div class="form-group row pt-4">
+                        <label for="GiaTriCauHinh" class="col-3 text-right pt-4 pr-4">Giá trị cấu hình<span class="text-danger"> *</span></label>
+                        <textarea id="GiaTriCauHinh" class="form-control col-6" rows="3" value="" required></textarea>
+                    </div>
+                    <div class="form-group row pt-4">
+                        <label for="MoTaCauHinh" class="col-3 text-right pt-4 pr-4">Mô tả</label>
+                        <textarea id="MoTaCauHinh" class="form-control col-6" rows="3" value=""></textarea>
+                    </div>
+                </form>
+            </div>
+
+            @await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml", new ModalFooterViewModel("LuuThongTinCauHinhBtn"))
+        </div>
+    </div>
+</div>

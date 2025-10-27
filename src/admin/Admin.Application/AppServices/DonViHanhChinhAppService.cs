@@ -44,7 +44,6 @@ namespace Admin.AppServices
         //[AbpAuthorize(AppPermissions.Admin_DanhMuc_Khac_TinhThanh)]
         public TableShowItem GetAllItem(TableFilterItem input)
         {
-            TableShowItem res = new();
             try
             {
                 if (!string.IsNullOrWhiteSpace(input.sort))
@@ -62,13 +61,13 @@ namespace Admin.AppServices
                 };
                 var _dbContext = _dbContextProvider.GetDbContext();
                 var data = _dbContext.C_DonViHCs
-    .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetPage] @SortCol, @PageIndex, @PageSize, @TotalRows OUTPUT",
-        sortParam, pageIndexParam, pageSizeParam, totalRowsParam)
-    .AsEnumerable()
-    .ToList();
+                    .FromSqlRaw("EXEC [dbo].[Web_C_DonViHC_GetPage] @SortCol, @PageIndex, @PageSize, @TotalRows OUTPUT",
+                        sortParam, pageIndexParam, pageSizeParam, totalRowsParam)
+                    .AsEnumerable()
+                    .ToList();
 
                 int totalRows = (int)totalRowsParam.Value;
-                res = new TableShowItem
+                TableShowItem res = new TableShowItem
                 {
                     totalCount = totalRows,
                     data = data.Cast<object>().ToList()
@@ -81,7 +80,7 @@ namespace Admin.AppServices
                 throw;
             }
             
-            return res;
+            return new TableShowItem();
         }
 
     }

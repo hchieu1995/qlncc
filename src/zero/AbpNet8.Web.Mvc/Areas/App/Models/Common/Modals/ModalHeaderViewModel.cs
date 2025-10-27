@@ -9,4 +9,13 @@
             Title = title;
         }
     }
+    public class ModalFooterViewModel
+    {
+        public string IdSaveButton { get; set; }
+
+        public ModalFooterViewModel(string IdSaveButton)
+        {
+            this.IdSaveButton = IdSaveButton;
+        }
+    }
 }

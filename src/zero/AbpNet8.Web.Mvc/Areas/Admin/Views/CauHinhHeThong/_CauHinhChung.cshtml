@@ -1,0 +1,21 @@
+﻿@using Admin.Authorization
+
+<div class="bgct pt-3 pr-4 pl-4">
+    <div class="row">
+        <div class="col-3">
+            <input type="text" id="CauHinhFilterTxt" class="form-control" placeholder="Mã,Giá trị cấu hình" autocomplete="off" style="z-index: 1" maxlength="500">
+        </div>
+        <div class="col-1">
+            <button id="CauHinhfilterBtn" class="btn btn-outline-primary pr-0 pb-2"><i class="flaticon-search-1" aria-label="@L("Search")"></i></button>
+        </div>
+        @* @if (IsGranted(AppPermissions.Admin_HeThong_CauHinh_DanhSachCauHinh_Them))
+        { *@
+            <div class="col-8 text-right">
+                <button id="ThemCauHinhBtn" class="btn btn-sm btn-outline-primary">
+                    <i class="fa fa-plus"></i> Thêm mới
+                </button>
+            </div>
+        @* } *@
+    </div>
+    <div class="pt-3" id="CauHinhgridContainer" style="height: calc(100vh - 170px)"></div>
+</div>

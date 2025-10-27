@@ -8,6 +8,16 @@ namespace Admin.Domains
     [MultiTenancySide(MultiTenancySides.Host)]
     public class C_DonViHC : Entity<long>
     {
+        private long _id;
+        public new long Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                IdHC = value;
+            }
+        }
         public long? IdHC { get; set; }
         public int MaHC { get; set; }
         public string Ten { get; set; }

@@ -1,0 +1,60 @@
+﻿@using AbpNet8.Web.Areas.Admin.Startup
+@using Admin.Authorization
+
+@* @{
+    ViewBag.CurrentPageName = AppPageNames.Common.CauHinhHeThong;
+} *@
+
+@section Styles {
+    <link rel="stylesheet" href="/view-resources/Areas/Admin/CauHinhHeThong/index.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="/view-resources/Areas/Admin/CauHinhHeThong/Index.js" asp-append-version="true"></script>
+}
+@{var isactive = 0; }
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="kt-container kt-container--fluid">
+        <div id="SettingsTabPanel" class="tabbable-line">
+            <ul class="nav nav-tabs mt-3 ml-3 mb-3" role="tablist">
+                @* @if (IsGranted(AppPermissions.Admin_HeThong_CauHinh_DanhSachCauHinh))
+                { *@
+                    isactive = isactive == 0 ? 1 : 2;
+                    <li class="nav-item ">
+                        <a href="#CauHinhChungTab" class="nav-link @(isactive == 1 ? "active" : "")" data-toggle="tab" role="tab">
+                            Danh sách cấu hình
+                        </a>
+                    </li>
+                @* }
+                @if (IsGranted(AppPermissions.Admin_HeThong_CauHinh_KetNoiEmail))
+                { *@
+                    isactive = isactive == 0 ? 1 : 2;
+                    <li class="nav-item">
+                        <a href="#KetNoiEmailTab" class="nav-link @(isactive == 1 ? "active" : "")" data-toggle="tab" role="tab">
+                            Thông tin email
+                        </a>
+                    </li>
+                @* } *@
+            </ul>
+            @{ isactive = 0;}
+            <div class="tab-content">
+               @*  @if (IsGranted(AppPermissions.Admin_HeThong_CauHinh_DanhSachCauHinh))
+                { *@
+                    isactive = isactive == 0 ? 1 : 2;
+                    <div class="tab-pane @(isactive == 1 ? "active" : "")" id="CauHinhChungTab" role="tabpanel">
+                        @await Html.PartialAsync("_CauHinhChung")
+                    </div>
+                @* }
+                @if (IsGranted(AppPermissions.Admin_HeThong_CauHinh_KetNoiEmail))
+                { *@
+                    isactive = isactive == 0 ? 1 : 2;
+                    <div class="tab-pane @(isactive == 1 ? "active" : "")" id="KetNoiEmailTab" role="tabpanel">
+                        @await Html.PartialAsync("_CauHinhEmail")
+                    </div>
+                @* } *@
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ThongTinCauHinhModal")
+</div>
