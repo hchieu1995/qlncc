@@ -1,16 +1,14 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.Domain.Entities;
 using Abp.MultiTenancy;
-using AbpNet8.MultiTenancy;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Admin.Domains
 {
     [Table("C_DonViHC")]
     [MultiTenancySide(MultiTenancySides.Host)]
-    public class C_DonViHC
+    public class C_DonViHC : Entity<long>
     {
-        public long Id { get; set; }
+        public long? IdHC { get; set; }
         public int MaHC { get; set; }
         public string Ten { get; set; }
         public string TenTat { get; set; }

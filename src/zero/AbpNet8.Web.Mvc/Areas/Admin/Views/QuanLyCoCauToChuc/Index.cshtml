@@ -35,11 +35,11 @@
             <div class="col-sm-3">
                 <div class="kt-portlet">
                     <div class="row pt-3 pr-3 pl-3 ml-0 mr-0">
-                        @if (IsGranted(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_ThemToChuc))
+                       @*  @if (IsGranted(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc_ThemToChuc))
                         {
                             <button type="button" id="ThemToChuc" class="btn btn-sm btn-outline-primary float-right mb-3"><i class="fa fa-plus"></i>Thêm tổ chức</button>
-                        }
-
+                        } *@
+                        <input type="text" id="treeSearchBox" class="form-control mb-2" placeholder="Tìm kiếm đơn vị..." />
                        
                     </div>
                     <div class="kt-portlet__body" style="height: calc(100vh - 165px)">

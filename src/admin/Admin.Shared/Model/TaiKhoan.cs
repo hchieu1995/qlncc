@@ -5,7 +5,6 @@ namespace Admin.Model
 {
     public class TaiKhoan
     {
-        public string ChucVu { get; set; }
         public long UserId { get; set; }
     }
     public class DanhSachTaiKhoanInput : PagedAndSortedInputDto

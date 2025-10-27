@@ -144,40 +144,32 @@
             });
         });
 
-        function loadToChucCombo(dstochuc) {
-            _toChucThongBao.empty();
-            _toChucThongBao.append('<option value=""> -- Chọn tổ chức -- </option>');
-            if (dstochuc && dstochuc.length > 0) {
-                $.each(dstochuc, function (i, item) {
-                    _toChucThongBao.append('<option value="' + item.id + '" ' + ' class="font-weight-bold" ' + '>' + item.spaceLevel + item.toChuc_Ma + " - " + item.toChuc_Ten + '</option>');
-                });
-            }
-        }
+        //function loadToChucCombo(dstochuc) {
+        //    _toChucThongBao.empty();
+        //    _toChucThongBao.append('<option value=""> -- Chọn tổ chức -- </option>');
+        //    if (dstochuc && dstochuc.length > 0) {
+        //        $.each(dstochuc, function (i, item) {
+        //            _toChucThongBao.append('<option value="' + item.id + '" ' + ' class="font-weight-bold" ' + '>' + item.spaceLevel + item.toChuc_Ma + " - " + item.toChuc_Ten + '</option>');
+        //        });
+        //    }
+        //}
 
-        async function init() {
-            _quanlynguoidungService.cayToChuc().done(function (res) {
-                if (res.success) {
-                    loadToChucCombo(res.data);
-                    $('.combobox').selectpicker({
-                        iconBase: "fa",
-                        tickIcon: "fa fa-check"
-                    });
+        //async function init() {
+        //    _quanlynguoidungService.cayToChuc().done(function (res) {
+        //        if (res.success) {
+        //            loadToChucCombo(res.data);
+        //            $('.combobox').selectpicker({
+        //                iconBase: "fa",
+        //                tickIcon: "fa fa-check"
+        //            });
 
-                    $('.combobox').selectpicker('refresh');
-                } else {
-                    abp.notify.error(res.message);
-                }
-            });
-        }
+        //            $('.combobox').selectpicker('refresh');
+        //        } else {
+        //            abp.notify.error(res.message);
+        //        }
+        //    });
+        //}
 
-        init();
-
-
-
-
-
-
-
-
+        //init();
     }
 })(jQuery);

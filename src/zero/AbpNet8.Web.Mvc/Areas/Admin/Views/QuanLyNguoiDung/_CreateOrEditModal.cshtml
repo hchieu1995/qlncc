@@ -33,27 +33,22 @@
         <div class="tab-pane active" id="UserInformationsTab" role="tabpanel">
             <form name="UserInformationsForm" role="form" novalidate class="form-validation">
                 <input id="Id" type="hidden" name="Id" value="@Model.Id" />
-
-                @* <div class="row col-md-12 mt-3">
-                    <label for="DoanhNghiep_Mst" class="col-md-2 mt-2">Doanh nghiệp</label>
-                    <select class="form-control kt-select2 bs-select form-control-sm col-md-10 combobox" id="DoanhNghiep_Mst" name="DoanhNghiep_Mst" data-live-search="true" @(Model.Id == 0 ? "" : "disabled")>
-                        <option value=""> -- Chọn doanh nghiệp -- </option>
-                        @foreach (var dn in Model.ListDoanhNghiep)
+                <div class="row col-md-12 mt-3">
+                    <label for="MaHC" class="col-md-2 mt-2">Đơn vị hành chính</label>
+                    <select class="form-control kt-select2 bs-select form-control-sm combobox col-md-10" id="MaHC" name="MaHC" data-live-search="true">
+                        <option value=""> -- Chọn tổ chức -- </option>
+                        @foreach (var td in Model.donvis)
                         {
-                            @if (dn.DoanhNghiep_Mst == Model.DoanhNghiep_Mst)
+                            @if (td.MaHC == Model.MaHC)
                             {
-                                <option value="@dn.DoanhNghiep_Mst" selected>@dn.DoanhNghiep_Mst - @dn.DoanhNghiep_Ten</option>
+                                <option value="@td.MaHC" selected>@td.MaHC - @td.Ten</option>
                             }
                             else
                             {
-                                <option value="@dn.DoanhNghiep_Mst">@dn.DoanhNghiep_Mst - @dn.DoanhNghiep_Ten</option>
+                                <option value="@td.MaHC">@td.MaHC - @td.Ten</option>
                             }
                         }
                     </select>
-                </div> *@
-                <div class="row col-md-12 mt-3">
-                    <label for="DoanhNghiep_Mst" class="col-md-2 mt-2">Tổ chức</label>
-                    <select class="form-control kt-select2 bs-select form-control-sm col-md-10 combobox" id="ToChucThongBao" data-live-search="true"></select>
                 </div>
                 <div class="row col-md-12 mt-3">
                     <label for="NguoiDung_HoTen" class="col-md-2 mt-2">Họ tên<span style="color: red;"> *</span></label>

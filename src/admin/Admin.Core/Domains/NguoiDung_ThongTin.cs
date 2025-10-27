@@ -15,6 +15,7 @@ namespace Admin.Domains
         public string NguoiDung_Sdt { get; set; }
         public string NguoiDung_Email { get; set; }
         public bool? NguoiDung_TrangThai { get; set; }
+        public int? MaHC { get; set; }
 
         public string TokenValidityKey { get; set; }
         public string AccessToken { get; set; }

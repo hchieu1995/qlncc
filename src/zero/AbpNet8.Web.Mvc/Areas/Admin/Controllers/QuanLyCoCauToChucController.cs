@@ -23,24 +23,6 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public PartialViewResult CreateOrEditModal(int? id, int? chaid)
-        {
-            CreateOrEditToChucModalViewModel viewModel = new();
-            if (id > 0)
-            {
-                viewModel.ToChuc = _quanLyCoCauToChucAppService.ToChucById(id.Value);
-            }
-            else if (chaid > 0)
-            {
-                viewModel.ToChuc = new();
-                viewModel.ToChuc.ToChuc_Cha_Id = chaid;
-            }
-            else
-            {
-                viewModel.ToChuc = new();
-            }
-            return PartialView("_CreateOrEditModal", viewModel);
-        }
 
         public PartialViewResult CreateNguoiDungModal(int id)
         {

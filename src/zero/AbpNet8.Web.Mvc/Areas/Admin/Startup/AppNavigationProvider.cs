@@ -14,10 +14,10 @@ namespace AbpNet8.Web.Areas.Admin.Startup
         {
             var menu = context.Manager.Menus[MenuName] = new MenuDefinition(MenuName, new FixedLocalizableString("Main Menu"));
             menu
-                .AddItem(new MenuItemDefinition("HeThong", L("HeThong"), icon: "flaticon-medical", permissionDependency: null)//new SimplePermissionDependency(AppPermissions.Admin_HeThong))
-                            .AddItem(new MenuItemDefinition("HeThong.QuanLyNguoiDung", L("QuanLyNguoiDung"), url: "Admin/QuanLyNguoiDung", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_NguoiDung)))
-                            .AddItem(new MenuItemDefinition("HeThong.QuanLyCoCauToChuc", L("QuanLyCoCauToChuc"), url: "Admin/QuanLyCoCauToChuc", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc)))
-                            .AddItem(new MenuItemDefinition("HeThong.VaiTro", L("VaiTro"), url: "Admin/QuanLyVaiTro", permissionDependency: null))//new SimplePermissionDependency(AppPermissions.Admin_HeThong_VaiTro)))
+                .AddItem(new MenuItemDefinition("HeThong", L("HeThong"), icon: "flaticon-medical", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong))
+                            .AddItem(new MenuItemDefinition("HeThong.QuanLyNguoiDung", L("QuanLyNguoiDung"), url: "Admin/QuanLyNguoiDung", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_NguoiDung)))
+                            .AddItem(new MenuItemDefinition("HeThong.QuanLyCoCauToChuc", L("QuanLyCoCauToChuc"), url: "Admin/QuanLyCoCauToChuc", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_QuanLyCoCauToChuc)))
+                            .AddItem(new MenuItemDefinition("HeThong.VaiTro", L("VaiTro"), url: "Admin/QuanLyVaiTro", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_HeThong_VaiTro)))
                          )
                 .AddItem(new MenuItemDefinition("DanhMuc", L("DanhMuc"), icon: "flaticon-medical", permissionDependency: null)
                         //.AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac", L("DanhMucKhac"), permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac))

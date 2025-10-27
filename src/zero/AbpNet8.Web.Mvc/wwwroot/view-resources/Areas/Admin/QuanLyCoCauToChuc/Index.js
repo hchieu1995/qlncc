@@ -27,61 +27,9 @@
 
             $tree: $('#treeviewid'),
 
-            contextMenu: function (node) {
-
-                var items = {
-                    edit: {
-                        label: app.localize('Sua'),
-                        icon: 'la la-pencil',
-                        _disabled: !_permissions.suatochuc,
-                        action: function () {
-                            _createToChucModal.open({
-                                id: node.id, chaid: undefined
-                            });
-                        }
-                    },
-
-                    add: {
-                        label: app.localize('Them'),
-                        icon: 'la la-plus',
-                        _disabled: !_permissions.themtochuc,
-                        action: function () {
-                            _createToChucModal.open({ id: undefined, chaid: node.id });
-                        }
-                    },
-
-                    delete: {
-                        label: app.localize("Xoa"),
-                        icon: 'la la-remove',
-                        _disabled: !_permissions.xoatochuc || (node.children && node.children.length > 0),
-                        action: function (data) {
-                            abp.message.confirm(
-                                app.localize('BanChacChanMuonThucHienThaoTacNay'),
-                                app.localize('XacNhan'),
-                                function (isConfirmed) {
-                                    if (isConfirmed) {
-                                        _quanLyCoCauToChucService.delete({
-                                            id: node.id
-                                        }).done(function () {
-                                            abp.notify.success(app.localize('SuccessfullyDeleted'));
-                                            treeview.reload();
-                                        }).fail(function (err) {
-                                            setTimeout(function () { abp.message.error(err.message); }, 500);
-                                        });
-                                    }
-                                }
-                            );
-                        }
-                    }
-                };
-
-                return items;
-            },
-
             generateTextOnTree: function (item) {
                 var $name = $("<span/>").addClass("label text-info");
-                $name.text(item.toChuc_Ma + ' - ' + item.toChuc_Ten);
-                var $label = $("<span/>").addClass("label");
+                $name.text(item.maHC + ' - ' + item.ten);
                 return $name[0].outerHTML;
             },
 
@@ -91,10 +39,10 @@
                         
                         var treeData = _.map(result, function (item) {
                             return {
-                                id: item.id,
-                                parent: item.toChuc_Cha_Id_Temp ? item.toChuc_Cha_Id_Temp : '#',
-                                code: item.toChuc_Ma,
-                                displayName: item.toChuc_Ten,
+                                id: item.maHC,
+                                parent: item.idCha ? item.idCha : '#',
+                                code: item.maHC,
+                                displayName: item.ten,
                                 text: treeview.generateTextOnTree(item),
                                 state: {
                                     opened: true
@@ -114,11 +62,11 @@
                         .on('changed.jstree', function (e, data) {
                             if (data.selected.length != 1) {
                                 selectednode = undefined;
-                                $("#CreateNewUserButton").hide();
+                                //$("#CreateNewUserButton").hide();
                                 reloaddataTable();
                             } else {
                                 selectednode = data.instance.get_node(data.selected[0]);
-                                $("#CreateNewUserButton").show();
+                                //$("#CreateNewUserButton").show();
                                 reloaddataTable();
                             }
                         })
@@ -149,12 +97,16 @@
 
                                 return -1;
                             },
+                            search: {
+                                case_insensitive: true,
+                                show_only_matches: true,  // chỉ hiện node khớp
+                                show_only_matches_children: true
+                            },
                             plugins: [
                                 'types',
-                                'contextmenu',
+                                //'contextmenu',
                                 'wholerow',
                                 'sort',
-                                //'dnd'
                                 'search'
                             ]
                         });
@@ -173,6 +125,14 @@
 
             }
         };
+        var to = false;
+        $('#treeSearchBox').keyup(function () {
+            if (to) { clearTimeout(to); }
+            to = setTimeout(function () {
+                var v = $('#treeSearchBox').val();
+                treeview.$tree.jstree(true).search(v);
+            }, 300);
+        });
 
         $('#ThemToChuc').click(function () {
             _createToChucModal.open({ chaid: undefined });

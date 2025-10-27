@@ -115,7 +115,7 @@ namespace Admin.AppServices
 
             var listRole = _roleManager.Roles.ToList();
             model.ListRole = ObjectMapper.Map<List<RoleEditDto>>(listRole);
-            
+            model.donvis = GetListPhongBanQuanLy();
             return model;
         }
         public NguoiDung_ThongTinDto GetNguoiDungById(int? ndId)
@@ -140,7 +140,7 @@ namespace Admin.AppServices
                     role.IsAssigned = true;
                 else role.IsAssigned = false;
             }
-
+            model.donvis = GetListPhongBanQuanLy();
             return model;
         }
         public async Task<GenericResultDto> CreateOrUpdate(CreateEditNguoiDungThongTin input)
@@ -162,15 +162,7 @@ namespace Admin.AppServices
             try
             {
                 input.NguoiDungThongTinDto.NguoiDung_TaiKhoan.Replace(" ", "");
-                string taikhoan = "";
-                if (string.IsNullOrEmpty(input.NguoiDungThongTinDto.DoanhNghiep_Mst))
-                {
-                    taikhoan = input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
-                }
-                else
-                {
-                    taikhoan = input.NguoiDungThongTinDto.DoanhNghiep_Mst.Replace("-", "") + "@" + input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
-                }
+                string taikhoan = input.NguoiDungThongTinDto.NguoiDung_TaiKhoan;
                 var nguoidungcu = _userManager.Users.FirstOrDefault(m => m.UserName == taikhoan);
                 if (nguoidungcu != null && nguoidungcu.Id > 0)
                 {
@@ -393,78 +385,78 @@ namespace Admin.AppServices
             }
             return result;
         }
-        public GenericResultDto CayToChuc()
-        {
-            GenericResultDto rs = new GenericResultDto();
-            try
-            {
-                var pbs = GetListPhongBanQuanLy();
-                if (pbs.Count > 0)
-                {
-                    var listToChuc = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(pbs);
+        //public GenericResultDto CayToChuc()
+        //{
+        //    GenericResultDto rs = new GenericResultDto();
+        //    try
+        //    {
+        //        var pbs = GetListPhongBanQuanLy();
+        //        if (pbs.Count > 0)
+        //        {
+        //            var listToChuc = ObjectMapper.Map<List<Ql_CoCauToChucDto>>(pbs);
 
-                    // 👉 Sắp xếp đúng thứ tự cây cha → con
-                    var orderedList = OrderAsTree(listToChuc);
-                    rs.Success = true;
-                    rs.Data = orderedList;
-                }
-                else
-                {
-                    rs.Success = true;
-                    rs.Data = new List<Ql_CoCauToChucDto>();
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("DSToChuc", ex);
-            }
-            return rs;
-        }
-        private List<Ql_CoCauToChucDto> OrderAsTree(List<Ql_CoCauToChucDto> list)
-        {
-            if (list == null || list.Count == 0)
-                return new List<Ql_CoCauToChucDto>();
+        //            // 👉 Sắp xếp đúng thứ tự cây cha → con
+        //            var orderedList = OrderAsTree(listToChuc);
+        //            rs.Success = true;
+        //            rs.Data = orderedList;
+        //        }
+        //        else
+        //        {
+        //            rs.Success = true;
+        //            rs.Data = new List<Ql_CoCauToChucDto>();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.Error("DSToChuc", ex);
+        //    }
+        //    return rs;
+        //}
+        //private List<Ql_CoCauToChucDto> OrderAsTree(List<Ql_CoCauToChucDto> list)
+        //{
+        //    if (list == null || list.Count == 0)
+        //        return new List<Ql_CoCauToChucDto>();
 
-            const string htmlspace = "&nbsp;&nbsp;&nbsp;";
+        //    const string htmlspace = "&nbsp;&nbsp;&nbsp;";
 
-            // Tạo map cha -> danh sách con
-            var childrenMap = list
-                .Where(x => x.ToChuc_Cha_Id != null)
-                .GroupBy(x => x.ToChuc_Cha_Id)
-                .ToDictionary(
-                    g => g.Key,
-                    g => g.OrderBy(x => x.ToChuc_Ma).ThenBy(x => x.ToChuc_Ten).ToList()
-                );
+        //    // Tạo map cha -> danh sách con
+        //    var childrenMap = list
+        //        .Where(x => x.ToChuc_Cha_Id != null)
+        //        .GroupBy(x => x.ToChuc_Cha_Id)
+        //        .ToDictionary(
+        //            g => g.Key,
+        //            g => g.OrderBy(x => x.ToChuc_Ma).ThenBy(x => x.ToChuc_Ten).ToList()
+        //        );
 
-            // Tập hợp ID
-            var allIds = list.Select(x => x.Id).ToHashSet();
+        //    // Tập hợp ID
+        //    var allIds = list.Select(x => x.Id).ToHashSet();
 
-            // Xác định các gốc (root)
-            var roots = list
-                .Where(x => x.ToChuc_Cha_Id == null || !allIds.Contains(x.ToChuc_Cha_Id.Value))
-                .OrderBy(x => x.ToChuc_Ma)
-                .ThenBy(x => x.ToChuc_Ten)
-                .ToList();
+        //    // Xác định các gốc (root)
+        //    var roots = list
+        //        .Where(x => x.ToChuc_Cha_Id == null || !allIds.Contains(x.ToChuc_Cha_Id.Value))
+        //        .OrderBy(x => x.ToChuc_Ma)
+        //        .ThenBy(x => x.ToChuc_Ten)
+        //        .ToList();
 
-            var ordered = new List<Ql_CoCauToChucDto>();
-            void Traverse(Ql_CoCauToChucDto node, int level, string space)
-            {
-                node.Level = level;
-                node.SpaceLevel = space;
-                ordered.Add(node);
+        //    var ordered = new List<Ql_CoCauToChucDto>();
+        //    void Traverse(Ql_CoCauToChucDto node, int level, string space)
+        //    {
+        //        node.Level = level;
+        //        node.SpaceLevel = space;
+        //        ordered.Add(node);
 
-                if (childrenMap.TryGetValue(node.Id, out var children))
-                {
-                    foreach (var child in children)
-                        Traverse(child, level + 1, space + htmlspace);
-                }
-            }
+        //        if (childrenMap.TryGetValue(node.Id, out var children))
+        //        {
+        //            foreach (var child in children)
+        //                Traverse(child, level + 1, space + htmlspace);
+        //        }
+        //    }
 
-            foreach (var r in roots)
-                Traverse(r, 1, "");
+        //    foreach (var r in roots)
+        //        Traverse(r, 1, "");
 
-            return ordered;
-        }
+        //    return ordered;
+        //}
 
 
     }
