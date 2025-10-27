@@ -61,7 +61,7 @@ namespace Admin.AppServices
                 };
                 var _dbContext = _dbContextProvider.GetDbContext();
                 var data = _dbContext.C_DonViHCs
-                    .FromSqlRaw("EXEC [dbo].[Web_C_DonViHC_GetPage] @SortCol, @PageIndex, @PageSize, @TotalRows OUTPUT",
+                    .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetPage] @SortCol, @PageIndex, @PageSize, @TotalRows OUTPUT",
                         sortParam, pageIndexParam, pageSizeParam, totalRowsParam)
                     .AsEnumerable()
                     .ToList();
@@ -72,6 +72,7 @@ namespace Admin.AppServices
                     totalCount = totalRows,
                     data = data.Cast<object>().ToList()
                 };
+                return res;
 
             }
             catch (Exception ex)

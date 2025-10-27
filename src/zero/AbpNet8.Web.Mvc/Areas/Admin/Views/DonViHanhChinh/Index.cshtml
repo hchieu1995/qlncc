@@ -11,6 +11,7 @@
 @section Scripts
     {
     <script type="text/javascript" src="/view-resources/Areas/Admin/DonViHanhChinh/Index.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/view-resources/Areas/Admin/AppTopBarView/tagbox-timkiem.js"></script>
 }
 
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor bgrallct">
@@ -46,10 +47,10 @@
             <div class="kt-portlet__body">
                 <div class="kt-form" style="">
                     <div class="row col-12">
-                        <div class="col-3">
+                        <div class="col-11">
                             <div class="form-group align-items-center">
                                 <div class="input-group">
-                                    <input type="text" id="filterText" class="form-control" placeholder="Mã đơn vị, tên đơn vị" autocomplete="off" style="z-index: 1" maxlength="255">
+                                    <div id="comboTimKiem" class="cbbct"></div>
                                 </div>
                             </div>
                         </div>

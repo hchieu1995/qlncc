@@ -175,6 +175,12 @@
             ]
         }).dxDataGrid("instance");
 
+        const staticSource = [
+            { key: "ma", label: "Tìm kiếm theo Mã đơn vị" },
+            { key: "ten", label: "Tìm kiếm theo Tên đơn vị" }
+        ];
+        initTagBoxTimKiem("#comboTimKiem", staticSource);
+        
         function getdata() {
             $("#gridContainer").dxDataGrid("instance").refresh();
             $(".checkboxalldelete").prop("checked", false);
@@ -189,6 +195,9 @@
             });
 
             $("#filterButton").click(function (e) {
+                const combo = $("#comboTimKiem").dxTagBox("instance");
+                const values = combo.option("value");
+                debugger;
                 e.preventDefault();
                 getdata();
             });

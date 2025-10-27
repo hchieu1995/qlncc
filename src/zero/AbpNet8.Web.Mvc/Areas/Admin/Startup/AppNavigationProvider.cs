@@ -24,7 +24,7 @@ namespace AbpNet8.Web.Areas.Admin.Startup
                         //        .AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac.TinhThanh", L("DanhMucTinhThanh"), url: "Admin/DanhMucTinhThanh", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac_TinhThanh)))
                         //        .AddItem(new MenuItemDefinition("DanhMuc.DanhMucKhac.QuanHuyen", L("DanhMucQuanHuyen"), url: "Admin/DanhMucQuanHuyen", permissionDependency: new SimplePermissionDependency(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen)))
                         //        )
-                        //.AddItem(new MenuItemDefinition("DanhMuc.DonViHanhChinh", L("DonViHanhChinh"), url: "Admin/DonViHanhChinh", permissionDependency: null))
+                        .AddItem(new MenuItemDefinition("DanhMuc.DonViHanhChinh", L("DonViHanhChinh"), url: "Admin/DonViHanhChinh", permissionDependency: null))
                          )
                 ;
         }
