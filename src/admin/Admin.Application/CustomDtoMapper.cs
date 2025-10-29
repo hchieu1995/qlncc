@@ -12,6 +12,9 @@ namespace Admin.Application
 
             configuration.CreateMap<Dm_CauHinh, DmCauHinhDto>();
             configuration.CreateMap<DmCauHinhDto, Dm_CauHinh>();
+
+            configuration.CreateMap<Dm_TinhThanh, Dm_TinhThanhDto>();
+            configuration.CreateMap<Dm_TinhThanhDto, Dm_TinhThanh>();
         }
     }
 }

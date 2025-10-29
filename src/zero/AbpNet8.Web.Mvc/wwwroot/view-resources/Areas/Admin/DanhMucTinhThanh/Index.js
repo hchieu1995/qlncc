@@ -1,12 +1,32 @@
 ﻿(function () {
     $(function () {
-        var _donViHanhChinh = abp.services.qlncc.donViHanhChinh;
 
-        var _createOrEditModal = new app.ModalManager({
-            viewUrl: abp.appPath + 'Admin/DonViHanhChinh/CreateOrEditModal',
-            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_CreateOrEditModal.js',
-            modalClass: 'CreateOrEditModal'
-        });
+        var _$dmtinhthanhTable = $('#gridContainer');
+        var _dmtinhthanhService = abp.services.qlncc.danhMucTinhThanh;
+
+        function edittinhthanh(data) {
+            _createOrEditModal.open({ id: data.Id });
+        }
+
+        function deletetinhthanh(data) {
+            abp.message.confirm(
+                app.localize('AreYouSure'),
+                app.localize('XacNhan'),
+                function (isConfirmed) {
+                    if (isConfirmed) {
+                        _dmtinhthanhService.delete(data.Id).done(function (res) {
+                            if (res.success == true) {
+                                gettinhthanh();
+                                abp.notify.success(app.localize('SuccessfullyDeleted'));
+                            } else {
+                                abp.notify.error(app.localize('DeletedError'));
+                            }
+                        });
+                    }
+                }
+            );
+        }
+        var parmaforall = {};
 
         DevExpress.localization.locale("vi");
         function isNotEmpty(value) {
@@ -39,9 +59,10 @@
                     }
                 });
                 params.filterext = $("#filterText").val();
+                console.log(params);
+                parmaforall = params;
                 console.log("→ skip:", loadOptions.skip, "take:", loadOptions.take, "pageIndex:", loadOptions.skip / loadOptions.take + 1);
-
-                $.getJSON(abp.appPath + "api/services/qlncc/DonViHanhChinh/GetAllItem", params)
+                $.getJSON(abp.appPath + "api/services/qlncc/DanhMucTinhThanh/GetAllItem", params)
                     .done(function (response) {
                         $.each(response.result.data, function (i, val) {
                             val.stt = parseInt(params.skip) + i + 1;
@@ -72,14 +93,19 @@
             remoteOperations: { paging: true, sorting: true, filtering: true },
             key: "id",
             showBorders: true,
-
+            onEditorPreparing: function (info) {
+                if (info.parentType == 'filterRow' && info.dataField == "tinhThanh_HieuLuc") {
+                    info.trueText = "có";
+                    info.falseText = "không";
+                }
+            },
             wordWrapEnabled: true,
             grouping: {
                 autoExpandAll: true,
             },
             columnResizingMode: "nextColumn",
             pager: {
-                allowedPageSizes: [10, 20, 50, 100],
+                allowedPageSizes: [10, 20, 50, 100, 500],
                 showInfo: true,
                 showNavigationButtons: true,
                 showPageSizeSelector: true,
@@ -112,44 +138,53 @@
                     },
                     cellTemplate: function (container, options) {
                         $(container).append(`<p style="text-align: center;margin:0;">${options.text}</p>`)
-                    }
+                    },
                 },
                 {
-                    dataField: "maHC",
-                    caption: "Mã đơn vị",
+                    dataField: "tinhThanh_Ma",
+                    caption: "Mã tỉnh thành",
                     width: 200,
                     headerCellTemplate: function (header, info) {
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    }
+                    },
+                    filterOperations: ["contains", "="],
+                    selectedFilterOperation: "contains",
                 },
                 {
-                    dataField: "ten",
-                    caption: "Tên đơn vị",
+                    dataField: "tinhThanh_Ten",
+                    caption: "Tên tỉnh thành",
                     headerCellTemplate: function (header, info) {
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    }
+                    },
+                    filterOperations: ["contains", "="],
+                    selectedFilterOperation: "contains",
                 },
                 {
-                    dataField: "tenTat",
+                    dataField: "tinhThanh_TenTat",
                     caption: "Tên tắt",
                     headerCellTemplate: function (header, info) {
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    }
+                    },
+                    filterOperations: ["contains", "="],
+                    selectedFilterOperation: "contains",
                 },
                 {
-                    dataField: "lePhi",
-                    caption: "Lệ phí",
+                    dataField: "tinhThanh_HieuLuc",
+                    caption: "Hiệu lực",
+                    width: 150,
                     headerCellTemplate: function (header, info) {
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    }
+                    },
+                    filterOperations: ["contains", "="],
+                    selectedFilterOperation: "contains"
                 },
                 {
                     caption: "Hành động",
@@ -158,25 +193,19 @@
                     alignment: 'center',
                     cellTemplate: function (container, options) {
                         var txt = "";
-                        if (abp.auth.isGranted('Admin.DanhMuc.DonViHanhChinh.Sua')) {
+                        if (abp.auth.isGranted('Admin.DanhMuc.Khac.TinhThanh.Sua')) {
                             txt += `<a class="btn btn-sm btn-icon btn-icon-md edit" title="Chỉnh sửa" style="color:#169BD5;margin-top:-10px;" href="#" data-id="${options.data.id}"><i class="fa fa-edit icon-color"></i></a>`;
                         }
-                        if (abp.auth.isGranted('Admin.DanhMuc.DonViHanhChinh.Xoa')) {
+                        if (abp.auth.isGranted('Admin.DanhMuc.Khac.TinhThanh.Xoa')) {
                             txt += `<a class="btn btn-sm btn-icon btn-icon-md delete" title="Xóa" style="color:red;margin-top:-10px" data-id="${options.data.id}" href="#"><i class="fa fa-trash icon-color"></i></a>`;
                         }
-                        $(container).append(txt);
+                            $(container).append(txt);
                     }
                 }
             ]
         }).dxDataGrid("instance");
 
-        //const staticSource = [
-        //    { key: "ma", label: "Tìm kiếm theo Mã đơn vị" },
-        //    { key: "ten", label: "Tìm kiếm theo Tên đơn vị" }
-        //];
-        //initTagBoxTimKiem("#comboTimKiem", staticSource);
-        
-        function getdata() {
+        function gettinhthanh() {
             $("#gridContainer").dxDataGrid("instance").refresh();
             $(".checkboxalldelete").prop("checked", false);
         }
@@ -184,24 +213,9 @@
         registerEvent();
         function registerEvent() {
 
-            $('.combobox').selectpicker({
-                iconBase: "fa",
-                tickIcon: "fa fa-check"
-            });
-
             $("#filterButton").click(function (e) {
-                //const combo = $("#comboTimKiem").dxTagBox("instance");
-                //const values = combo.option("value");
-                //debugger;
                 e.preventDefault();
-                getdata();
-            });
-
-            $('#filterText').keypress(function (event) {
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode == '13') {
-                    getdata();
-                }
+                gettinhthanh();
             });
 
             $('#CreateButton').click(function () {
@@ -211,33 +225,41 @@
             $('#gridContainer').on('click', 'a.edit', function () {
                 var data = new Object();
                 data.Id = parseInt($(this).attr("data-id"));
-                _createOrEditModal.open({ id: data.Id });
+                edittinhthanh(data);
             });
 
             $('#gridContainer').on('click', 'a.delete', function () {
                 var data = new Object();
                 data.Id = parseInt($(this).attr("data-id"));
-                abp.message.confirm(
-                    app.localize('AreYouSure'),
-                    app.localize('XacNhan'),
-                    function (isConfirmed) {
-                        if (isConfirmed) {
-                            _donViHanhChinh.delete(data.Id).done(function (res) {
-                                if (res.success == true) {
-                                    gettiente();
-                                    abp.notify.success(app.localize('SuccessfullyDeleted'));
-                                } else {
-                                    abp.notify.error(app.localize('DeletedError'));
-                                }
-                            });
-                        }
-                    }
-                );
-            });
-            abp.event.on('app.createOrEditModalSaved', function () {
-                gettiente();
+                deletetinhthanh(data);
+                gettinhthanh();
             });
 
+            abp.event.on('app.createOrEditModalSaved', function () {
+                gettinhthanh();
+            });
+
+            $('#ImportExcelButton').on('click', function () {
+                _importFileModal.open();
+            });
+
+            $('#filterText').keypress(function (event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    gettinhthanh();
+                }
+            });
         }
+
+        $('#ExportExcelButton').click(function (e) {
+            e.preventDefault();
+            abp.ui.setBusy("body");
+            _dmtinhthanhService
+                .exportItem(parmaforall)
+                .done(function (result) {
+                    app.downloadTempFile(result);
+                    abp.ui.clearBusy("body");
+                });
+        });
     });
 })();

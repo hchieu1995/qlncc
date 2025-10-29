@@ -15,6 +15,7 @@ namespace Admin.EntityFrameworkCore
         public virtual DbSet<NguoiDung_ThongTin> NguoiDung_ThongTins { get; set; }
         public virtual DbSet<C_DonViHC> C_DonViHCs { get; set; }
         public virtual DbSet<Dm_CauHinh> Dm_CauHinhs { get; set; }
+        public virtual DbSet<Dm_TinhThanh> Dm_TinhThanhs { get; set; }
 
         public BnnDbContext(DbContextOptions<BnnDbContext> options)
             : base(options)
