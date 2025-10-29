@@ -12,7 +12,7 @@
  Target Server Version : 13001601
  File Encoding         : 65001
 
- Date: 28/10/2025 06:52:01
+ Date: 29/10/2025 08:19:46
 */
 
 
@@ -627,6 +627,21 @@ GO
 INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'44', N'1', N'Pages.Roles', N'1', N'RolePermissionSetting', N'16', NULL, N'2025-10-23 23:39:04.285796', NULL)
 GO
 
+INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'45', NULL, N'Admin.DanhMuc', N'1', N'RolePermissionSetting', N'1', NULL, N'2025-10-28 22:38:37.112434', N'11')
+GO
+
+INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'46', NULL, N'Admin.DanhMuc.DonViHanhChinh', N'1', N'RolePermissionSetting', N'1', NULL, N'2025-10-28 22:38:37.145522', N'11')
+GO
+
+INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'47', NULL, N'Admin.DanhMuc.DonViHanhChinh.Them', N'1', N'RolePermissionSetting', N'1', NULL, N'2025-10-28 22:38:37.148922', N'11')
+GO
+
+INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'48', NULL, N'Admin.DanhMuc.DonViHanhChinh.Sua', N'1', N'RolePermissionSetting', N'1', NULL, N'2025-10-28 22:38:37.150800', N'11')
+GO
+
+INSERT INTO [dbo].[AbpPermissions] ([Id], [TenantId], [Name], [IsGranted], [Discriminator], [RoleId], [UserId], [CreationTime], [CreatorUserId]) VALUES (N'49', NULL, N'Admin.DanhMuc.DonViHanhChinh.Xoa', N'1', N'RolePermissionSetting', N'1', NULL, N'2025-10-28 22:38:37.152469', N'11')
+GO
+
 SET IDENTITY_INSERT [dbo].[AbpPermissions] OFF
 GO
 
@@ -1209,7 +1224,7 @@ GO
 INSERT INTO [dbo].[AbpUsers] ([Id], [ProfilePictureId], [ShouldChangePasswordOnNextLogin], [SignInTokenExpireTimeUtc], [SignInToken], [GoogleAuthenticatorKey], [RecoveryCode], [CreationTime], [CreatorUserId], [LastModificationTime], [LastModifierUserId], [IsDeleted], [DeleterUserId], [DeletionTime], [AuthenticationSource], [UserName], [TenantId], [EmailAddress], [Name], [Surname], [Password], [EmailConfirmationCode], [PasswordResetCode], [LockoutEndDateUtc], [AccessFailedCount], [IsLockoutEnabled], [PhoneNumber], [IsPhoneNumberConfirmed], [SecurityStamp], [IsTwoFactorEnabled], [IsEmailConfirmed], [IsActive], [NormalizedUserName], [NormalizedEmailAddress], [ConcurrencyStamp]) VALUES (N'10', NULL, N'0', NULL, NULL, NULL, NULL, N'2023-06-23 11:18:42.815796', N'3', N'2023-10-16 10:03:15.077996', N'3', N'1', N'3', N'2023-10-16 10:12:50.197205', NULL, N'0@giafs', NULL, N'23/06/2023 11:18:42__86dba517-faba-4269-a925-5bc014f57778@gmail.com', N'ad', N'ad', N'AQAAAAEAACcQAAAAEPd7iO997/AZd5B1M1uMWnI2o7xlcGd9ApQmdTWwW+9nEDIyNFKvZnyezdPa3ARL4Q==', NULL, NULL, NULL, N'0', N'1', NULL, N'0', N'SYCTO6MTKUHCM7EG4RE2TJBPZCPV43VS', N'1', N'0', N'1', N'0@GIAFS', N'23/06/2023 11:18:42__86DBA517-FABA-4269-A925-5BC014F57778@GMAIL.COM', N'2539145a-1938-4594-b89d-a94f5f1cb0aa')
 GO
 
-INSERT INTO [dbo].[AbpUsers] ([Id], [ProfilePictureId], [ShouldChangePasswordOnNextLogin], [SignInTokenExpireTimeUtc], [SignInToken], [GoogleAuthenticatorKey], [RecoveryCode], [CreationTime], [CreatorUserId], [LastModificationTime], [LastModifierUserId], [IsDeleted], [DeleterUserId], [DeletionTime], [AuthenticationSource], [UserName], [TenantId], [EmailAddress], [Name], [Surname], [Password], [EmailConfirmationCode], [PasswordResetCode], [LockoutEndDateUtc], [AccessFailedCount], [IsLockoutEnabled], [PhoneNumber], [IsPhoneNumberConfirmed], [SecurityStamp], [IsTwoFactorEnabled], [IsEmailConfirmed], [IsActive], [NormalizedUserName], [NormalizedEmailAddress], [ConcurrencyStamp]) VALUES (N'11', NULL, N'0', NULL, NULL, NULL, NULL, N'2025-10-18 17:07:09.806369', NULL, N'2025-10-26 15:47:27.160374', N'11', N'0', NULL, NULL, NULL, N'admin', NULL, N'admin@gmail.com', N'ADMIN', N'ADMIN', N'AQAAAAIAAYagAAAAEBbhE546uZVRfSExlShdKQtBAgRZ+bmrcOraAdzMfoqlCm/zneHgueeT1bcg5Ng3rg==', NULL, NULL, NULL, N'0', N'1', NULL, N'0', N'FQRZ7WIRCVFBBLVDOJ2MEI3TEO6UVVQZ', N'1', N'1', N'1', N'ADMIN', N'ADMIN@GMAIL.COM', N'8a2b952a-cf4c-421e-b1e9-b86509836b4e')
+INSERT INTO [dbo].[AbpUsers] ([Id], [ProfilePictureId], [ShouldChangePasswordOnNextLogin], [SignInTokenExpireTimeUtc], [SignInToken], [GoogleAuthenticatorKey], [RecoveryCode], [CreationTime], [CreatorUserId], [LastModificationTime], [LastModifierUserId], [IsDeleted], [DeleterUserId], [DeletionTime], [AuthenticationSource], [UserName], [TenantId], [EmailAddress], [Name], [Surname], [Password], [EmailConfirmationCode], [PasswordResetCode], [LockoutEndDateUtc], [AccessFailedCount], [IsLockoutEnabled], [PhoneNumber], [IsPhoneNumberConfirmed], [SecurityStamp], [IsTwoFactorEnabled], [IsEmailConfirmed], [IsActive], [NormalizedUserName], [NormalizedEmailAddress], [ConcurrencyStamp]) VALUES (N'11', NULL, N'0', NULL, NULL, NULL, NULL, N'2025-10-18 17:07:09.806369', NULL, N'2025-10-28 22:38:40.316319', N'11', N'0', NULL, NULL, NULL, N'admin', NULL, N'admin@gmail.com', N'ADMIN', N'ADMIN', N'AQAAAAIAAYagAAAAEBbhE546uZVRfSExlShdKQtBAgRZ+bmrcOraAdzMfoqlCm/zneHgueeT1bcg5Ng3rg==', NULL, NULL, NULL, N'0', N'1', NULL, N'0', N'H7CP7OGIJTPVPRZITWNU72HK3ULTLDYW', N'1', N'1', N'1', N'ADMIN', N'ADMIN@GMAIL.COM', N'daaa3a08-29e9-4e24-ae0c-51b1679b7cc8')
 GO
 
 INSERT INTO [dbo].[AbpUsers] ([Id], [ProfilePictureId], [ShouldChangePasswordOnNextLogin], [SignInTokenExpireTimeUtc], [SignInToken], [GoogleAuthenticatorKey], [RecoveryCode], [CreationTime], [CreatorUserId], [LastModificationTime], [LastModifierUserId], [IsDeleted], [DeleterUserId], [DeletionTime], [AuthenticationSource], [UserName], [TenantId], [EmailAddress], [Name], [Surname], [Password], [EmailConfirmationCode], [PasswordResetCode], [LockoutEndDateUtc], [AccessFailedCount], [IsLockoutEnabled], [PhoneNumber], [IsPhoneNumberConfirmed], [SecurityStamp], [IsTwoFactorEnabled], [IsEmailConfirmed], [IsActive], [NormalizedUserName], [NormalizedEmailAddress], [ConcurrencyStamp]) VALUES (N'12', NULL, N'0', NULL, NULL, NULL, NULL, N'2025-10-19 20:24:46.810731', N'11', N'2025-10-26 15:47:23.604263', N'11', N'0', NULL, NULL, NULL, N'hieuhc', NULL, N'123@gmail.com', N'1', N'1', N'AQAAAAIAAYagAAAAECTn18ArxmWVVd33St7JQTdpakkdIyp2LQAegUkHDvqkIFSE5TPQc8J9UgL6VRWjNg==', NULL, NULL, NULL, N'0', N'1', NULL, N'0', N'XWFNLPQ57BVIZNAMA62DBDFRICW77KSX', N'1', N'0', N'1', N'HIEUHC', N'123@GMAIL.COM', N'e0226d65-b6ca-4e53-ad66-b97e085653a6')
@@ -7111,9 +7126,6 @@ GO
 INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11539', N'83333', N'FGH', N'LO', N'8333333', NULL, N'2', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
 GO
 
-INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11553', N'1000000', N'Trung ương', NULL, N'0', NULL, N'1', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
-GO
-
 INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11557', N'11111', N'Con cua Dia phuong', NULL, N'1000002', NULL, N'2', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
 GO
 
@@ -7121,9 +7133,6 @@ INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [
 GO
 
 INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11561', N'22222', N'Dia phuong 333', NULL, N'1000011', NULL, N'2', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
-GO
-
-INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11563', N'1000022', N'Dia phuong', NULL, N'0', NULL, N'1', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
 GO
 
 INSERT INTO [dbo].[C_DonViHC] ([Id], [MaHC], [Ten], [TenTat], [IdCha], [Vung], [Cap], [Status], [HeSoKV], [LePhi], [MaV], [FolderExp], [ApDung], [Version], [IsUpdate], [IdHC]) VALUES (N'11568', N'1053800', N'TTĐDNCC số 2', N'VPS', N'1010000', NULL, N'2', N'0', NULL, NULL, NULL, NULL, NULL, N'500', N'1', NULL)
@@ -12311,30 +12320,166 @@ GO
 
 
 -- ----------------------------
--- procedure structure for C_DonViHC_GetPage
+-- Table structure for TableDel
 -- ----------------------------
-IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_GetPage]') AND type IN ('P', 'PC', 'RF', 'X'))
-	DROP PROCEDURE[dbo].[C_DonViHC_GetPage]
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[TableDel]') AND type IN ('U'))
+	DROP TABLE [dbo].[TableDel]
 GO
 
-CREATE PROCEDURE [dbo].[C_DonViHC_GetPage]
-	@SortCol NVARCHAR(30),
-	@PageIndex INT,
-	@PageSize INT,
-	@TotalRows INT OUTPUT
+CREATE TABLE [dbo].[TableDel] (
+  [Id] int  IDENTITY(1,1) NOT NULL,
+  [TbName] varchar(50) COLLATE Vietnamese_CI_AS  NULL,
+  [KeyName] varchar(50) COLLATE Vietnamese_CI_AS  NULL,
+  [KeyValue] varchar(50) COLLATE Vietnamese_CI_AS  NULL,
+  [IsUpdate] bit  NULL
+)
+GO
+
+ALTER TABLE [dbo].[TableDel] SET (LOCK_ESCALATION = TABLE)
+GO
+
+
+-- ----------------------------
+-- Records of TableDel
+-- ----------------------------
+SET IDENTITY_INSERT [dbo].[TableDel] ON
+GO
+
+INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate]) VALUES (N'4', N'D_DTTX', N'IdDTTX', N'3ADC292C-3EA7-F011-B9FD-C4CBE1386B14', N'0')
+GO
+
+INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate]) VALUES (N'5', N'D_BiendongDTTX', N'IdDTTX', N'3ADC292C-3EA7-F011-B9FD-C4CBE1386B14', N'0')
+GO
+
+INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate]) VALUES (N'6', N'D_HoSo', N'MaDT', N'39DC292C-3EA7-F011-B9FD-C4CBE1386B14', N'0')
+GO
+
+INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate]) VALUES (N'7', N'C_DonViHC', N'Id', N'11563', N'0')
+GO
+
+INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate]) VALUES (N'8', N'C_DonViHC', N'Id', N'11553', N'0')
+GO
+
+SET IDENTITY_INSERT [dbo].[TableDel] OFF
+GO
+
+
+-- ----------------------------
+-- procedure structure for C_DonViHC_GetPage_Web
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_GetPage_Web]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[C_DonViHC_GetPage_Web]
+GO
+
+CREATE PROCEDURE [dbo].[C_DonViHC_GetPage_Web]
+    @SortCol NVARCHAR(50),
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(200) = NULL,
+    @Cap NVARCHAR(50) = NULL,
+    @IdCha BIGINT = NULL,
+		@TotalRows INT OUTPUT
 AS
+BEGIN
+    SET NOCOUNT ON;
 
-	WITH temp 
-	as
-	(
-		SELECT * ,ROW_NUMBER() OVER (ORDER BY Id desc) as RowNum
-		FROM dbo.C_DonViHC
-	)
-	select * from temp
-	WHERE RowNum BETWEEN (@PageIndex - 1) * @PageSize + 1 
-		  AND @PageIndex * @PageSize 
+    DECLARE @SortColumn NVARCHAR(50), @SortDirection NVARCHAR(4);
+    SET @SortColumn = LTRIM(RTRIM(LEFT(@SortCol, CHARINDEX(' ', @SortCol + ' ') - 1)));
+    SET @SortDirection = UPPER(LTRIM(RTRIM(REPLACE(@SortCol, @SortColumn, ''))));
 
-SELECT @TotalRows = COUNT(*) FROM dbo.C_DonViHC
+    IF @SortDirection NOT IN ('ASC', 'DESC')
+        SET @SortDirection = 'DESC';
+
+    DECLARE @SQL NVARCHAR(MAX);
+
+    SET @SQL = N'
+    WITH temp AS
+    (
+        SELECT *,
+               ROW_NUMBER() OVER (ORDER BY ' + QUOTENAME(@SortColumn) + ' ' + @SortDirection + N') AS RowNum
+        FROM dbo.C_DonViHC
+        WHERE
+            (' + CASE WHEN @SearchText IS NULL OR @SearchText = '' THEN '1=1'
+                      ELSE 'MaHC LIKE ''%' + @SearchText + '%'' OR Ten LIKE ''%' + @SearchText + '%''' END + N')
+            AND (' + CASE WHEN @Cap IS NULL OR @Cap = '' THEN '1=1'
+                         ELSE 'Cap = N''' + @Cap + '''' END + N')
+            AND (' + CASE WHEN @IdCha IS NULL THEN '1=1'
+                         ELSE 'IdCha = ' + CAST(@IdCha AS NVARCHAR(20)) END + N')
+    )
+    SELECT * 
+    FROM temp
+    WHERE RowNum BETWEEN (' + CAST((@PageIndex - 1) * @PageSize + 1 AS NVARCHAR(20)) + N')
+                     AND (' + CAST(@PageIndex * @PageSize AS NVARCHAR(20)) + N'); 
+
+    SELECT @TotalRowsOut = COUNT(*) 
+    FROM dbo.C_DonViHC
+    WHERE
+        (' + CASE WHEN @SearchText IS NULL OR @SearchText = '' THEN '1=1'
+                  ELSE 'MaHC LIKE ''%' + @SearchText + '%'' OR Ten LIKE ''%' + @SearchText + '%''' END + N')
+        AND (' + CASE WHEN @Cap IS NULL OR @Cap = '' THEN '1=1'
+                     ELSE 'Cap = N''' + @Cap + '''' END + N')
+        AND (' + CASE WHEN @IdCha IS NULL THEN '1=1'
+                     ELSE 'IdCha = ' + CAST(@IdCha AS NVARCHAR(20)) END + N');
+    ';
+
+    EXEC sp_executesql @SQL, N'@TotalRowsOut INT OUTPUT', @TotalRows OUTPUT;
+END;
+GO
+
+
+-- ----------------------------
+-- procedure structure for C_DonViHC_Get_Web
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_Get_Web]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[C_DonViHC_Get_Web]
+GO
+
+CREATE PROCEDURE [dbo].[C_DonViHC_Get_Web] 
+@idHC varchar(50)
+as
+select * from C_DonViHC where id=@idHC
+GO
+
+
+-- ----------------------------
+-- procedure structure for C_DonViHC_Delete_Web
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_Delete_Web]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[C_DonViHC_Delete_Web]
+GO
+
+CREATE PROCEDURE [dbo].[C_DonViHC_Delete_Web] @idHC nvarchar(max) as delete C_DonViHC where id in (select * from fnSplit(@idHC,';'))  insert into TableDel(TbName,KeyName,KeyValue,IsUpdate) values('C_DonViHC','Id',@idHC,0)
+GO
+
+
+-- ----------------------------
+-- function structure for fnSplit
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[fnSplit]') AND type IN ('FN', 'FS', 'FT', 'IF', 'TF'))
+	DROP FUNCTION[dbo].[fnSplit]
+GO
+
+CREATE FUNCTION [dbo].[fnSplit](
+    @sInputList VARCHAR(max) -- List of delimited items
+  , @sDelimiter VARCHAR(max) = ',' -- delimiter that separates items
+) RETURNS @List TABLE (item VARCHAR(max))
+
+BEGIN
+DECLARE @sItem VARCHAR(max)
+WHILE CHARINDEX(@sDelimiter,@sInputList,0) <> 0
+ BEGIN
+ SELECT
+  @sItem=RTRIM(LTRIM(SUBSTRING(@sInputList,1,CHARINDEX(@sDelimiter,@sInputList,0)-1))),
+  @sInputList=RTRIM(LTRIM(SUBSTRING(@sInputList,CHARINDEX(@sDelimiter,@sInputList,0)+LEN(@sDelimiter),LEN(@sInputList))))
+ 
+ IF LEN(@sItem) > 0
+  INSERT INTO @List SELECT @sItem
+ END
+
+IF LEN(@sInputList) > 0
+ INSERT INTO @List SELECT @sInputList -- Put the last item in
+RETURN
+END
 GO
 
 
@@ -12590,7 +12735,7 @@ GO
 -- ----------------------------
 -- Auto increment value for AbpPermissions
 -- ----------------------------
-DBCC CHECKIDENT ('[dbo].[AbpPermissions]', RESEED, 44)
+DBCC CHECKIDENT ('[dbo].[AbpPermissions]', RESEED, 49)
 GO
 
 
@@ -13205,6 +13350,22 @@ GO
 -- Primary Key structure for table NguoiDung_ThongTin
 -- ----------------------------
 ALTER TABLE [dbo].[NguoiDung_ThongTin] ADD CONSTRAINT [PK__NguoiDun__3214EC078A801AFB] PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
+-- Auto increment value for TableDel
+-- ----------------------------
+DBCC CHECKIDENT ('[dbo].[TableDel]', RESEED, 8)
+GO
+
+
+-- ----------------------------
+-- Primary Key structure for table TableDel
+-- ----------------------------
+ALTER TABLE [dbo].[TableDel] ADD CONSTRAINT [PK_TableDel] PRIMARY KEY CLUSTERED ([Id])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
 ON [PRIMARY]
 GO
