@@ -24,17 +24,6 @@ namespace Admin.Authorization
             //admin
             var admin = context.CreatePermission(AppPermissions.Admin, L("Admin"));
 
-            #region DanhMuc
-
-            var danhmuc = admin.CreateChildPermission(AppPermissions.Admin_DanhMuc, L("DanhMuc"));
-
-            var danhnghiepruiro = danhmuc.CreateChildPermission(AppPermissions.Admin_DanhMuc_QuanLyRuiRo, L("QuanLyRuiRo"));
-            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_QuanLyRuiRo_CreateNew, L("CreateNew"));
-            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_QuanLyRuiRo_Update, L("Update"));
-            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_QuanLyRuiRo_Delete, L("Delete"));
-
-            #endregion
-
             #region HeThong
 
             var hethong = admin.CreateChildPermission(AppPermissions.Admin_HeThong, L("HeThong"));
@@ -58,10 +47,20 @@ namespace Admin.Authorization
             vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Sua, L("Sua"));
             vaitro.CreateChildPermission(AppPermissions.Admin_HeThong_VaiTro_Xoa, L("Xoa"));
 
-            
+
 
             #endregion
 
+            #region DanhMuc
+
+            var danhmuc = admin.CreateChildPermission(AppPermissions.Admin_DanhMuc, L("DanhMuc"));
+
+            var danhnghiepruiro = danhmuc.CreateChildPermission(AppPermissions.Admin_DanhMuc_DonViHanhChinh, L("QuanLyRuiRo"));
+            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_DonViHanhChinh_Them, L("Them"));
+            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_DonViHanhChinh_Sua, L("Sua"));
+            danhnghiepruiro.CreateChildPermission(AppPermissions.Admin_DanhMuc_DonViHanhChinh_Xoa, L("Xoa"));
+
+            #endregion
         }
         private static ILocalizableString L(string name)
         {

@@ -1,0 +1,105 @@
+﻿@using Abp.Json
+@using Admin.Domains
+
+@model C_DonViHC
+<style>
+    .modal-content {
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<div class="modal-header" style="border-bottom: 1px solid #ebedf2; background-color: rgb(66,139,202);">
+    <h4 class="text-center" style="color:white;width:100%;padding-top:5px;">
+        @if (Model.Id != 0)
+        {
+            <spam>@L("Edit")</spam>
+        }
+        else
+        {
+            <span>@L("CreateNew")</span>
+        }
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+</div>
+<div class="modal-body">
+    <form name="InformationsForm" autocomplete="off">
+        <div class="row col-md-12 mt-2">
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <div class="row col-md-6 mt-2">
+                <label for="MaHC" class="col-md-12 mt-2">Mã HC<span style="color: red;"> *</span></label>
+                <input id="MaHC" class="form-control form-control-sm col-md-11 mt-2" type="text" name="MaHC" value="@Model.MaHC" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="Ten" class="col-md-12 mt-2">Tên<span style="color: red;"> *</span></label>
+                <input id="Ten" class="form-control form-control-sm col-md-12 mt-2" type="text" name="Ten" value="@Model.Ten" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="TenTat" class="col-md-12 mt-2">Tên tắt</label>
+                <input id="TenTat" class="form-control form-control-sm col-md-11 mt-2" type="text" name="TenTat" value="@Model.TenTat" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="Vung" class="col-md-12 mt-2">Vùng</label>
+                <select class="form-control kt-select2 bs-select form-control-sm col-md-12 combobox" id="Vung" name="Vung" data-live-search="true">
+                    <option value="0"> -- Chọn vùng -- </option>
+                    @foreach (var v in new List<string>() { "T", "N" })
+                    {
+                        @if (v == Model.Vung)
+                        {
+                            <option value="@v" selected>@v</option>
+                        }
+                        else
+                        {
+                            <option value="@v" >@v</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="HeSoKV" class="col-md-12 mt-2">Hệ số KV</label>
+                <input id="HeSoKV" class="form-control form-control-sm col-md-11 mt-2" type="number" name="HeSoKV" value="@Model.HeSoKV">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="LePhi" class="col-md-12 mt-2">Lệ phí</label>
+                <input id="LePhi" class="form-control form-control-sm col-md-12 mt-2" type="number" name="LePhi" value="@Model.LePhi">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="MaV" class="col-md-12 mt-2">Mã V</label>
+                <input id="MaV" class="form-control form-control-sm col-md-11 mt-2" type="text" name="MaV" value="@Model.MaV" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="FolderExp" class="col-md-12 mt-2">FolderExp</label>
+                <input id="FolderExp" class="form-control form-control-sm col-md-12 mt-2" type="text" name="FolderExp" value="@Model.FolderExp" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="ApDung" class="col-md-12 mt-2">Áp dụng</label>
+                <input id="ApDung" class="form-control form-control-sm col-md-11 mt-2" type="text" name="ApDung" value="@Model.ApDung" maxlength="255">
+            </div>
+
+            <div class="row col-md-6 mt-2">
+                <label for="Version" class="col-md-12 mt-2">Version</label>
+                <input id="Version" class="form-control form-control-sm col-md-12 mt-2" type="number" name="Version" value="@Model.Version">
+            </div>
+
+            <div class="row col-md-6 mt-4">
+                <label for="" class="col-md-12 mt-2"></label>
+                <div class="kt-checkbox-list">
+                    <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                        <input id="IsUpdate" type="checkbox" name="IsUpdate" value="1" @(Model.IsUpdate == true ? "checked=\"checked\"" : "")>
+                        IsUpdate
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

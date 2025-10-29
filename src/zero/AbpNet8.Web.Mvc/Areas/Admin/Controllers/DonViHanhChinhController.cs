@@ -1,7 +1,9 @@
 ﻿using Abp.AspNetCore.Mvc.Authorization;
 using AbpNet8.Controllers;
 using Admin.AppServices;
+using Admin.Domains;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AbpNet8.Web.Areas.Admin.Controllers
 {
@@ -19,6 +21,24 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public PartialViewResult CreateOrEditModal(int? id)
+        {
+            C_DonViHC viewModel = new();
+            if (id.HasValue)
+            {
+                var output = _donViHanhChinhAppService.GetDonViHanhChinhById(id);
+                viewModel = output;
+            }
+            else
+            {
+                viewModel = new C_DonViHC
+                {
+                    IsUpdate = true
+                };
+            }
+
+            return PartialView("_CreateOrEditModal", viewModel);
         }
     }
 }

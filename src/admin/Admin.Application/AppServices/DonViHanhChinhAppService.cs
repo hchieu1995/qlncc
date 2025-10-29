@@ -7,6 +7,7 @@ using Admin.DomainTranferObjects;
 using Admin.EntityFrameworkCore;
 using Admin.Helper;
 using Admin.Shared.Common;
+using Admin.Shared.DomainTranferObjects;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 
 namespace Admin.AppServices
 {
@@ -55,19 +57,24 @@ namespace Admin.AppServices
                 var pageIndexParam = new SqlParameter("@PageIndex", (input.skip / input.take) + 1);
                 var pageSizeParam = new SqlParameter("@PageSize", input.take);
 
+                var searchTextParam = new SqlParameter("@SearchText", string.IsNullOrEmpty(input.filterext) ? DBNull.Value : input.filterext);
+                var capParam = new SqlParameter("@Cap", 1);
+                var idChaParam = new SqlParameter("@IdCha", DBNull.Value);
+
                 var totalRowsParam = new SqlParameter("@TotalRows", SqlDbType.Int)
                 {
                     Direction = ParameterDirection.Output
                 };
+
                 var _dbContext = _dbContextProvider.GetDbContext();
                 var data = _dbContext.C_DonViHCs
-                    .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetPage] @SortCol, @PageIndex, @PageSize, @TotalRows OUTPUT",
-                        sortParam, pageIndexParam, pageSizeParam, totalRowsParam)
+                    .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetPage_Web] @SortCol, @PageIndex, @PageSize, @SearchText, @Cap, @IdCha, @TotalRows OUTPUT",
+                        sortParam, pageIndexParam, pageSizeParam, totalRowsParam, searchTextParam, capParam, idChaParam)
                     .AsEnumerable()
                     .ToList();
 
                 int totalRows = (int)totalRowsParam.Value;
-                TableShowItem res = new TableShowItem
+                TableShowItem res = new()
                 {
                     totalCount = totalRows,
                     data = data.Cast<object>().ToList()
@@ -78,11 +85,39 @@ namespace Admin.AppServices
             catch (Exception ex)
             {
 
-                throw;
             }
             
             return new TableShowItem();
         }
 
+        public C_DonViHC GetDonViHanhChinhById(int? id)
+        {
+            var idHCParam = new SqlParameter("@idHC", id);
+
+            var _dbContext = _dbContextProvider.GetDbContext();
+            C_DonViHC rs = _dbContext.C_DonViHCs
+                .FromSqlRaw("EXEC [dbo].[C_DonViHC_Get_Web] @idHC",
+                    idHCParam)
+                .AsEnumerable().FirstOrDefault();
+            return rs;
+        }
+        public GenericResultDto Delete(int id)
+        {
+            var result = new GenericResultDto();
+            try
+            {
+                var idParam = new SqlParameter("@idHC", id);
+                var _dbContext = _dbContextProvider.GetDbContext();
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[C_DonViHC_Delete_Web] @idHC", idParam);
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.ToString());
+                result.Success = false;
+            }
+            return result;
+        }
     }
 }

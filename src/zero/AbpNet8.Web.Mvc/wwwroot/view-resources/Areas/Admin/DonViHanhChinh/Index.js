@@ -2,7 +2,11 @@
     $(function () {
         var _donViHanhChinh = abp.services.qlncc.donViHanhChinh;
 
-        var parmaforall = {};
+        var _createOrEditModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Admin/DonViHanhChinh/CreateOrEditModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_CreateOrEditModal.js',
+            modalClass: 'CreateOrEditModal'
+        });
 
         DevExpress.localization.locale("vi");
         function isNotEmpty(value) {
@@ -35,14 +39,15 @@
                     }
                 });
                 params.filterext = $("#filterText").val();
-                params.tinhthanh = $("#TinhThanh_Ma").val();
-                console.log(params);
-                parmaforall = params;
+                console.log("→ skip:", loadOptions.skip, "take:", loadOptions.take, "pageIndex:", loadOptions.skip / loadOptions.take + 1);
+
                 $.getJSON(abp.appPath + "api/services/qlncc/DonViHanhChinh/GetAllItem", params)
                     .done(function (response) {
                         $.each(response.result.data, function (i, val) {
                             val.stt = parseInt(params.skip) + i + 1;
                         });
+                        console.log("← data:", response.data.length, "total:", response.totalCount);
+
                         d.resolve(response.result, {
                             totalCount: response.result.totalCount,
                             summary: response.result.summary
@@ -63,7 +68,7 @@
             },
         });
 
-        var dataGrid = $("#gridContainer").dxDataGrid({
+        $("#gridContainer").dxDataGrid({
 
             dataSource: customDataSource,
             remoteOperations: { paging: true, sorting: true, filtering: true },
@@ -119,9 +124,7 @@
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    },
-                    filterOperations: ["contains", "="],
-                    selectedFilterOperation: "contains"
+                    }
                 },
                 {
                     dataField: "ten",
@@ -130,9 +133,7 @@
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    },
-                    filterOperations: ["contains", "="],
-                    selectedFilterOperation: "contains"
+                    }
                 },
                 {
                     dataField: "tenTat",
@@ -141,9 +142,7 @@
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    },
-                    filterOperations: ["contains", "="],
-                    selectedFilterOperation: "contains"
+                    }
                 },
                 {
                     dataField: "lePhi",
@@ -152,9 +151,7 @@
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
-                    },
-                    filterOperations: ["contains", "="],
-                    selectedFilterOperation: "contains"
+                    }
                 },
                 {
                     caption: "Hành động",
@@ -163,23 +160,23 @@
                     alignment: 'center',
                     cellTemplate: function (container, options) {
                         var txt = "";
-                        //if (abp.auth.isGranted('Admin.DanhMuc.Khac.QuanHuyen.Sua')) {
+                        if (abp.auth.isGranted('Admin.DanhMuc.DonViHanhChinh.Sua')) {
                             txt += `<a class="btn btn-sm btn-icon btn-icon-md edit" title="Chỉnh sửa" style="color:#169BD5;margin-top:-10px;" href="#" data-id="${options.data.id}"><i class="fa fa-edit icon-color"></i></a>`;
-                        //}
-                        //if (abp.auth.isGranted('Admin.DanhMuc.Khac.QuanHuyen.Xoa')) {
+                        }
+                        if (abp.auth.isGranted('Admin.DanhMuc.DonViHanhChinh.Xoa')) {
                             txt += `<a class="btn btn-sm btn-icon btn-icon-md delete" title="Xóa" style="color:red;margin-top:-10px" data-id="${options.data.id}" href="#"><i class="fa fa-trash icon-color"></i></a>`;
-                        //}
+                        }
                         $(container).append(txt);
                     }
                 }
             ]
         }).dxDataGrid("instance");
 
-        const staticSource = [
-            { key: "ma", label: "Tìm kiếm theo Mã đơn vị" },
-            { key: "ten", label: "Tìm kiếm theo Tên đơn vị" }
-        ];
-        initTagBoxTimKiem("#comboTimKiem", staticSource);
+        //const staticSource = [
+        //    { key: "ma", label: "Tìm kiếm theo Mã đơn vị" },
+        //    { key: "ten", label: "Tìm kiếm theo Tên đơn vị" }
+        //];
+        //initTagBoxTimKiem("#comboTimKiem", staticSource);
         
         function getdata() {
             $("#gridContainer").dxDataGrid("instance").refresh();
@@ -195,9 +192,9 @@
             });
 
             $("#filterButton").click(function (e) {
-                const combo = $("#comboTimKiem").dxTagBox("instance");
-                const values = combo.option("value");
-                debugger;
+                //const combo = $("#comboTimKiem").dxTagBox("instance");
+                //const values = combo.option("value");
+                //debugger;
                 e.preventDefault();
                 getdata();
             });
@@ -208,6 +205,41 @@
                     getdata();
                 }
             });
+
+            $('#CreateButton').click(function () {
+                _createOrEditModal.open();
+            });
+
+            $('#gridContainer').on('click', 'a.edit', function () {
+                var data = new Object();
+                data.Id = parseInt($(this).attr("data-id"));
+                _createOrEditModal.open({ id: data.Id });
+            });
+
+            $('#gridContainer').on('click', 'a.delete', function () {
+                var data = new Object();
+                data.Id = parseInt($(this).attr("data-id"));
+                abp.message.confirm(
+                    app.localize('AreYouSure'),
+                    app.localize('XacNhan'),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            _donViHanhChinh.delete(data.Id).done(function (res) {
+                                if (res.success == true) {
+                                    gettiente();
+                                    abp.notify.success(app.localize('SuccessfullyDeleted'));
+                                } else {
+                                    abp.notify.error(app.localize('DeletedError'));
+                                }
+                            });
+                        }
+                    }
+                );
+            });
+            abp.event.on('app.createOrEditModalSaved', function () {
+                gettiente();
+            });
+
         }
     });
 })();

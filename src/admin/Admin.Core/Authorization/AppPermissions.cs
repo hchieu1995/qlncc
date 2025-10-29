@@ -43,12 +43,10 @@ namespace Admin.Authorization
 
         public const string Admin_DanhMuc = "Admin.DanhMuc";
 
-        public const string Admin_DanhMuc_Khac = "Admin.DanhMuc.Khac";
-
-        public const string Admin_DanhMuc_QuanLyRuiRo = "Admin.DanhMuc.QuanLyRuiRo";
-        public const string Admin_DanhMuc_QuanLyRuiRo_CreateNew = "Admin.DanhMuc.QuanLyRuiRo.CreateNew";
-        public const string Admin_DanhMuc_QuanLyRuiRo_Update = "Admin.DanhMuc.QuanLyRuiRo.Update";
-        public const string Admin_DanhMuc_QuanLyRuiRo_Delete = "Admin.DanhMuc.QuanLyRuiRo.Delete";
+        public const string Admin_DanhMuc_DonViHanhChinh = "Admin.DanhMuc.DonViHanhChinh";
+        public const string Admin_DanhMuc_DonViHanhChinh_Them = "Admin.DanhMuc.DonViHanhChinh.Them";
+        public const string Admin_DanhMuc_DonViHanhChinh_Sua = "Admin.DanhMuc.DonViHanhChinh.Sua";
+        public const string Admin_DanhMuc_DonViHanhChinh_Xoa = "Admin.DanhMuc.DonViHanhChinh.Xoa";
 
         #endregion
 

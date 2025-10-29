@@ -24,20 +24,20 @@
                 <span class="kt-subheader__separator kt-subheader__separator--v"></span>
             </div>
             <div class="kt-subheader__toolbar col-md-8" style="padding:0px">
-                @* <div class="kt-subheader__wrapper">
-                    @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_NhapExcel))
+                <div class="kt-subheader__wrapper">
+                    @* @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_NhapExcel))
                     {
                         <button id="ImportExcelButton" class="btn btn-outline-warning btn-sm" style="height: 34px"><i class="far fa-file-excel"></i>Nhập excel</button>
                     }
                     @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_XuatExcel))
                     {
                         <button id="ExportExcelButton" class="btn btn-success btn-sm" style="height: 34px"><i class="far fa-file-excel"></i>Xuất excel</button>
-                    }
-                    @if (IsGranted(AppPermissions.Admin_DanhMuc_Khac_QuanHuyen_Them))
+                    } *@
+                    @if (IsGranted(AppPermissions.Admin_DanhMuc_DonViHanhChinh_Them))
                     {
                         <button id="CreateButton" class="btn btn-sm btn-outline-primary" style="height: 34px"><i class="fa fa-plus" aria-hidden="true"></i>@L("CreateNew")</button>
                     }
-                </div> *@
+                </div>
             </div>
         </div>
     </div>
@@ -47,10 +47,17 @@
             <div class="kt-portlet__body">
                 <div class="kt-form" style="">
                     <div class="row col-12">
-                        <div class="col-11">
+                        @* <div class="col-11">
                             <div class="form-group align-items-center">
                                 <div class="input-group">
                                     <div id="comboTimKiem" class="cbbct"></div>
+                                </div>
+                            </div>
+                        </div> *@
+                        <div class="col-3">
+                            <div class="form-group align-items-center">
+                                <div class="input-group">
+                                    <input type="text" id="filterText" class="form-control" placeholder="Mã, tên tên đơn vị" autocomplete="off" style="z-index: 1">
                                 </div>
                             </div>
                         </div>
