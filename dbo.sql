@@ -1,18 +1,18 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 1sql2016
+ Source Server         : SQL2019_Local
  Source Server Type    : SQL Server
- Source Server Version : 13001601
- Source Host           : .\sql2016:1433
- Source Catalog        : nccdemo
+ Source Server Version : 15002000
+ Source Host           : localhost\SQL2019:1433
+ Source Catalog        : demoncc
  Source Schema         : dbo
 
  Target Server Type    : SQL Server
- Target Server Version : 13001601
+ Target Server Version : 15002000
  File Encoding         : 65001
 
- Date: 29/10/2025 08:19:46
+ Date: 29/10/2025 17:23:54
 */
 
 
@@ -12267,6 +12267,326 @@ GO
 
 
 -- ----------------------------
+-- Table structure for dm_tinhthanh
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[dm_tinhthanh]') AND type IN ('U'))
+	DROP TABLE [dbo].[dm_tinhthanh]
+GO
+
+CREATE TABLE [dbo].[dm_tinhthanh] (
+  [id] int  NOT NULL,
+  [tinhthanh_ma] nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
+  [tinhthanh_ten] nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
+  [tinhthanh_tentat] nvarchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL,
+  [tinhthanh_batdau] datetime2(7)  NULL,
+  [tinhthanh_ketthuc] datetime2(7)  NULL,
+  [tinhthanh_hieuluc] bit  NULL,
+  [creationtime] datetime2(7)  NULL,
+  [creatoruserid] int  NULL,
+  [deleteruserid] int  NULL,
+  [deletiontime] datetime2(7)  NULL,
+  [isdeleted] bit  NULL,
+  [lastmodificationtime] datetime2(7)  NULL,
+  [lastmodifieruserid] int  NULL
+)
+GO
+
+ALTER TABLE [dbo].[dm_tinhthanh] SET (LOCK_ESCALATION = TABLE)
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'id giá trị tự tăng',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'id'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'mã tỉnh thành',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_ma'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'tên tỉnh thành',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_ten'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'tên viết tắt',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_tentat'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ngày bắt đầu thành lập',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_batdau'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ngày kết thúc',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_ketthuc'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'tình trạng hiệu lực: 0 - không hiệu lực, 1 - đang có hiệu lực',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'tinhthanh_hieuluc'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ngày tạo',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'creationtime'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'id người tạo',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'creatoruserid'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'id người xóa',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'deleteruserid'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ngày xóa',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'deletiontime'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'dữ liệu đã xóa hay chưa',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'isdeleted'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'ngày thay đổi gần nhất',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'lastmodificationtime'
+GO
+
+EXEC sp_addextendedproperty
+'MS_Description', N'người thay đổi gần nhất',
+'SCHEMA', N'dbo',
+'TABLE', N'dm_tinhthanh',
+'COLUMN', N'lastmodifieruserid'
+GO
+
+
+-- ----------------------------
+-- Records of dm_tinhthanh
+-- ----------------------------
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'150', N'01', N'Thành phố Hà Nội', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'151', N'02', N'Tỉnh Hà Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'152', N'04', N'Tỉnh Cao Bằng', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'153', N'06', N'Tỉnh Bắc Kạn', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'154', N'08', N'Tỉnh Tuyên Quang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'155', N'10', N'Tỉnh Lào Cai', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'156', N'11', N'Tỉnh Điện Biên', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'157', N'12', N'Tỉnh Lai Châu', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'158', N'14', N'Tỉnh Sơn La', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'159', N'15', N'Tỉnh Yên Bái', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'160', N'17', N'Tỉnh Hoà Bình', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'161', N'19', N'Tỉnh Thái Nguyên', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'162', N'20', N'Tỉnh Lạng Sơn', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'163', N'22', N'Tỉnh Quảng Ninh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'164', N'24', N'Tỉnh Bắc Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'165', N'25', N'Tỉnh Phú Thọ', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'166', N'26', N'Tỉnh Vĩnh Phúc', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'167', N'27', N'Tỉnh Bắc Ninh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'168', N'30', N'Tỉnh Hải Dương', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'169', N'31', N'Thành phố Hải Phòng', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'170', N'33', N'Tỉnh Hưng Yên', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'171', N'34', N'Tỉnh Thái Bình', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'172', N'35', N'Tỉnh Hà Nam', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'173', N'36', N'Tỉnh Nam Định', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'174', N'37', N'Tỉnh Ninh Bình', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'175', N'38', N'Tỉnh Thanh Hóa', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'176', N'40', N'Tỉnh Nghệ An', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'177', N'42', N'Tỉnh Hà Tĩnh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'178', N'44', N'Tỉnh Quảng Bình', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'179', N'45', N'Tỉnh Quảng Trị', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'180', N'46', N'Tỉnh Thừa Thiên Huế', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'181', N'48', N'Đà Nẵng', N'', NULL, NULL, N'1', N'2024-08-07 15:12:23.0000000', NULL, NULL, NULL, N'0', N'2024-08-07 15:12:23.0000000', N'3')
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'182', N'49', N'Tỉnh Quảng Nam', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'183', N'51', N'Tỉnh Quảng Ngãi', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'184', N'52', N'Tỉnh Bình Định', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'185', N'54', N'Tỉnh Phú Yên', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'186', N'56', N'Tỉnh Khánh Hòa', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'187', N'58', N'Tỉnh Ninh Thuận', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'188', N'60', N'Tỉnh Bình Thuận', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'189', N'62', N'Tỉnh Kon Tum', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'190', N'64', N'Tỉnh Gia Lai', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'191', N'66', N'Tỉnh Đắk Lắk', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'192', N'67', N'Tỉnh Đắk Nông', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'193', N'68', N'Tỉnh Lâm Đồng', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'194', N'70', N'Tỉnh Bình Phước', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'195', N'72', N'Tỉnh Tây Ninh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'196', N'74', N'Tỉnh Bình Dương', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'197', N'75', N'Tỉnh Đồng Nai', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'198', N'77', N'Tỉnh Bà Rịa - Vũng Tàu', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'199', N'79', N'Thành phố Hồ Chí Minh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'200', N'80', N'Tỉnh Long An', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'201', N'82', N'Tỉnh Tiền Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'202', N'83', N'Tỉnh Bến Tre', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'203', N'84', N'Tỉnh Trà Vinh', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'204', N'86', N'Tỉnh Vĩnh Long', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'205', N'87', N'Tỉnh Đồng Tháp', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'206', N'89', N'Tỉnh An Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'207', N'91', N'Tỉnh Kiên Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'208', N'92', N'Thành phố Cần Thơ', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'209', N'93', N'Tỉnh Hậu Giang', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'210', N'94', N'Tỉnh Sóc Trăng', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'211', N'95', N'Tỉnh Bạc Liêu', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+INSERT INTO [dbo].[dm_tinhthanh] ([id], [tinhthanh_ma], [tinhthanh_ten], [tinhthanh_tentat], [tinhthanh_batdau], [tinhthanh_ketthuc], [tinhthanh_hieuluc], [creationtime], [creatoruserid], [deleteruserid], [deletiontime], [isdeleted], [lastmodificationtime], [lastmodifieruserid]) VALUES (N'212', N'96', N'Tỉnh Cà Mau', NULL, NULL, NULL, N'1', N'2024-07-24 14:53:56.0000000', NULL, NULL, NULL, N'0', NULL, NULL)
+GO
+
+
+-- ----------------------------
 -- Table structure for NguoiDung_ThongTin
 -- ----------------------------
 IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[NguoiDung_ThongTin]') AND type IN ('U'))
@@ -12361,6 +12681,62 @@ INSERT INTO [dbo].[TableDel] ([Id], [TbName], [KeyName], [KeyValue], [IsUpdate])
 GO
 
 SET IDENTITY_INSERT [dbo].[TableDel] OFF
+GO
+
+
+-- ----------------------------
+-- procedure structure for C_DonViHC_GetPage
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_GetPage]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[C_DonViHC_GetPage]
+GO
+
+CREATE PROCEDURE [dbo].[C_DonViHC_GetPage]
+	@SortCol NVARCHAR(30),
+	@PageIndex INT,
+	@PageSize INT,
+	@TotalRows INT OUTPUT
+AS
+
+	WITH temp 
+	as
+	(
+		SELECT * ,ROW_NUMBER() OVER (ORDER BY Id desc) as RowNum
+		FROM dbo.C_DonViHC
+	)
+	select * from temp
+	WHERE RowNum BETWEEN (@PageIndex - 1) * @PageSize + 1 
+		  AND @PageIndex * @PageSize 
+
+SELECT @TotalRows = COUNT(*) FROM dbo.C_DonViHC
+GO
+
+
+-- ----------------------------
+-- procedure structure for Web_C_DonViHC_GetPage
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[Web_C_DonViHC_GetPage]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[Web_C_DonViHC_GetPage]
+GO
+
+CREATE PROCEDURE [dbo].[Web_C_DonViHC_GetPage]
+	@SortCol NVARCHAR(30),
+	@PageIndex INT,
+	@PageSize INT,
+	@TotalRows INT OUTPUT
+AS
+
+	WITH temp 
+	as
+	(
+		SELECT * ,ROW_NUMBER() OVER (ORDER BY Id desc) as RowNum
+		FROM dbo.C_DonViHC
+	)
+	select * from temp
+	WHERE RowNum BETWEEN (@PageIndex - 1) * @PageSize + 1 
+		  AND @PageIndex * @PageSize 
+
+SELECT @TotalRows = COUNT(*) FROM dbo.C_DonViHC
 GO
 
 
@@ -13334,6 +13710,15 @@ GO
 -- Primary Key structure for table C_DonViHC
 -- ----------------------------
 ALTER TABLE [dbo].[C_DonViHC] ADD CONSTRAINT [PK__C_DonViH__3214EC072E3984D8] PRIMARY KEY CLUSTERED ([Id])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
+ON [PRIMARY]
+GO
+
+
+-- ----------------------------
+-- Primary Key structure for table dm_tinhthanh
+-- ----------------------------
+ALTER TABLE [dbo].[dm_tinhthanh] ADD CONSTRAINT [PK__dm_tinht__3213E83F4D30AB1F] PRIMARY KEY CLUSTERED ([id])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)  
 ON [PRIMARY]
 GO
