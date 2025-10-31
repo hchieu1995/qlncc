@@ -92,6 +92,7 @@ namespace Admin.AppServices
             var result = new GenericResultDto();
             try
             {
+                input = FixInput(input);
                 string rs = "";
                 if(input.Id == 0)
                 {
@@ -118,6 +119,17 @@ namespace Admin.AppServices
                 result.Message = "Có lỗi xảy ra trong quá trình lưu đơn vị hành chính.";
             }
             return result;
+        }
+
+        private C_DonViHC FixInput(C_DonViHC input)
+        {
+            input.Ten = input.Ten?.Trim() ?? "";
+            input.TenTat = input.TenTat?.Trim() ?? "";
+            input.MaV = input.MaV?.Trim() ?? "";
+            input.FolderExp = input.FolderExp?.Trim() ?? "";
+            input.ApDung = input.ApDung?.Trim() ?? "";
+
+            return input;
         }
     }
 }
