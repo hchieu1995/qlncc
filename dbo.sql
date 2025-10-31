@@ -12,7 +12,7 @@
  Target Server Version : 13001601
  File Encoding         : 65001
 
- Date: 31/10/2025 07:15:26
+ Date: 01/11/2025 01:43:22
 */
 
 
@@ -12817,13 +12817,13 @@ GO
 
 
 -- ----------------------------
--- procedure structure for C_DonViHC_Get_Web
+-- procedure structure for C_DonViHC_GetById_Web
 -- ----------------------------
-IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_Get_Web]') AND type IN ('P', 'PC', 'RF', 'X'))
-	DROP PROCEDURE[dbo].[C_DonViHC_Get_Web]
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[C_DonViHC_GetById_Web]') AND type IN ('P', 'PC', 'RF', 'X'))
+	DROP PROCEDURE[dbo].[C_DonViHC_GetById_Web]
 GO
 
-CREATE PROCEDURE [dbo].[C_DonViHC_Get_Web] 
+CREATE PROCEDURE [dbo].[C_DonViHC_GetById_Web] 
 @id varchar(50)
 as
 select * from C_DonViHC where id=@id
