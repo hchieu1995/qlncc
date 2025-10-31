@@ -20,10 +20,10 @@
                 document.getElementById("Ten").focus();
                 return abp.notify.warn("Mời bạn nhập tên!");
             }
-
-            data.TienTe_HieuLuc = $("#IsUpdate").is(":checked") ? true : false;
+            data.Cap = 1;
+            data.IsUpdate = $("#IsUpdate").is(":checked") ? true : false;
             _modalManager.setBusy(true);
-            _donViHanhChinh.createOrUpdate(data).done(function (res) {
+            _donViHanhChinh.createOrEdit(data).done(function (res) {
                 if (res.success == true) {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     abp.event.trigger('app.createOrEditModalSaved');

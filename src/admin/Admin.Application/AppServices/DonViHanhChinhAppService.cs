@@ -1,22 +1,15 @@
-﻿using Abp.Domain.Repositories;
-using Abp.EntityFrameworkCore;
+﻿using Abp.EntityFrameworkCore;
 using AbpNet8.Storage;
 using Admin.Application.AppServices;
 using Admin.Domains;
-using Admin.DomainTranferObjects;
 using Admin.EntityFrameworkCore;
+using Admin.EntityFrameworkCore.Repositories;
 using Admin.Helper;
 using Admin.Shared.Common;
 using Admin.Shared.DomainTranferObjects;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Threading.Tasks;
 
 namespace Admin.AppServices
 {
@@ -27,53 +20,28 @@ namespace Admin.AppServices
         private readonly FileManager _fileManager;
         private readonly ITempFileCacheManager _tempFileCacheManager;
         protected readonly IBinaryObjectManager _binaryObjectManager;
-        private readonly SearchingCommon _searchingCommon;
+        private readonly DonViHCRepository _donViHCRepository;
 
         public DonViHanhChinhAppService(
             FileManager fileManager,
             ITempFileCacheManager tempFileCacheManager,
             IBinaryObjectManager binaryObjectManager,
-            SearchingCommon searchingCommon,
-            IDbContextProvider<BnnDbContext> dbContextProvider
+            IDbContextProvider<BnnDbContext> dbContextProvider,
+            DonViHCRepository donViHCRepository
             )
         {
             _fileManager = fileManager;
             _tempFileCacheManager = tempFileCacheManager;
             _binaryObjectManager = binaryObjectManager;
-            _searchingCommon = searchingCommon;
             _dbContextProvider = dbContextProvider;
+            _donViHCRepository = donViHCRepository;
         }
         //[AbpAuthorize(AppPermissions.Admin_DanhMuc_Khac_TinhThanh)]
         public TableShowItem GetAllItem(TableFilterItem input)
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(input.sort))
-                {
-                    var objsort = JsonConvert.DeserializeObject<List<TableSorterItem>>(input.sort).First();
-                    input.sort = objsort.selector + " " + (objsort.desc == true ? "desc" : "asc");
-                }
-                var sortParam = new SqlParameter("@SortCol", input.sort ?? "id asc");
-                var pageIndexParam = new SqlParameter("@PageIndex", (input.skip / input.take) + 1);
-                var pageSizeParam = new SqlParameter("@PageSize", input.take);
-
-                var searchTextParam = new SqlParameter("@SearchText", string.IsNullOrEmpty(input.filterext) ? DBNull.Value : input.filterext);
-                var capParam = new SqlParameter("@Cap", 1);
-                var idChaParam = new SqlParameter("@IdCha", DBNull.Value);
-
-                var totalRowsParam = new SqlParameter("@TotalRows", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                };
-
-                var _dbContext = _dbContextProvider.GetDbContext();
-                var data = _dbContext.C_DonViHCs
-                    .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetPage_Web] @SortCol, @PageIndex, @PageSize, @SearchText, @Cap, @IdCha, @TotalRows OUTPUT",
-                        sortParam, pageIndexParam, pageSizeParam, totalRowsParam, searchTextParam, capParam, idChaParam)
-                    .AsEnumerable()
-                    .ToList();
-
-                int totalRows = (int)totalRowsParam.Value;
+                var (data, totalRows) = _donViHCRepository.GetAllPageDonViHC(input);
                 TableShowItem res = new()
                 {
                     totalCount = totalRows,
@@ -84,21 +52,15 @@ namespace Admin.AppServices
             }
             catch (Exception ex)
             {
-
+                Logger.Error(ex.ToString());
             }
             
             return new TableShowItem();
         }
 
-        public C_DonViHC GetDonViHanhChinhById(int? id)
+        public C_DonViHC GetDonViHanhChinhById(int id)
         {
-            var idHCParam = new SqlParameter("@idHC", id);
-
-            var _dbContext = _dbContextProvider.GetDbContext();
-            C_DonViHC rs = _dbContext.C_DonViHCs
-                .FromSqlRaw("EXEC [dbo].[C_DonViHC_Get_Web] @idHC",
-                    idHCParam)
-                .AsEnumerable().FirstOrDefault();
+            var rs = _donViHCRepository.GetByIdDonViHC(id);
             return rs;
         }
         public GenericResultDto Delete(int id)
@@ -106,16 +68,54 @@ namespace Admin.AppServices
             var result = new GenericResultDto();
             try
             {
-                var idParam = new SqlParameter("@idHC", id);
-                var _dbContext = _dbContextProvider.GetDbContext();
-                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[C_DonViHC_Delete_Web] @idHC", idParam);
-
-                result.Success = true;
+                var rs = _donViHCRepository.DeleteDonViHC(id);
+                if(string.IsNullOrEmpty(rs))
+                {
+                    result.Success = true;
+                }
+                else
+                {
+                    result.Success = false;
+                    result.Message = rs;
+                }
             }
             catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
                 result.Success = false;
+                result.Message = "Có lỗi xảy ra trong quá trình xóa đơn vị hành chính.";
+            }
+            return result;
+        }
+        public GenericResultDto CreateOrEdit(C_DonViHC input)
+        {
+            var result = new GenericResultDto();
+            try
+            {
+                string rs = "";
+                if(input.Id == 0)
+                {
+                    _donViHCRepository.InsertDonViHC(input);
+                }
+                else
+                {
+                    _donViHCRepository.UpdateDonViHC(input);
+                }
+                if (string.IsNullOrEmpty(rs))
+                {
+                    result.Success = true;
+                }
+                else
+                {
+                    result.Success = false;
+                    result.Message = rs;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.ToString());
+                result.Success = false;
+                result.Message = "Có lỗi xảy ra trong quá trình lưu đơn vị hành chính.";
             }
             return result;
         }

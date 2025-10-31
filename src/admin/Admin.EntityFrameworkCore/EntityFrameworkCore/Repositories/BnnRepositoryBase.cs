@@ -3,12 +3,9 @@ using Abp.EntityFrameworkCore;
 using Abp.EntityFrameworkCore.Repositories;
 using Admin.Common;
 using Admin.Domains;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Admin.EntityFrameworkCore.EntityFrameworkCore.Repositories
+namespace Admin.EntityFrameworkCore.Repositories
 {
     public abstract class BnnRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<BnnDbContext, TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>

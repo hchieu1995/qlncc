@@ -39,7 +39,6 @@
                     }
                 });
                 params.filterext = $("#filterText").val();
-                console.log("→ skip:", loadOptions.skip, "take:", loadOptions.take, "pageIndex:", loadOptions.skip / loadOptions.take + 1);
 
                 $.getJSON(abp.appPath + "api/services/qlncc/DonViHanhChinh/GetAllItem", params)
                     .done(function (response) {
@@ -224,7 +223,7 @@
                         if (isConfirmed) {
                             _donViHanhChinh.delete(data.Id).done(function (res) {
                                 if (res.success == true) {
-                                    gettiente();
+                                    getdata();
                                     abp.notify.success(app.localize('SuccessfullyDeleted'));
                                 } else {
                                     abp.notify.error(app.localize('DeletedError'));
@@ -235,7 +234,7 @@
                 );
             });
             abp.event.on('app.createOrEditModalSaved', function () {
-                gettiente();
+                getdata();
             });
 
         }

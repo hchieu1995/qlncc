@@ -27,7 +27,7 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
             C_DonViHC viewModel = new();
             if (id.HasValue)
             {
-                var output = _donViHanhChinhAppService.GetDonViHanhChinhById(id);
+                var output = _donViHanhChinhAppService.GetDonViHanhChinhById(id.Value);
                 viewModel = output;
             }
             else

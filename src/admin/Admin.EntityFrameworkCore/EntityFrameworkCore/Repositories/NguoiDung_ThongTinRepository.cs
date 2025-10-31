@@ -1,6 +1,5 @@
 ﻿using Abp.EntityFrameworkCore;
 using Admin.Domains;
-using Admin.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 
 namespace Admin.EntityFrameworkCore.Repositories
 {
