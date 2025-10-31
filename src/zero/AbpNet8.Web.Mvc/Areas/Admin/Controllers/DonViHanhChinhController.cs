@@ -22,7 +22,7 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public PartialViewResult CreateOrEditModal(int? id)
+        public PartialViewResult CreateOrEditModal(int? id, int? idCha)
         {
             C_DonViHC viewModel = new();
             if (id.HasValue)
@@ -34,11 +34,17 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
             {
                 viewModel = new C_DonViHC
                 {
-                    IsUpdate = true
+                    IsUpdate = true,
+                    IdCha = idCha
                 };
             }
 
             return PartialView("_CreateOrEditModal", viewModel);
+        }
+
+        public PartialViewResult ChildUnitsModal(int maHC)
+        {
+            return PartialView("_ChildUnitsModal", maHC);
         }
     }
 }

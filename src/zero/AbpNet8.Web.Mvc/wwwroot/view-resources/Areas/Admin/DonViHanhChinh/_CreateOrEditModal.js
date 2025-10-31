@@ -4,7 +4,7 @@
         var _donViHanhChinh = abp.services.qlncc.donViHanhChinh;
         var _modalManager;
         var _$InformationForm = null;
-        
+        debugger
         this.init = function (modalManager) {
             _modalManager = modalManager;
             _$InformationForm = _modalManager.getModal().find('form[name=InformationsForm]');

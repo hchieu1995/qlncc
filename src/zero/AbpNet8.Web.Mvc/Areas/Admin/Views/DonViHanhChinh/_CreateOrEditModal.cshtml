@@ -25,6 +25,8 @@
     <form name="InformationsForm" autocomplete="off">
         <div class="row col-md-12 mt-2">
             <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <!-- Hidden IdCha so parent can be supplied when creating a child -->
+            <input type="hidden" id="IdCha" name="IdCha" value="@(Model.IdCha ?? 0)" />
             <div class="row col-md-6 mt-2">
                 <label for="MaHC" class="col-md-12 mt-2">Mã HC<span style="color: red;"> *</span></label>
                 <input id="MaHC" class="form-control form-control-sm col-md-11 mt-2" type="number" name="MaHC" value="@Model.MaHC">
@@ -52,7 +54,7 @@
                         }
                         else
                         {
-                            <option value="@v" >@v</option>
+                            <option value="@v">@v</option>
                         }
                     }
                 </select>

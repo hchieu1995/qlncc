@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Admin.EntityFrameworkCore.Repositories
 {
@@ -34,8 +33,8 @@ namespace Admin.EntityFrameworkCore.Repositories
                 var skipParam = new SqlParameter("@Skip", input.skip);
                 var takeParam = new SqlParameter("@Take", input.take);
                 var searchTextParam = new SqlParameter("@SearchText", string.IsNullOrEmpty(input.filterext) ? DBNull.Value : input.filterext);
-                var capParam = new SqlParameter("@Cap", 1);
-                var idChaParam = new SqlParameter("@IdCha", DBNull.Value);
+                var capParam = new SqlParameter("@Cap", input.id.HasValue ? DBNull.Value : 1);
+                var idChaParam = new SqlParameter("@IdCha", input.id.HasValue ? (object)input.id.Value : DBNull.Value);
                 var totalRowsParam = new SqlParameter("@TotalRows", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
                 var _dbContext = _dbContextProvider.GetDbContext();
@@ -61,13 +60,16 @@ namespace Admin.EntityFrameworkCore.Repositories
             var idParam = new SqlParameter("@id", id);
 
             return _dbContext.C_DonViHCs
-                .FromSqlRaw("EXEC [dbo].[C_DonViHC_Get_Web] @id", idParam)
+                .FromSqlRaw("EXEC [dbo].[C_DonViHC_GetById_Web] @id", idParam)
                 .AsEnumerable()
                 .FirstOrDefault();
         }
-        public long InsertDonViHC(C_DonViHC input)
+        public (long, string) InsertDonViHC(C_DonViHC input)
         {
             var _dbContext = _dbContextProvider.GetDbContext();
+            var isExist = _dbContext.C_DonViHCs.Any(x => x.MaHC == input.MaHC);
+            if (isExist)
+                return (0, $"Mã hành chính '{input.MaHC}' đã tồn tại.");
 
             var parameters = new[]
             {
@@ -94,7 +96,7 @@ namespace Admin.EntityFrameworkCore.Repositories
                 .AsEnumerable()
                 .FirstOrDefault();
 
-            return newId;
+            return (newId, null);
         }
         public string UpdateDonViHC(C_DonViHC input)
         {
@@ -104,6 +106,9 @@ namespace Admin.EntityFrameworkCore.Repositories
             var existing = _dbContext.C_DonViHCs.FirstOrDefault(x => x.Id == input.Id);
             if (existing == null)
                 return "Không tìm thấy đơn vị hành chính";
+            var isExist = _dbContext.C_DonViHCs.Any(x => x.MaHC == input.MaHC && x.Id != input.Id);
+            if (isExist)
+                return $"Mã hành chính '{input.MaHC}' đã tồn tại.";
 
             try
             {

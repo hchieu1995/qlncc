@@ -1,0 +1,16 @@
+﻿@model int
+<style>
+    .child-modal-toolbar {
+        margin-bottom: 8px;
+    }
+</style>
+<div class="modal-body">
+    <input type="hidden" id="childModalParentMaHC" value="@Model" />
+    <div class="child-modal-toolbar">
+        <button id="btnCreateChild" class="btn btn-sm btn-primary">Thêm</button>
+    </div>
+    <div id="childGridContainer" style="height:400px;"></div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">@L("Close")</button>
+</div>

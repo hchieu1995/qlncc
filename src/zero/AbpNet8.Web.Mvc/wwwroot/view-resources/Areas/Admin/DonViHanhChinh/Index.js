@@ -8,6 +8,12 @@
             modalClass: 'CreateOrEditModal'
         });
 
+        var _childUnitsModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Admin/DonViHanhChinh/ChildUnitsModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_ChildUnitsModal.js',
+            modalClass: 'ChildUnitsModal'
+        });
+
         DevExpress.localization.locale("vi");
         function isNotEmpty(value) {
             return value !== undefined && value !== null && value !== "";
@@ -42,23 +48,26 @@
 
                 $.getJSON(abp.appPath + "api/services/qlncc/DonViHanhChinh/GetAllItem", params)
                     .done(function (response) {
-                        $.each(response.result.data, function (i, val) {
-                            val.stt = parseInt(params.skip) + i + 1;
+                        var data = response?.result?.data || [];
+                        var total = response?.result?.totalCount || 0;
+
+                        $.each(data, function (i, val) {
+                            val.stt = (Number(loadOptions.skip) || 0) + i + 1;
                         });
-                        d.resolve(response.result, {
-                            totalCount: response.result.totalCount,
-                            summary: response.result.summary
-                        });
+
+                        d.resolve({ data: data, totalCount: total, summary: response?.result?.summary });
+
                         setTimeout(function () {
                             $(`#gridContainer tr[class="dx-row dx-column-lines dx-datagrid-filter-row"] input[class="dx-texteditor-input"]`).prop("placeholder", "Tìm kiếm");
                         }, 500)
                     })
                     .fail(function (res) {
-                        if (res.responseJSON.error.message.indexOf("Required permissions are not granted") >= 0) {
+                        var msg = res?.responseJSON?.error?.message || "";
+                        if (msg.indexOf("Required permissions are not granted") >= 0) {
                             abp.notify.error("Bạn không có quyền!");
-                            d.resolve([], {
-                                totalCount: 0
-                            });
+                            d.resolve({ data: [], totalCount: 0 });
+                        } else {
+                            d.reject(res);
                         }
                     });
                 return d.promise();
@@ -130,6 +139,18 @@
                         $('<div>')
                             .html(`<p style="font-size: 14px;color:#000;margin:0;">` + info.column.caption + " </p>")
                             .appendTo(header);
+                    },
+                    cellTemplate: function (container, options) {
+                        // make the name clickable to open child units modal
+                        var name = options.text || "";
+                        var mahc = options.data.maHC;
+                        var $a = $(`<a href="#" class="show-child-units" data-mahc="${mahc}" style="color:#169BD5;">${name}</a>`);
+                        $a.on('click', function (e) {
+                            e.preventDefault();
+                            var ma = $(this).data('mahc');
+                            _childUnitsModal.open({ maHC: ma });
+                        });
+                        $(container).append($a);
                     }
                 },
                 {
@@ -169,12 +190,6 @@
             ]
         }).dxDataGrid("instance");
 
-        //const staticSource = [
-        //    { key: "ma", label: "Tìm kiếm theo Mã đơn vị" },
-        //    { key: "ten", label: "Tìm kiếm theo Tên đơn vị" }
-        //];
-        //initTagBoxTimKiem("#comboTimKiem", staticSource);
-        
         function getdata() {
             $("#gridContainer").dxDataGrid("instance").refresh();
             $(".checkboxalldelete").prop("checked", false);
@@ -189,9 +204,6 @@
             });
 
             $("#filterButton").click(function (e) {
-                //const combo = $("#comboTimKiem").dxTagBox("instance");
-                //const values = combo.option("value");
-                //debugger;
                 e.preventDefault();
                 getdata();
             });
