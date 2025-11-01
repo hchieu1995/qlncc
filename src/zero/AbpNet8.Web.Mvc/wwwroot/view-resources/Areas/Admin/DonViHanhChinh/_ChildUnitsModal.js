@@ -1,13 +1,14 @@
 ﻿(function ($) {
     app.modals.ChildUnitsModal = function () {
         var _donViHanhChinh = abp.services.qlncc.donViHanhChinh;
-        debugger;
-        // local Create/Edit modal manager to reuse existing partial
-        //var _createOrEditModal = new app.ModalManager({
-        //    viewUrl: abp.appPath + 'Admin/DonViHanhChinh/CreateOrEditModal',
-        //    scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_CreateOrEditModal.js',
-        //    modalClass: 'CreateOrEditModal'
-        //});
+
+        var _createOrEditModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Admin/DonViHanhChinh/CreateOrEditModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_CreateOrEditModal.js',
+            modalClass: 'CreateOrEditModal',
+            modalSize: 'modal-60'
+        });
+
         this.init = function (modalManager) {
             _modalManager = modalManager;
             _$InformationForm = _modalManager.getModal().find('form[name=InformationsForm]');
@@ -43,11 +44,9 @@
                         params[i] = JSON.stringify(loadOptions[i]);
                     }
                 });
-
-                // Read parent id from DOM on each load (prevents stale value)
                 var parentMaHC = parseInt($("#childModalParentMaHC").val(), 10) || null;
                 params.id = parentMaHC;
-                params.filterext = $("#filterText").val() || "";
+                params.filterext = $("#txtSearchChild").val() || "";
 
                 $.getJSON(abp.appPath + "api/services/qlncc/DonViHanhChinh/GetAllItem", params)
                     .done(function (response) {
@@ -100,14 +99,17 @@
             ]
         }).dxDataGrid("instance");
 
-        // Create child - read parent value when button clicked
-        //$("#btnCreateChild").on("click", function (e) {
-        //    e.preventDefault();
-        //    var parentMaHC = parseInt($("#childModalParentMaHC").val(), 10) || null;
-        //    _createOrEditModal.open({ idCha: parentMaHC });
-        //});
+        $("#btnSearchChild").click(function (e) {
+            e.preventDefault();
+            childGrid.refresh();
+        });
 
-        // Edit and Delete handlers delegated on grid container
+        $("#btnCreateChild").on("click", function (e) {
+            e.preventDefault();
+            var parentMaHC = parseInt($("#childModalParentMaHC").val(), 10) || null;
+            _createOrEditModal.open({ idCha: parentMaHC });
+        });
+
         $("#childGridContainer").on("click", "a.edit", function (e) {
             e.preventDefault();
             var id = parseInt($(this).data("id"), 10);
@@ -135,15 +137,9 @@
             );
         });
 
-        // Refresh child grid after create/edit saved
         abp.event.on('app.createOrEditModalSaved', function () {
             childGrid.refresh();
         });
 
-        abp.event.on('app.childUnitsModalOpened', function (maHC) {
-            // cập nhật lại giá trị parent id
-            $parentInput.val(maHC);
-            childGrid.refresh();
-        });
     };
 })(jQuery);

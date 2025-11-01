@@ -15353,7 +15353,7 @@ code {
 
     .modal .modal-content .modal-header .close {
         outline: none !important;
-        color: #646c9a;
+        color: #FFFFFF;
         font-family: "LineAwesome";
         text-decoration: inherit;
         text-rendering: optimizeLegibility;
@@ -55593,4 +55593,19 @@ body {
 
 #kt_header {
     background-color: #187dce;
+}
+.modal-60 {
+    max-width: 60% !important;
+}
+
+.modal-70 {
+    max-width: 70% !important;
+}
+
+.modal-80 {
+    max-width: 80% !important;
+}
+
+.modal-90 {
+    max-width: 90% !important;
 }

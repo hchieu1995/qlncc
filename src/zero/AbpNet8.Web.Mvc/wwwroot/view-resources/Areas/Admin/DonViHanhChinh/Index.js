@@ -5,13 +5,15 @@
         var _createOrEditModal = new app.ModalManager({
             viewUrl: abp.appPath + 'Admin/DonViHanhChinh/CreateOrEditModal',
             scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_CreateOrEditModal.js',
-            modalClass: 'CreateOrEditModal'
+            modalClass: 'CreateOrEditModal',
+            modalSize: 'modal-60'
         });
 
         var _childUnitsModal = new app.ModalManager({
             viewUrl: abp.appPath + 'Admin/DonViHanhChinh/ChildUnitsModal',
             scriptUrl: abp.appPath + 'view-resources/Areas/Admin/DonViHanhChinh/_ChildUnitsModal.js',
-            modalClass: 'ChildUnitsModal'
+            modalClass: 'ChildUnitsModal',
+            modalSize: 'modal-70'
         });
 
         DevExpress.localization.locale("vi");
@@ -144,11 +146,12 @@
                         // make the name clickable to open child units modal
                         var name = options.text || "";
                         var mahc = options.data.maHC;
-                        var $a = $(`<a href="#" class="show-child-units" data-mahc="${mahc}" style="color:#169BD5;">${name}</a>`);
+                        var $a = $(`<a href="#" class="show-child-units" data-mahc="${mahc}" data-ten="${name}" style="color:#169BD5;">${name}</a>`);
                         $a.on('click', function (e) {
                             e.preventDefault();
                             var ma = $(this).data('mahc');
-                            _childUnitsModal.open({ maHC: ma });
+                            var ten = $(this).data('ten');
+                            _childUnitsModal.open({ maHC: ma, ten: ten });
                         });
                         $(container).append($a);
                     }
@@ -224,7 +227,7 @@
                 data.Id = parseInt($(this).attr("data-id"));
                 _createOrEditModal.open({ id: data.Id });
             });
-
+            
             $('#gridContainer').on('click', 'a.delete', function () {
                 var data = new Object();
                 data.Id = parseInt($(this).attr("data-id"));

@@ -1,16 +1,30 @@
-﻿@model int
+﻿@model (int, string)
 <style>
     .child-modal-toolbar {
         margin-bottom: 8px;
     }
 </style>
+<div class="modal-header" style="border-bottom: 1px solid #ebedf2; background-color: rgb(66,139,202);">
+    <h4 class="text-center" style="color:white;width:100%;padding-top:5px;">
+        @Model.Item2
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+</div>
 <div class="modal-body">
-    <input type="hidden" id="childModalParentMaHC" value="@Model" />
-    <div class="child-modal-toolbar">
-        <button id="btnCreateChild" class="btn btn-sm btn-primary">Thêm</button>
+    <input type="hidden" id="childModalParentMaHC" value="@Model.Item1" />
+    <div class="child-modal-toolbar d-flex justify-content-between align-items-center mb-2">
+        <!-- Ô tìm kiếm bên trái -->
+        <div class="input-group input-group-sm" style="width: 230px;">
+            <input type="text" id="txtSearchChild" class="form-control" placeholder="Mã, tên tên đơn vị">
+            <div class="input-group-append">
+                <button id="btnSearchChild" class="btn btn-outline-primary" type="button" style="padding-right:2px;">
+                    <i class="flaticon-search-1" aria-label="@L("Search")"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Nút thêm bên phải -->
+        <button id="btnCreateChild" class="btn btn-sm btn-outline-primary" style="height: 34px"><i class="fa fa-plus" aria-hidden="true"></i>@L("CreateNew")</button>
     </div>
     <div id="childGridContainer" style="height:400px;"></div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">@L("Close")</button>
 </div>

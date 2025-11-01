@@ -42,9 +42,9 @@ namespace AbpNet8.Web.Areas.Admin.Controllers
             return PartialView("_CreateOrEditModal", viewModel);
         }
 
-        public PartialViewResult ChildUnitsModal(int maHC)
+        public PartialViewResult ChildUnitsModal(int maHC, string ten)
         {
-            return PartialView("_ChildUnitsModal", maHC);
+            return PartialView("_ChildUnitsModal", (maHC, ten));
         }
     }
 }
